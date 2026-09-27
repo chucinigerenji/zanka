@@ -1,0 +1,154 @@
+{
+  "_comment": "《残夏》三个系统面板的数据源：信件（每章末写下的一句话）、照护日志（祖母线）、时间编排（时段分配）。letter/care/timeslot 的 key 与剧本里的 @letter/@care/@timeslot 参数一致。",
+
+  "letters": {
+    "prologue": {
+      "title": "第一封 · 不会寄出的信",
+      "prompt": "你在便利店收银小票的背面，写下一行字。",
+      "options": [
+        { "id": "L0_a", "text": "「今天遇到一个把坏饭团买下来的人。」" },
+        { "id": "L0_b", "text": "「雨很大。有人蹲在防波堤上看海，看了两个小时。」" },
+        { "id": "L0_c", "text": "「奶奶今天叫错了我的名字。这是这个月第四次。」" }
+      ]
+    },
+    "ch1": {
+      "title": "第二封 · 不会寄出的信",
+      "prompt": "蝉开始叫了。你在作业本的空白页上写字。",
+      "options": [
+        { "id": "L1_a", "text": "「她弹了一首走音的曲子。然后说：这首歌你别学。」" },
+        { "id": "L1_b", "text": "「她分装我奶奶的药，比我熟练。她为什么会这么熟练。」" },
+        { "id": "L1_c", "text": "「她从来不吃午饭。我想问，我没问。」" }
+      ]
+    },
+    "ch2": {
+      "title": "第三封 · 不会寄出的信",
+      "prompt": "潮祭结束了。烟火只有四十发，很快就没了。",
+      "options": [
+        { "id": "L2_a", "text": "「今年夏天会很长。」" },
+        { "id": "L2_b", "text": "「她在便利店仓库晕倒了。她说，站起来太快。」" },
+        { "id": "L2_c", "text": "「奶奶说：你去过你自己的。第二天早上，她问我你是谁家的孩子。」" }
+      ]
+    },
+    "ch3": {
+      "title": "第四封 · 不会寄出的信",
+      "prompt": "台风过去了。蝉在某个下午突然全停了。",
+      "options": [
+        { "id": "L3_a", "text": "「我在她包里看见一个药袋。我没有问她。」" },
+        { "id": "L3_b", "text": "「她说，我想活到冬天。」" },
+        { "id": "L3_c", "text": "「台风那晚我对奶奶发火了。后来我跪在玄关哭了很久。」" }
+      ]
+    },
+    "ch4": {
+      "title": "第五封 · 不会寄出的信",
+      "prompt": "医院走廊的自动贩卖机，罐装咖啡一百二十日元。",
+      "options": [
+        { "id": "L4_a", "text": "「她三个月前就知道了。她一直知道。」" },
+        { "id": "L4_b", "text": "「我妈说，店里排班排不开。然后就挂了。」" },
+        { "id": "L4_c", "text": "「我恨我妈。我也恨我自己。」" }
+      ]
+    },
+    "ch5": {
+      "title": "第六封 · 不会寄出的信",
+      "prompt": "玄关摆满了鞋。你数了三遍，一共十四个信封。",
+      "options": [
+        { "id": "L5_a", "text": "「浜口叔说，他不恨她爹了。」" },
+        { "id": "L5_b", "text": "「我这辈子从来没有像今天这样，希望自己有钱。」" },
+        { "id": "L5_c", "text": "「……我写不下去。」" }
+      ]
+    }
+  },
+
+  "care_days": {
+    "day1": {
+      "title": "照护日志 · 六月",
+      "prompt": "奶奶的药只剩三天了。下次复诊是下周二。",
+      "options": [
+        { "id": "C1_a", "text": "请半天假，自己带她去。", "score": 1, "flag": "care_self" },
+        { "id": "C1_b", "text": "去町役场问一次介护保险。听说有这个东西。", "score": 3, "flag": "care_insurance" },
+        { "id": "C1_c", "text": "拜托佐野瞳帮忙看一下午。", "score": 2, "flag": "care_hitomi" }
+      ]
+    },
+    "day2": {
+      "title": "照护日志 · 七月",
+      "prompt": "傍晚五点，奶奶开始反复问同一件事：「诚一回来了吗。」她已经问了第十一遍。",
+      "options": [
+        { "id": "C2_a", "text": "纠正她，一遍一遍解释。", "score": 1, "flag": "care_correct" },
+        { "id": "C2_b", "text": "顺着她说：「快了，船要进港了。」", "score": 3, "flag": "care_follow" },
+        { "id": "C2_c", "text": "假装没听见，回自己房间。", "score": 0, "flag": "care_ignore" }
+      ]
+    },
+    "day3": {
+      "title": "照护日志 · 八月",
+      "prompt": "介护保险的调查员下周要上门。她会问奶奶一些问题。",
+      "options": [
+        { "id": "C3_a", "text": "提前教奶奶怎么回答，自己也在旁边。", "score": 3, "flag": "care_prepare" },
+        { "id": "C3_b", "text": "让爸爸去应付。", "score": 1, "flag": "care_dad" },
+        { "id": "C3_c", "text": "打电话取消这次上门。", "score": 0, "flag": "care_cancel" }
+      ]
+    },
+    "day4": {
+      "title": "照护日志 · 九月",
+      "prompt": "凌晨两点，奶奶不在房间里。玄关的鞋少了一双。",
+      "options": [
+        { "id": "C4_a", "text": "一个人去找。她走不远。", "score": 1, "flag": "care_alone" },
+        { "id": "C4_b", "text": "叫醒佐野瞳，请町内会的人一起找。", "score": 3, "flag": "care_together" },
+        { "id": "C4_c", "text": "报警。", "score": 2, "flag": "care_police" }
+      ]
+    }
+  },
+
+  "timeslots": {
+    "ch1": {
+      "title": "七月 · 时间编排",
+      "prompt": "这个夏天，你只有两格时间。",
+      "slots": 2,
+      "options": [
+        { "id": "T1_a", "text": "陪栞去那间废弃的小学。", "memory": 2, "flag": "ts_ch1_piano", "fragment": "frag_piano" },
+        { "id": "T1_b", "text": "去便利店找值夜班的她。", "memory": 2, "flag": "ts_ch1_konbini" },
+        { "id": "T1_c", "text": "陪奶奶看一次傍晚的町内放送。", "memory": 1, "flag": "ts_ch1_fumi" },
+        { "id": "T1_d", "text": "留在教室做题。", "memory": 0, "flag": "ts_ch1_study" }
+      ]
+    },
+    "ch2": {
+      "title": "八月 · 时间编排",
+      "prompt": "潮祭那两天，全町的年轻人都回来了。",
+      "slots": 2,
+      "options": [
+        { "id": "T2_a", "text": "和她一起去看那四十发烟火。", "memory": 3, "flag": "ts_ch2_festival", "cg": "cg_festival_fireworks" },
+        { "id": "T2_b", "text": "去渔协多打一份工。", "memory": 0, "flag": "ts_ch2_work" },
+        { "id": "T2_c", "text": "陪佐野瞳去进货。", "memory": 1, "flag": "ts_ch2_hitomi" },
+        { "id": "T2_d", "text": "在家陪奶奶。", "memory": 1, "flag": "ts_ch2_fumi" }
+      ]
+    },
+    "ch3": {
+      "title": "九月 · 时间编排",
+      "prompt": "台风警报。町内放送一直在响。",
+      "slots": 2,
+      "options": [
+        { "id": "T3_a", "text": "去第三工场找她。", "memory": 3, "flag": "ts_ch3_factory" },
+        { "id": "T3_b", "text": "回家守着奶奶。", "memory": 2, "flag": "ts_ch3_fumi" },
+        { "id": "T3_c", "text": "去渔港看看没回家的父亲。", "memory": 2, "flag": "ts_ch3_dad" }
+      ]
+    },
+    "ch4": {
+      "title": "九月 · 时间编排",
+      "prompt": "医生说的话，你只听懂了一半。今天你只有一格时间。",
+      "slots": 1,
+      "options": [
+        { "id": "T4_a", "text": "留在医院陪她。", "memory": 3, "flag": "ts_ch4_hospital" },
+        { "id": "T4_b", "text": "去町役场，把那份介护保险申请交上去。", "memory": 2, "flag": "ts_ch4_office" },
+        { "id": "T4_c", "text": "回学校，把退学申请交了。", "memory": 1, "flag": "ts_ch4_quit_school" }
+      ]
+    },
+    "ch5": {
+      "title": "九月 · 时间编排",
+      "prompt": "今天你只有一格时间。以后也只会越来越少。",
+      "slots": 1,
+      "options": [
+        { "id": "T5_a", "text": "去借钱。能借多少借多少。", "memory": 2, "flag": "ts_ch5_money" },
+        { "id": "T5_b", "text": "待在医院。什么都不做，就坐在那儿。", "memory": 3, "flag": "ts_ch5_stay" },
+        { "id": "T5_d", "text": "去找桐生正人。", "memory": 1, "flag": "ts_ch5_kiryu" }
+      ]
+    }
+  }
+}

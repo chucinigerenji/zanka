@@ -1,0 +1,393 @@
+[16:17:29] 计划 36 项，待生成 36 项（模型 anythingv5cpu）
+[16:17:29] Local Dream 2.8.1
+[16:17:29] [1/36] bg_seawall_dusk 512x320 steps=12 ...
+[16:17:52]   ok 69.9s seed=4294967295 -> assets/bg/bg_seawall_dusk.png
+[16:17:52] [2/36] bg_seawall_rain 512x320 steps=12 ...
+[16:19:02]   ok 93.1s seed=4294967295 -> assets/bg/bg_seawall_dusk.png
+[16:19:02] [2/36] bg_seawall_rain 512x320 steps=12 ...
+[16:21:01]   ok 118.9s seed=4294967295 -> assets/bg/bg_seawall_rain.png
+[16:21:01] [3/36] bg_seawall_night 512x320 steps=12 ...
+[16:22:05]   ok 63.5s seed=4294967295 -> assets/bg/bg_seawall_night.png
+[16:22:05] [4/36] bg_port_morning 512x320 steps=12 ...
+[16:23:10]   ok 65.2s seed=4294967295 -> assets/bg/bg_port_morning.png
+[16:23:10] [5/36] bg_shopping_street 512x320 steps=12 ...
+[16:24:23]   ok 73.5s seed=4294967295 -> assets/bg/bg_shopping_street.png
+[16:24:23] [6/36] bg_konbini_night 512x320 steps=12 ...
+[16:25:32]   ok 68.2s seed=4294967295 -> assets/bg/bg_konbini_night.png
+[16:25:32] [7/36] bg_okada_kitchen 512x320 steps=12 ...
+[16:26:40]   ok 68.4s seed=4294967295 -> assets/bg/bg_okada_kitchen.png
+[16:26:40] [8/36] bg_okada_genkan 512x320 steps=12 ...
+[16:27:49]   ok 69.3s seed=4294967295 -> assets/bg/bg_okada_genkan.png
+[16:27:49] [9/36] bg_music_room 512x320 steps=12 ...
+[16:29:01]   ok 71.9s seed=4294967295 -> assets/bg/bg_music_room.png
+[16:29:01] [10/36] bg_classroom 512x320 steps=12 ...
+[16:30:16]   ok 75.2s seed=4294967295 -> assets/bg/bg_classroom.png
+[16:30:16] [11/36] bg_factory_interior 512x320 steps=12 ...
+[16:31:22]   ok 65.6s seed=4294967295 -> assets/bg/bg_factory_interior.png
+[16:31:22] [12/36] bg_clinic 512x320 steps=12 ...
+[16:32:27]   ok 64.8s seed=4294967295 -> assets/bg/bg_clinic.png
+[16:32:27] [13/36] bg_hospital_corridor 512x320 steps=12 ...
+[16:33:30]   ok 63.5s seed=4294967295 -> assets/bg/bg_hospital_corridor.png
+[16:33:30] [14/36] bg_shrine_stairs 512x320 steps=12 ...
+[16:34:34]   ok 63.8s seed=4294967295 -> assets/bg/bg_shrine_stairs.png
+[16:34:34] [15/36] bg_station 512x320 steps=12 ...
+[16:35:44]   ok 69.9s seed=4294967295 -> assets/bg/bg_station.png
+[16:35:44] [16/36] bg_shiori_room 512x320 steps=12 ...
+[16:36:51]   ok 67.0s seed=4294967295 -> assets/bg/bg_shiori_room.png
+[16:36:51] [17/36] bg_beach_night 512x320 steps=12 ...
+[16:38:04]   ok 72.6s seed=4294967295 -> assets/bg/bg_beach_night.png
+[16:38:04] [18/36] bg_title 512x320 steps=14 ...
+[16:39:18]   ok 74.3s seed=4294967295 -> assets/bg/bg_title.png
+[16:39:18] [19/36] char_shiori_uniform_normal 512x512 steps=14 ...
+[16:41:40]   ~~ 抠图完成 背景占比 0.18
+[16:41:40]   ok 142.5s seed=4294967295 -> assets/char/char_shiori_uniform_normal.png
+[16:41:40] [20/36] char_shiori_uniform_smile 512x512 steps=14 ...
+[16:44:23]   ~~ 抠图完成 背景占比 0.14
+[16:44:23]   ok 162.7s seed=4294967295 -> assets/char/char_shiori_uniform_smile.png
+[16:44:23] [21/36] char_shiori_uniform_sad 512x512 steps=14 ...
+[16:45:49] 计划 1 项，待生成 1 项（模型 anythingv5cpu）
+[16:45:49] Local Dream 2.8.1
+[16:45:49] [1/1] char_shiori_uniform_normal 512x512 steps=16 ...
+[16:49:22]   ~~ 抠图完成 背景占比 0.38
+[16:49:22]   ok 213.3s seed=4294967295 -> assets/char/char_shiori_uniform_normal.png
+[16:49:22] 完成：成功 1 / 失败 0，总耗时 3.6 分钟
+[16:49:40] 计划 36 项，待生成 17 项（模型 anythingv5cpu）
+[16:49:40] Local Dream 2.8.1
+[16:49:40] [1/17] char_shiori_uniform_smile 512x512 steps=14 ...
+[16:52:13]   ~~ 抠图完成 背景占比 0.41
+[16:52:13]   ok 152.4s seed=4294967295 -> assets/char/char_shiori_uniform_smile.png
+[16:52:13] [2/17] char_shiori_uniform_sad 512x512 steps=14 ...
+[16:54:49]   ~~ 抠图完成 背景占比 0.56
+[16:54:49]   ok 156.3s seed=4294967295 -> assets/char/char_shiori_uniform_sad.png
+[16:54:49] [3/17] char_shiori_casual 512x512 steps=14 ...
+[16:57:23]   ~~ 抠图完成 背景占比 0.15
+[16:57:23]   ok 153.7s seed=4294967295 -> assets/char/char_shiori_casual.png
+[16:57:23] [4/17] char_shiori_weak 512x512 steps=14 ...
+[17:00:02]   ~~ 抠图完成 背景占比 0.29
+[17:00:02]   ok 159.4s seed=4294967295 -> assets/char/char_shiori_weak.png
+[17:00:02] [5/17] char_hitomi_uniform 512x512 steps=14 ...
+[17:02:30]   ~~ 抠图完成 背景占比 0.19
+[17:02:30]   ok 147.7s seed=4294967295 -> assets/char/char_hitomi_uniform.png
+[17:02:30] [6/17] char_fumi 512x512 steps=14 ...
+[17:06:28]   ~~ 抠图完成 背景占比 0.27
+[17:06:28]   ok 238.5s seed=4294967295 -> assets/char/char_fumi.png
+[17:06:28] [7/17] char_chizuru 512x512 steps=14 ...
+[17:07:53] 计划 1 项，待生成 1 项（模型 anythingv5cpu）
+[17:07:53] Local Dream 2.8.1
+[17:07:53] [1/1] char_shiori_uniform_normal 512x512 steps=14 ...
+[17:11:18]   ~~ 抠图失败(背景占比 0.00)，保留原图
+[17:11:18]   ok 205.4s seed=4294967295 -> assets/char/char_shiori_uniform_normal.png
+[17:11:18] 完成：成功 1 / 失败 0，总耗时 3.4 分钟
+[17:11:35] 计划 1 项，待生成 1 项（模型 anythingv5cpu）
+[17:11:35] Local Dream 2.8.1
+[17:11:35] [1/1] char_shiori_uniform_normal 512x512 steps=14 ...
+[17:13:50]   ~~ 抠图完成 背景占比 0.53
+[17:13:50]   ok 134.8s seed=4294967295 -> assets/char/char_shiori_uniform_normal.png
+[17:13:50] 完成：成功 1 / 失败 0，总耗时 2.2 分钟
+[17:14:12] 计划 36 项，待生成 18 项（模型 anythingv5cpu）
+[17:14:12]   待生成 char_shiori_uniform_normal  512x512
+[17:14:17] 计划 36 项，待生成 18 项（模型 anythingv5cpu）
+[17:14:17] Local Dream 2.8.1
+[17:14:17] [1/18] char_shiori_uniform_normal 512x512 steps=12 ...
+[17:16:21]   ~~ 抠图完成 背景占比 0.41
+[17:16:21]   ok 124.7s seed=4294967295 -> assets/char/char_shiori_uniform_normal.png
+[17:16:21] [2/18] char_shiori_uniform_smile 512x512 steps=12 ...
+[17:18:17]   ~~ 抠图完成 背景占比 0.34
+[17:18:17]   ok 115.6s seed=4294967295 -> assets/char/char_shiori_uniform_smile.png
+[17:18:17] [3/18] char_shiori_uniform_sad 512x512 steps=12 ...
+[17:20:45]   ~~ 抠图完成 背景占比 0.57
+[17:20:45]   ok 147.6s seed=4294967295 -> assets/char/char_shiori_uniform_sad.png
+[17:20:45] [4/18] char_shiori_casual 512x512 steps=12 ...
+[17:22:50]   ~~ 抠图完成 背景占比 0.51
+[17:22:50]   ok 125.7s seed=4294967295 -> assets/char/char_shiori_casual.png
+[17:22:50] [5/18] char_shiori_weak 512x512 steps=12 ...
+[17:25:04]   ~~ 抠图完成 背景占比 0.40
+[17:25:04]   ok 133.4s seed=4294967295 -> assets/char/char_shiori_weak.png
+[17:25:04] [6/18] char_hitomi_uniform 512x512 steps=12 ...
+[17:27:58]   ~~ 抠图完成 背景占比 0.42
+[17:27:58]   ok 174.1s seed=4294967295 -> assets/char/char_hitomi_uniform.png
+[17:27:58] [7/18] char_fumi 512x512 steps=12 ...
+[17:30:38]   ~~ 抠图完成 背景占比 0.35
+[17:30:38]   ok 160.4s seed=4294967295 -> assets/char/char_fumi.png
+[17:30:38] [8/18] char_chizuru 512x512 steps=12 ...
+[17:32:53]   ~~ 抠图完成 背景占比 0.46
+[17:32:53]   ok 134.9s seed=4294967295 -> assets/char/char_chizuru.png
+[17:32:53] [9/18] char_daikan 512x512 steps=12 ...
+[17:35:25]   ~~ 抠图完成 背景占比 0.38
+[17:35:25]   ok 151.5s seed=4294967295 -> assets/char/char_daikan.png
+[17:35:25] [10/18] char_hamaguchi 512x512 steps=12 ...
+[17:38:13]   ~~ 抠图完成 背景占比 0.43
+[17:38:13]   ok 168.5s seed=4294967295 -> assets/char/char_hamaguchi.png
+[17:38:13] [11/18] char_seiichi 512x512 steps=12 ...
+[17:42:31]   ~~ 抠图完成 背景占比 0.30
+[17:42:31]   ok 258.1s seed=4294967295 -> assets/char/char_seiichi.png
+[17:42:31] [12/18] char_kiryu 512x512 steps=12 ...
+[17:46:17]   ~~ 抠图完成 背景占比 0.59
+[17:46:17]   ok 226.1s seed=4294967295 -> assets/char/char_kiryu.png
+[17:46:17] [13/18] char_yuto 512x512 steps=12 ...
+[17:49:42]   ~~ 抠图完成 背景占比 0.21
+[17:49:42]   ok 204.2s seed=4294967295 -> assets/char/char_yuto.png
+[17:49:42] [14/18] cg_umbrella_rain 512x320 steps=14 ...
+[17:51:17]   ok 95.3s seed=4294967295 -> assets/cg/cg_umbrella_rain.png
+[17:51:17] [15/18] cg_piano 512x320 steps=14 ...
+[17:52:46]   ok 89.3s seed=4294967295 -> assets/cg/cg_piano.png
+[17:52:46] [16/18] cg_festival_fireworks 512x320 steps=14 ...
+[17:54:11]   ok 84.9s seed=4294967295 -> assets/cg/cg_festival_fireworks.png
+[17:54:11] [17/18] cg_envelopes 512x320 steps=14 ...
+[17:55:38]   ok 86.9s seed=4294967295 -> assets/cg/cg_envelopes.png
+[17:55:38] [18/18] cg_moon_sea 512x320 steps=14 ...
+[17:56:58]   ok 80.3s seed=4294967295 -> assets/cg/cg_moon_sea.png
+[17:56:58] 完成：成功 18 / 失败 0，总耗时 42.7 分钟
+[18:04:12] 计划 1 项，待生成 1 项（模型 anythingv5cpu）
+[18:04:12] Local Dream 2.8.1
+[18:04:12] [1/1] char_shiori_uniform_normal 512x512 steps=14 ...
+[18:07:05]   ~~ 抠图完成 背景占比 0.47
+[18:07:05]   ok 173.2s seed=4294967295 -> assets/char/char_shiori_uniform_normal.png
+[18:07:05] 完成：成功 1 / 失败 0，总耗时 2.9 分钟
+[18:07:49] 计划 36 项，待生成 13 项（模型 anythingv5cpu）
+[18:07:49]   待生成 char_shiori_uniform_normal  512x512
+[18:07:53] 计划 36 项，待生成 13 项（模型 anythingv5cpu）
+[18:07:53] Local Dream 2.8.1
+[18:07:53] [1/13] char_shiori_uniform_normal 512x512 steps=14 ...
+[18:10:57]   ~~ 抠图完成 背景占比 0.51
+[18:10:57]   ok 183.6s seed=4294967295 -> assets/char/char_shiori_uniform_normal.png
+[18:10:57] [2/13] char_shiori_uniform_smile 512x512 steps=14 ...
+[18:14:06]   ~~ 抠图完成 背景占比 0.54
+[18:14:06]   ok 189.6s seed=4294967295 -> assets/char/char_shiori_uniform_smile.png
+[18:14:06] [3/13] char_shiori_uniform_sad 512x512 steps=14 ...
+[18:17:25]   ~~ 抠图完成 背景占比 0.49
+[18:17:25]   ok 199.2s seed=4294967295 -> assets/char/char_shiori_uniform_sad.png
+[18:17:26] [4/13] char_shiori_casual 512x512 steps=14 ...
+[18:20:26]   ~~ 抠图完成 背景占比 0.46
+[18:20:26]   ok 180.8s seed=4294967295 -> assets/char/char_shiori_casual.png
+[18:20:26] [5/13] char_shiori_weak 512x512 steps=14 ...
+[18:23:37]   ~~ 抠图完成 背景占比 0.64
+[18:23:37]   ok 190.4s seed=4294967295 -> assets/char/char_shiori_weak.png
+[18:23:37] [6/13] char_hitomi_uniform 512x512 steps=14 ...
+[18:26:53]   ~~ 抠图完成 背景占比 0.44
+[18:26:53]   ok 196.0s seed=4294967295 -> assets/char/char_hitomi_uniform.png
+[18:26:53] [7/13] char_fumi 512x512 steps=14 ...
+[18:29:28]   ~~ 抠图完成 背景占比 0.32
+[18:29:28]   ok 155.4s seed=4294967295 -> assets/char/char_fumi.png
+[18:29:28] [8/13] char_chizuru 512x512 steps=14 ...
+[18:32:37]   ~~ 抠图完成 背景占比 0.39
+[18:32:37]   ok 188.9s seed=4294967295 -> assets/char/char_chizuru.png
+[18:32:37] [9/13] char_daikan 512x512 steps=14 ...
+[18:35:41]   ~~ 抠图完成 背景占比 0.44
+[18:35:41]   ok 183.6s seed=4294967295 -> assets/char/char_daikan.png
+[18:35:41] [10/13] char_hamaguchi 512x512 steps=14 ...
+[18:38:38]   ~~ 抠图完成 背景占比 0.40
+[18:38:38]   ok 177.4s seed=4294967295 -> assets/char/char_hamaguchi.png
+[18:38:38] [11/13] char_seiichi 512x512 steps=14 ...
+[18:41:32]   ~~ 抠图完成 背景占比 0.39
+[18:41:32]   ok 174.1s seed=4294967295 -> assets/char/char_seiichi.png
+[18:41:32] [12/13] char_kiryu 512x512 steps=14 ...
+[18:45:17]   ~~ 抠图完成 背景占比 0.69
+[18:45:17]   ok 224.9s seed=4294967295 -> assets/char/char_kiryu.png
+[18:45:17] [13/13] char_yuto 512x512 steps=14 ...
+[18:51:03]   ~~ 抠图完成 背景占比 0.57
+[18:51:03]   ok 345.8s seed=4294967295 -> assets/char/char_yuto.png
+[18:51:03] 完成：成功 13 / 失败 0，总耗时 43.2 分钟
+[18:53:10] 计划 36 项，待生成 6 项（模型 anythingv5cpu）
+[18:53:10]   待生成 char_shiori_uniform_normal  512x512
+[18:53:10]   待生成 char_shiori_casual  512x512
+[18:53:10]   待生成 char_fumi  512x512
+[18:53:10]   待生成 char_chizuru  512x512
+[18:53:10]   待生成 char_seiichi  512x512
+[18:53:10]   待生成 cg_envelopes  512x320
+[18:53:15] 计划 36 项，待生成 6 项（模型 anythingv5cpu）
+[18:53:15] Local Dream 2.8.1
+[18:53:15] [1/6] char_shiori_uniform_normal 512x512 steps=14 ...
+[18:54:23]   !! 失败：流结束但没拿到图像
+[18:54:23] [2/6] char_shiori_casual 512x512 steps=14 ...
+[18:54:23]   !! 失败：<urlopen error [Errno 111] Connection refused>
+[18:54:23] [3/6] char_fumi 512x512 steps=14 ...
+[18:54:23]   !! 失败：<urlopen error [Errno 111] Connection refused>
+[18:54:23] [4/6] char_chizuru 512x512 steps=14 ...
+[18:54:23]   !! 失败：<urlopen error [Errno 111] Connection refused>
+[18:54:23] [5/6] char_seiichi 512x512 steps=14 ...
+[18:54:23]   !! 失败：<urlopen error [Errno 111] Connection refused>
+[18:54:23] [6/6] cg_envelopes 512x320 steps=16 ...
+[18:54:23]   !! 失败：<urlopen error [Errno 111] Connection refused>
+[18:54:23] 完成：成功 0 / 失败 6，总耗时 1.1 分钟
+[18:54:23]    FAILED char_shiori_uniform_normal : 流结束但没拿到图像
+[18:54:23]    FAILED char_shiori_casual : <urlopen error [Errno 111] Connection refused>
+[18:54:23]    FAILED char_fumi : <urlopen error [Errno 111] Connection refused>
+[18:54:23]    FAILED char_chizuru : <urlopen error [Errno 111] Connection refused>
+[18:54:23]    FAILED char_seiichi : <urlopen error [Errno 111] Connection refused>
+[18:54:23]    FAILED cg_envelopes : <urlopen error [Errno 111] Connection refused>
+[18:54:50] 计划 36 项，待生成 6 项（模型 anythingv5cpu）
+[18:54:50] Local Dream 2.8.1
+[18:54:50] [1/6] char_shiori_uniform_normal 512x512 steps=14 ...
+[18:56:33]   !! 失败：流结束但没拿到图像
+[18:56:33] [2/6] char_shiori_casual 512x512 steps=14 ...
+[18:56:33]   !! 失败：<urlopen error [Errno 111] Connection refused>
+[18:56:33] [3/6] char_fumi 512x512 steps=14 ...
+[18:56:33]   !! 失败：<urlopen error [Errno 111] Connection refused>
+[18:56:33] [4/6] char_chizuru 512x512 steps=14 ...
+[18:56:33]   !! 失败：<urlopen error [Errno 111] Connection refused>
+[18:56:33] [5/6] char_seiichi 512x512 steps=14 ...
+[18:56:33]   !! 失败：<urlopen error [Errno 111] Connection refused>
+[18:56:33] [6/6] cg_envelopes 512x320 steps=16 ...
+[18:56:33]   !! 失败：<urlopen error [Errno 111] Connection refused>
+[18:56:33] 完成：成功 0 / 失败 6，总耗时 1.7 分钟
+[18:56:33]    FAILED char_shiori_uniform_normal : 流结束但没拿到图像
+[18:56:33]    FAILED char_shiori_casual : <urlopen error [Errno 111] Connection refused>
+[18:56:33]    FAILED char_fumi : <urlopen error [Errno 111] Connection refused>
+[18:56:33]    FAILED char_chizuru : <urlopen error [Errno 111] Connection refused>
+[18:56:33]    FAILED char_seiichi : <urlopen error [Errno 111] Connection refused>
+[18:56:33]    FAILED cg_envelopes : <urlopen error [Errno 111] Connection refused>
+[18:56:51] 计划 36 项，待生成 6 项（模型 anythingv5cpu）
+[18:56:51] Local Dream 2.8.1
+[18:56:51] select anythingv5cpu -> 200 {'ok': True}
+[18:56:53] [1/6] char_shiori_uniform_normal 512x512 steps=14 ...
+[18:59:36]   ~~ 抠图完成 背景占比 0.50
+[18:59:36]   ok 162.6s seed=4294967295 -> assets/char/char_shiori_uniform_normal.png
+[18:59:36] [2/6] char_shiori_casual 512x512 steps=14 ...
+[19:02:03]   ~~ 抠图完成 背景占比 0.41
+[19:02:03]   ok 147.2s seed=4294967295 -> assets/char/char_shiori_casual.png
+[19:02:03] [3/6] char_fumi 512x512 steps=14 ...
+[19:04:30]   ~~ 抠图完成 背景占比 0.29
+[19:04:30]   ok 147.0s seed=4294967295 -> assets/char/char_fumi.png
+[19:04:30] [4/6] char_chizuru 512x512 steps=14 ...
+[19:07:00]   ~~ 抠图完成 背景占比 0.38
+[19:07:00]   ok 150.0s seed=4294967295 -> assets/char/char_chizuru.png
+[19:07:00] [5/6] char_seiichi 512x512 steps=14 ...
+[19:10:03]   ~~ 抠图完成 背景占比 0.41
+[19:10:03]   ok 182.9s seed=4294967295 -> assets/char/char_seiichi.png
+[19:10:03] [6/6] cg_envelopes 512x320 steps=16 ...
+[19:11:40]   ok 97.3s seed=4294967295 -> assets/cg/cg_envelopes.png
+[19:11:40] 完成：成功 6 / 失败 0，总耗时 14.8 分钟
+[19:12:06] 计划 1 项，待生成 1 项（模型 anythingv5cpu）
+[19:12:06] Local Dream 2.8.1
+[19:12:06] [1/1] char_fumi 512x512 steps=14 ...
+[19:14:38]   ~~ 抠图完成 背景占比 0.55
+[19:14:38]   ok 151.7s seed=4294967295 -> assets/char/char_fumi.png
+[19:14:38] 完成：成功 1 / 失败 0，总耗时 2.5 分钟
+[19:14:38] 计划 1 项，待生成 1 项（模型 anythingv5cpu）
+[19:14:38] Local Dream 2.8.1
+[19:14:38] [1/1] char_chizuru 512x512 steps=14 ...
+[19:15:44]   !! 失败：流结束但没拿到图像
+[19:15:44] 完成：成功 0 / 失败 1，总耗时 1.1 分钟
+[19:15:44]    FAILED char_chizuru : 流结束但没拿到图像
+[19:16:06] 计划 36 项，待生成 4 项（模型 anythingv5cpu）
+[19:16:06] Local Dream 2.8.1
+[19:16:06] select anythingv5cpu -> 200 {'ok': True}
+[19:16:08] [1/4] char_shiori_casual 512x512 steps=14 ...
+[19:18:58]   ~~ 抠图完成 背景占比 0.41
+[19:18:58]   ok 170.1s seed=4294967295 -> assets/char/char_shiori_casual.png
+[19:18:58] [2/4] char_chizuru 512x512 steps=14 ...
+[19:22:10]   ~~ 抠图完成 背景占比 0.47
+[19:22:10]   ok 191.9s seed=4294967295 -> assets/char/char_chizuru.png
+[19:22:10] [3/4] char_daikan 512x512 steps=14 ...
+[19:25:08]   ~~ 抠图完成 背景占比 0.33
+[19:25:08]   ok 178.1s seed=4294967295 -> assets/char/char_daikan.png
+[19:25:08] [4/4] char_seiichi 512x512 steps=14 ...
+[19:28:09]   ~~ 抠图完成 背景占比 0.58
+[19:28:09]   ok 180.4s seed=4294967295 -> assets/char/char_seiichi.png
+[19:28:09] 完成：成功 4 / 失败 0，总耗时 12.0 分钟
+[19:29:14] 计划 36 项，待生成 2 项（模型 anythingv5cpu）
+[19:29:14] Local Dream 2.8.1
+[19:29:14] [1/2] char_chizuru 512x512 steps=14 ...
+[19:31:52]   ~~ 抠图完成 背景占比 0.42
+[19:31:52]   ok 158.3s seed=4294967295 -> assets/char/char_chizuru.png
+[19:31:52] [2/2] char_daikan 512x512 steps=14 ...
+[19:34:35]   ~~ 抠图完成 背景占比 0.39
+[19:34:35]   ok 162.9s seed=4294967295 -> assets/char/char_daikan.png
+[19:34:35] 完成：成功 2 / 失败 0，总耗时 5.4 分钟
+[19:42:46] 计划 1 项，待生成 1 项（模型 anythingv5cpu）
+[19:42:46] Local Dream 2.8.1
+[19:42:46] [1/1] char_shiori_uniform_normal 512x512 steps=14 ...
+[19:45:33]   ~~ 第 1 次：构图出画（顶 202 / 左 0 / 右 0），换种子重抽
+[19:47:59]   ~~ 第 2 次：构图出画（顶 202 / 左 0 / 右 0），换种子重抽
+[19:50:35]   ~~ 第 3 次：构图出画（顶 202 / 左 0 / 右 0），换种子重抽
+[19:53:11]   ~~ 第 4 次：构图出画（顶 202 / 左 0 / 右 0），换种子重抽
+[19:53:11]   XX char_shiori_uniform_normal：多次重抽仍不合格，跳过
+[19:53:11] 完成：成功 0 / 失败 1，总耗时 10.4 分钟
+[19:53:11]    FAILED char_shiori_uniform_normal : 多次重抽仍未得到合格构图
+[19:53:28] 计划 1 项，待生成 1 项（模型 anythingv5cpu）
+[19:53:28] Local Dream 2.8.1
+[19:53:28] [1/1] char_shiori_uniform_normal 512x512 steps=14 ...
+[19:53:39] 计划 1 项，待生成 1 项（模型 anythingv5cpu）
+[19:53:39] Local Dream 2.8.1
+[19:53:39] [1/1] char_shiori_uniform_normal 512x512 steps=14 ...
+[19:56:34]   ~~ 抠图完成 背景占比 0.59（顶边留白 0）
+[19:56:34]   ok 175.1s seed=288139097 -> assets/char/char_shiori_uniform_normal.png
+[19:56:34] 完成：成功 1 / 失败 0，总耗时 2.9 分钟
+[19:57:06] 计划 1 项，待生成 1 项（模型 anythingv5cpu）
+[19:57:06] Local Dream 2.8.1
+[19:57:06] [1/1] char_shiori_uniform_normal 512x512 steps=14 ...
+[19:59:57]   ~~ 抠图完成 背景占比 0.58（顶边留白 0）
+[19:59:57]   ok 171.5s seed=1325623088 -> assets/char/char_shiori_uniform_normal.png
+[19:59:57] 完成：成功 1 / 失败 0，总耗时 2.9 分钟
+[20:00:24] 计划 1 项，待生成 1 项（模型 anythingv5cpu）
+[20:00:24] Local Dream 2.8.1
+[20:00:24] [1/1] char_shiori_uniform_normal 512x512 steps=14 ...
+[20:03:10]   ~~ 第 1 次：构图出画（顶 157 / 左 0 / 右 176），换种子重抽
+[20:05:57]   ~~ 第 2 次：构图出画（顶 154 / 左 0 / 右 0），换种子重抽
+[20:09:12]   ~~ 抠图完成 背景占比 0.61（顶边留白 0）
+[20:09:12]   ok 528.3s seed=676569338 -> assets/char/char_shiori_uniform_normal.png
+[20:09:12] 完成：成功 1 / 失败 0，总耗时 8.8 分钟
+[20:09:33] 计划 1 项，待生成 1 项（模型 anythingv5cpu）
+[20:09:33] Local Dream 2.8.1
+[20:09:33] [1/1] char_shiori_uniform_smile 512x512 steps=14 ...
+[20:12:37]   ~~ 抠图完成 背景占比 0.77（顶边留白 0）
+[20:12:38]   ok 184.7s seed=1513897463 -> assets/char/char_shiori_uniform_smile.png
+[20:12:38] 完成：成功 1 / 失败 0，总耗时 3.1 分钟
+[20:15:33] 计划 1 项，待生成 1 项（模型 anythingv5cpu）
+[20:15:33] Local Dream 2.8.1
+[20:15:33] [1/1] char_shiori_uniform_sad 512x512 steps=14 ...
+[20:17:58]   ~~ 抠图完成 背景占比 0.57（顶边留白 0）
+[20:17:58]   ok 145.7s seed=88104710 -> assets/char/char_shiori_uniform_sad.png
+[20:17:58] 完成：成功 1 / 失败 0，总耗时 2.4 分钟
+[20:18:26] 计划 1 项，待生成 1 项（模型 anythingv5cpu）
+[20:18:26] Local Dream 2.8.1
+[20:18:26] [1/1] char_shiori_weak 512x512 steps=14 ...
+[20:21:37]   ~~ 第 1 次：构图出画（顶 0 / 左 0 / 右 54），换种子重抽
+[20:24:21]   ~~ 第 2 次：构图出画（顶 121 / 左 0 / 右 0），换种子重抽
+[20:26:48]   ~~ 第 3 次：构图出画（顶 0 / 左 156 / 右 170），换种子重抽
+[20:29:45]   ~~ 抠图完成 背景占比 0.56（顶边留白 0）
+[20:29:46]   ok 679.7s seed=1341330589 -> assets/char/char_shiori_weak.png
+[20:29:46] 完成：成功 1 / 失败 0，总耗时 11.3 分钟
+[20:30:24] 计划 1 项，待生成 1 项（模型 anythingv5cpu）
+[20:30:25] Local Dream 2.8.1
+[20:30:25] [1/1] char_shiori_casual 512x512 steps=14 ...
+[20:33:13]   ~~ 抠图完成 背景占比 0.72（顶边留白 0）
+[20:33:13]   ok 168.2s seed=443740328 -> assets/char/char_shiori_casual.png
+[20:33:13] 完成：成功 1 / 失败 0，总耗时 2.8 分钟
+[20:33:46] 计划 1 项，待生成 1 项（模型 anythingv5cpu）
+[20:33:46] Local Dream 2.8.1
+[20:33:46] [1/1] char_shiori_casual 512x512 steps=14 ...
+[20:37:32]   ~~ 第 1 次：构图出画（顶 205 / 左 0 / 右 0），换种子重抽
+[20:40:42]   ~~ 第 2 次：构图出画（顶 26 / 左 0 / 右 0），换种子重抽
+[20:43:58]   ~~ 第 3 次：构图出画（顶 53 / 左 4 / 右 23），换种子重抽
+[20:46:58] 计划 1 项，待生成 1 项（模型 anythingv5cpu）
+[20:46:58] Local Dream 2.8.1
+[20:46:58] [1/1] char_shiori_casual 512x512 steps=14 ...
+[20:52:24]   ~~ 抠图完成 背景占比 0.65（顶边留白 0）
+[20:52:24]   ok 326.7s seed=486066795 -> assets/char/char_shiori_casual.png
+[20:52:24] 完成：成功 1 / 失败 0，总耗时 5.4 分钟
+[20:52:59] 计划 36 项，待生成 1 项（模型 anythingv5cpu）
+[20:52:59] Local Dream 2.8.1
+[20:52:59] [1/1] char_hitomi_uniform 512x512 steps=14 ...
+[20:56:05]   ~~ 第 1 次：构图出画（顶 510 / 左 454 / 右 384，阈值 20/80/80），换种子重抽
+[20:59:06]   ~~ 抠图完成 背景占比 0.63（顶边留白 0）
+[20:59:07]   ok 367.7s seed=1555484808 -> assets/char/char_hitomi_uniform.png
+[20:59:07] 完成：成功 1 / 失败 0，总耗时 6.1 分钟
+[20:59:39] 计划 1 项，待生成 1 项（模型 anythingv5cpu）
+[20:59:39] Local Dream 2.8.1
+[20:59:39] [1/1] char_shiori_casual 512x512 steps=14 ...
+[21:03:07]   ~~ 抠图完成 背景占比 0.65（顶边留白 0）
+[21:03:07]   ok 207.3s seed=826403670 -> assets/char/char_shiori_casual.png
+[21:03:07] 完成：成功 1 / 失败 0，总耗时 3.5 分钟
+[21:03:37] 计划 36 项，待生成 2 项（模型 anythingv5cpu）
+[21:03:37] Local Dream 2.8.1
+[21:03:37] [1/2] char_chizuru 512x512 steps=14 ...
+[21:07:37]   ~~ 第 1 次：构图出画（顶 54 / 左 0 / 右 0，阈值 20/80/80），换种子重抽
+[21:11:13]   ~~ 抠图完成 背景占比 0.56（顶边留白 0）
+[21:11:13]   ok 456.2s seed=1993383580 -> assets/char/char_chizuru.png
+[21:11:13] [2/2] char_yuto 512x512 steps=14 ...
+[21:15:16]   ~~ 第 1 次：构图出画（顶 262 / 左 0 / 右 0，阈值 20/80/80），换种子重抽
+[21:18:53]   ~~ 抠图完成 背景占比 0.39（顶边留白 0）
+[21:18:53]   ok 459.9s seed=2108429209 -> assets/char/char_yuto.png
+[21:18:53] 完成：成功 2 / 失败 0，总耗时 15.3 分钟
