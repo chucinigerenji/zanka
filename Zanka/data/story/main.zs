@@ -911,6 +911,11 @@ hamaguchi|（背对着我）……你告诉她，我不恨她爹了。
 @set envelopes_done true
 @hide all 0.6
 
+|　　那天晚上，我在玄关坐了很久。
+|　　后来我在那叠信封的最上面，写了几行字。
+|　　写完之后我又读了一遍。我没有撕掉。
+@letter ch5
+
 @bg bg_hospital_corridor 1.2
 @amb room 1.2
 @bgm shiori 2.0
@@ -939,6 +944,8 @@ hitomi|（笑了一下，笑得很难看）我不是没考上。我是没报名�
 @wait 1.0
 |　　这是她第一次说这句话。说完她就转身走了，走得很快。
 @hide all 0.8
+
+@timeslot ch5
 
 @bg bg_hospital_corridor 1.0
 @amb room 1.0
@@ -975,6 +982,50 @@ kiryu|我只是……也不知道该怎么对一个人好。
 @amb room 1.0
 @bgm none
 @cal 9/18 中潮 夜
+|　　走到 816 门口的时候，我听见里面有说话的声音。
+|　　我停下了。
+@wait 1.0
+chizuru|栞。
+@wait 0.8
+|　　……
+@wait 0.6
+chizuru|妈妈不治了。
+@wait 1.2
+|　　……
+@wait 0.6
+chizuru|妈妈不治了。你把钱留着自己用。
+@wait 1.0
+shiori|（很平）妈，你上次也这么说。
+shiori|（很平）然后你去了。
+@wait 1.2
+|　　……
+@wait 0.8
+shiori|所以我们都不算数。
+shiori|我们都不算数，就这样过吧。
+@wait 1.4
+|　　门里面安静了很久。
+|　　我把手放在门把上，一直没有推开。
+@wait 1.2
+@fx vignette 0.4
+@char chizuru c 0.9
+|　　门从里面打开了。
+|　　她看见我，愣了一下。她什么都没有问。
+chizuru|（侧身让开）你进去吧。
+yuto|……好。
+@wait 0.8
+|　　她走了两步，又停下来。
+chizuru|（背对着我）冈田同学。
+yuto|嗯。
+chizuru|（想了很久）她要是跟你说什么，你就听着。
+chizuru|别劝她。
+@wait 1.0
+yuto|……为什么。
+@wait 1.0
+chizuru|（很久）因为她劝不动我。
+@wait 1.2
+|　　她走了。走廊很长，她的脚步声一直在响。
+@hide all 1.0
+@fx vignette 0.3
 |　　我回到病房。
 |　　她坐在窗边，正在把奶奶的药单抄在一本册子上。
 @char shiori_weak c 0.9
@@ -1463,9 +1514,8 @@ shiori|（想了很久）……没什么。
 @bgm none
 @cal 9/20 冈田家 朝
 |　　她没有再去过医院。
-|　　她母亲跪在她面前求过一次。她说：妈，你上次也这么说。然后你去了。
-@wait 1.2
-|　　「所以我们都不算数。我们都不算数，就这样过吧。」
+|　　她母亲求过她一次。她说的还是那句话。
+|　　栞回答她的，也是同一句。
 @wait 1.4
 |　　我陪她把清单上的事一件一件做完。
 @wait 0.8

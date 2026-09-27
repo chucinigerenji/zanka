@@ -117,10 +117,18 @@ python3 tools/gen_audio.py
 # 中文字体子集化（从系统 NotoSansCJK / NotoSerifCJK 抽取项目用到的字）
 python3 tools/make_font.py
 
-# ---- 立绘 alpha 重建（一条命令跑完整条流水线，可反复跑）----
+# ---- 立绘 alpha 重建（一条命令跑完整条流水线）----
 python3 tools/rebuild_sprites.py
 # 内部固定顺序：抠图 -> 切断细通道 -> 清边缘均匀色带 -> 轮廓收缩削灰边 -> 清碎块 + 裁边归一化
-# 每一步都会保留原始 RGB，所以随时可以整条重跑，不会越修越坏。
+# 每一步都会保留原始 RGB。
+# ⚠ 但「可反复跑」并不完全成立：autocrop 之后四边参考色不再是黑底，而是抗锯齿灰，
+#   于是每次重跑都会再啃掉一圈角色像素。实测 char_yuto 会持续缩水
+#   （475 -> 464 -> 461 -> 457 -> 454 -> 452 -> 451，约 −5% 宽度后收敛），其余 12 张稳定。
+#   重跑前先备份 assets/char/。
+# ⚠ 不要单独跑 tools/clean_sprites.py / tools/recut.py / tools/flat_cutout.py：
+#   前者的 main() 用的是「四边」清色带（会清掉下边缘，与半身像的设计相冲突），
+#   后两者是当初被放弃的备选抠图方案，且 flat_cutout 只看 RGB、无视现有 alpha，
+#   直接跑会把已经收敛的 13 张立绘全部大改。
 
 # 立绘构图体检：发现头顶/身体被画面边缘切掉的图
 python3 tools/check_sprites.py
@@ -145,7 +153,8 @@ python3 tools/validate.py
 5. `.zs` 剧本：块配平、标签唯一性、跳转目标、背景/CG/立绘 id、说话人 id、BGM/环境音/音效文件、系统数据 key、结局 id
 6. **剧本包同步**：`main.json` 必须与 `main.zs` 一致（`data/story/main.zs` 是编辑源，
    `main.json` 是运行时读的打包产物——Godot 导出时只有能被识别为资源的文件才会进 APK）
-7. **立绘构图体检**：`check_sprites.py` 检查四条边上有没有不透明像素——头顶被切平就是它抓出来的
+7. **立绘构图体检**：检查四条边上有没有不透明像素——头顶被切平就是它抓出来的。
+   ⚠ 这一步**不在 `validate.py` 里**，要单独跑 `python3 tools/check_sprites.py`（`--json` 可机器读）。
 8. **未定义常量**：裸用的大写常量若在任何地方都没声明，GDScript 会直接编译失败（这个检查抓到过一次真实的漏改事故）
 9. **标签可达性**：从 `::start` 出发做图遍历，报出不可达的标签（防止写出永远走不到的剧情）
 10. 数据文件内部一致性（`endings.json` 引用的背景是否存在等）
@@ -168,3 +177,56 @@ python3 tools/validate.py
   所以画面里看不到腿部裁切。
 * 无语音。`scripts/ui/dialogue_box.gd` 的打字机速度可以按设置调节。
 * 周目继承：已解锁的结局 / CG / 信件 / 记忆碎片存在 `user://global.json`，跨存档保留。
+
+---
+
+## 八、导出 Android APK
+
+`export_presets.cfg` 里已经配好一个 Android 预设（唯一预设，已设为 `runnable`），不用手动新建。
+
+### 0. 每次导出前（不能省）
+
+```bash
+python3 tools/pack_story.py     # ★ 改过 main.zs 就必须跑，否则 APK 里没有剧本
+python3 tools/validate.py       # 必须 0 ERROR
+```
+
+`main.zs` 不是 Godot 能识别的资源类型，**不会**被打进 APK；游戏运行时读的是 `pack_story.py`
+产出的 `data/story/main.json`。忘了这一步，装到手机上打开就是「剧本加载失败」。
+
+### 1. 一次性准备（在 Godot 编辑器里）
+
+1. **编辑器设置 → 导出 → Android**：填 Android SDK 路径（要含 `platform-tools` 与 `build-tools`）和 JDK 17。
+2. **编辑器 → 管理导出模板**：安装与当前编辑器版本一致的 **Android 导出模板**
+   （用官方模板即可——预设里 `gradle_build/use_gradle_build=false`，不要求自建 gradle 工程）。
+3. 调试包用 Godot 自动生成的 debug keystore，不必自备签名。
+
+### 2. 导出
+
+**项目 → 导出 → Android → 导出项目**。目标路径已设为 `build/Zanka.apk`（相对项目根，`build/` 已在 `.gitignore` 里）。
+
+预设里几个关键设定，改之前先看懂：
+
+| 设定 | 值 | 为什么 |
+|---|---|---|
+| `export_filter` | `all_resources` | 背景 / CG / 立绘 / 音频 / 字体全部按资源导出 |
+| `include_filter` | `data/story/*.json` | 显式钉住剧本包，防止被漏掉 |
+| `exclude_filter` | `预览/*` | `预览/` 三张总览图约 7 MB（还是成对重复的文件），只是审稿素材，不该进包 |
+| `architectures` | 只留 `arm64-v8a` | 现代手机都是 arm64；砍掉 armeabi-v7a / x86 可让包体减半 |
+| `screen/immersive_mode` | `true` | 视觉小说全屏沉浸，隐藏导航栏 |
+
+`tools/` 目录里有 `.gdignore`，Godot 会整目录跳过，不会被导出。
+
+### 3. 装到手机
+
+把 `build/Zanka.apk` 拷到手机上点安装，或 `adb install -r build/Zanka.apk`。
+
+### 4. 导出后必做的冒烟测试
+
+**不要只看能不能启动**——要确认那几个 JSON 真的都在包里：
+
+1. 标题 →「开始新的一周目」→ 能出第一句旁白（`main.json` 进包了）；
+2. 右上「菜单 → 汐浦港 潮汐表」→ 13 行都在，9/19 那行是「朔望大潮 +202cm」（`tides.json` 进包了）；
+3. 走完序章 → 弹出「不会寄出的信」面板（`systems.json` 进包了）；
+4. 横屏、无导航栏、中文不是豆腐块。
+

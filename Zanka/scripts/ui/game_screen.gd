@@ -53,6 +53,11 @@ var auto_mode: bool = false
 var skip_mode: bool = false
 var logs: Array = []
 
+## 当前这一句在显示之前是否已经读过（「只跳过已读」要用）。
+## 注意不能事后查 GameState：_on_say 里会立刻把当前行标记为已读，
+## 所以必须在标记之前把结果抓下来。
+var _cur_already_seen: bool = false
+
 var _auto_t: float = 0.0
 var _skip_t: float = 0.0
 var _shaking: bool = false
@@ -190,6 +195,8 @@ func _connect_engine() -> void:
 # ---------------------------------------------------------------- 引擎回调
 
 func _on_say(speaker_id: String, speaker_name: String, text: String) -> void:
+	_cur_already_seen = (not GameState.cur_line_key.is_empty()) \
+		and GameState.is_seen(GameState.cur_line_key)
 	if not GameState.cur_line_key.is_empty():
 		GameState.mark_seen(GameState.cur_line_key)
 	dbox.show_line(speaker_name, CharDB.name_color(speaker_id), text)
@@ -270,6 +277,7 @@ func _on_loaded() -> void:
 	logs.clear()
 	_set_auto(false)
 	_set_skip(false)
+	_cur_already_seen = false
 	set_hud_visible(true)
 	game_loaded.emit()
 
@@ -411,6 +419,11 @@ func _process(delta: float) -> void:
 	if dbox.is_typing():
 		return
 	if skip_mode:
+		# 「只跳过已读」是默认行为：撞到没读过的句子就自动停下来。
+		# 想连未读一起跳，在设置里打开「跳过时忽略未读文本」。
+		if not GameConfig.skip_unread and not _cur_already_seen:
+			_set_skip(false)
+			return
 		_skip_t += delta
 		if _skip_t >= 0.045:
 			_skip_t = 0.0
@@ -529,6 +542,7 @@ func reset_view() -> void:
 	logs.clear()
 	_set_auto(false)
 	_set_skip(false)
+	_cur_already_seen = false
 	_set_vignette(0.0)
 	_black.color = Color(0, 0, 0, 1)
 	var tw := create_tween()

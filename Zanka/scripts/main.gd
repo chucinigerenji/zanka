@@ -146,6 +146,10 @@ func _on_load_panel_closed() -> void:
 
 func _start_new() -> void:
 	GameState.reset_story()
+	# 看过结局之后再开新档，就是进入下一周目。
+	# （reset_story 只清单周目状态，playthrough / 解锁数据是跨周目保留的）
+	if not GameState.endings_seen.is_empty():
+		GameState.next_playthrough()
 	AudioManager.stop_all()
 	if not StoryEngine.load_script(story_path()):
 		_show_fatal("剧本加载失败，请看控制台输出。")
