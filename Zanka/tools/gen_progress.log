@@ -391,3 +391,257 @@
 [21:18:53]   ~~ 抠图完成 背景占比 0.39（顶边留白 0）
 [21:18:53]   ok 459.9s seed=2108429209 -> assets/char/char_yuto.png
 [21:18:53] 完成：成功 2 / 失败 0，总耗时 15.3 分钟
+[00:09:23] 立绘重出：命中 13 项，待出图 13 项（模型 anythingv5cpu）
+[00:09:23]   待出图 char_shiori_uniform_normal  512x512 steps=26
+[00:09:23]   待出图 char_shiori_uniform_smile  512x512 steps=26
+[00:09:23]   待出图 char_shiori_uniform_sad  512x512 steps=26
+[00:09:23]   待出图 char_shiori_casual  512x512 steps=26
+[00:09:23]   待出图 char_shiori_weak  512x512 steps=26
+[00:09:23]   待出图 char_hitomi_uniform  512x512 steps=26
+[00:09:23]   待出图 char_fumi  512x512 steps=26
+[00:09:23]   待出图 char_chizuru  512x512 steps=26
+[00:09:23]   待出图 char_daikan  512x512 steps=26
+[00:09:23]   待出图 char_hamaguchi  512x512 steps=26
+[00:09:23]   待出图 char_seiichi  512x512 steps=26
+[00:09:23]   待出图 char_kiryu  512x512 steps=26
+[00:09:23]   待出图 char_yuto  512x512 steps=26
+[00:09:25] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[00:09:25] Local Dream 2.8.1
+[00:09:25] token char_shiori_uniform_normal     prompt= 70/77 negative= 75/77  OK
+[00:09:25] token 核算通过（全部 ≤ 77）
+[00:09:25] [1/1] char_shiori_uniform_normal 512x512 steps=26 ...
+[00:12:42]   ok 197.0s seed=1333794636 -> tools/_raw_sprites/char_shiori_uniform_normal.png
+[00:12:42] 出图完成：成功 1 / 失败 0，总耗时 3.3 分钟
+[00:12:42] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[00:15:11] 立绘重出：命中 13 项，待出图 12 项（模型 anythingv5cpu）
+[00:15:11] Local Dream 2.8.1
+[00:15:11] token char_shiori_uniform_normal     prompt= 70/77 negative= 75/77  OK
+[00:15:11] token char_shiori_uniform_smile      prompt= 73/77 negative= 75/77  OK
+[00:15:11] token char_shiori_uniform_sad        prompt= 76/77 negative= 75/77  OK
+[00:15:11] token char_shiori_casual             prompt= 65/77 negative= 75/77  OK
+[00:15:11] token char_shiori_weak               prompt= 71/77 negative= 75/77  OK
+[00:15:11] token char_hitomi_uniform            prompt= 56/77 negative= 75/77  OK
+[00:15:11] token char_fumi                      prompt= 65/77 negative= 75/77  OK
+[00:15:11] token char_chizuru                   prompt= 66/77 negative= 75/77  OK
+[00:15:11] token char_daikan                    prompt= 65/77 negative= 75/77  OK
+[00:15:11] token char_hamaguchi                 prompt= 71/77 negative= 75/77  OK
+[00:15:11] token char_seiichi                   prompt= 68/77 negative= 75/77  OK
+[00:15:11] token char_kiryu                     prompt= 65/77 negative= 75/77  OK
+[00:15:11] token char_yuto                      prompt= 72/77 negative= 75/77  OK
+[00:15:11] token 核算通过（全部 ≤ 77）
+[00:15:11] [1/12] char_shiori_uniform_smile 512x512 steps=26 ...
+[00:17:56]   ok 164.7s seed=1968223483 -> tools/_raw_sprites/char_shiori_uniform_smile.png
+[00:17:56] [2/12] char_shiori_uniform_sad 512x512 steps=26 ...
+[00:20:53]   ok 177.1s seed=1651669441 -> tools/_raw_sprites/char_shiori_uniform_sad.png
+[00:20:53] [3/12] char_shiori_casual 512x512 steps=26 ...
+[00:23:51]   ok 178.1s seed=2106921924 -> tools/_raw_sprites/char_shiori_casual.png
+[00:23:51] [4/12] char_shiori_weak 512x512 steps=26 ...
+[22:46:31] 立绘重出：命中 13 项，待出图 9 项（模型 anythingv5cpu）
+[22:46:31] Local Dream 2.8.1
+[22:46:31] token char_shiori_uniform_normal     prompt= 70/77 negative= 75/77  OK
+[22:46:31] token char_shiori_uniform_smile      prompt= 73/77 negative= 75/77  OK
+[22:46:31] token char_shiori_uniform_sad        prompt= 76/77 negative= 75/77  OK
+[22:46:31] token char_shiori_casual             prompt= 72/77 negative= 75/77  OK
+[22:46:31] token char_shiori_weak               prompt= 71/77 negative= 75/77  OK
+[22:46:31] token char_hitomi_uniform            prompt= 56/77 negative= 75/77  OK
+[22:46:31] token char_fumi                      prompt= 65/77 negative= 75/77  OK
+[22:46:31] token char_chizuru                   prompt= 66/77 negative= 75/77  OK
+[22:46:31] token char_daikan                    prompt= 65/77 negative= 75/77  OK
+[22:46:31] token char_hamaguchi                 prompt= 71/77 negative= 75/77  OK
+[22:46:31] token char_seiichi                   prompt= 68/77 negative= 75/77  OK
+[22:46:31] token char_kiryu                     prompt= 65/77 negative= 75/77  OK
+[22:46:31] token char_yuto                      prompt= 72/77 negative= 75/77  OK
+[22:46:31] token 核算通过（全部 ≤ 77）
+[22:46:31] [1/9] char_shiori_weak 512x512 steps=26 ...
+[22:50:30]   ~~ 第 1 次：构图出画（顶 43 / 左 0 / 右 0），换种子重抽
+[22:55:55]   ok 564.0s seed=571356528 -> tools/_raw_sprites/char_shiori_weak.png
+[22:55:55] [2/9] char_hitomi_uniform 512x512 steps=26 ...
+[23:05:14]   ~~ 第 1 次：构图出画（顶 418 / 左 505 / 右 465），换种子重抽
+[23:24:46]   ~~ 第 2 次：构图出画（顶 49 / 左 0 / 右 0），换种子重抽
+[23:40:38]   ok 2683.2s seed=115071065 -> tools/_raw_sprites/char_hitomi_uniform.png
+[23:40:38] [3/9] char_fumi 512x512 steps=26 ...
+[23:51:49]   ok 671.2s seed=2063851513 -> tools/_raw_sprites/char_fumi.png
+[23:51:49] [4/9] char_chizuru 512x512 steps=26 ...
+[23:57:09]   ok 319.5s seed=209415860 -> tools/_raw_sprites/char_chizuru.png
+[23:57:09] [5/9] char_daikan 512x512 steps=26 ...
+[00:02:06]   ok 296.9s seed=767338086 -> tools/_raw_sprites/char_daikan.png
+[00:02:06] [6/9] char_hamaguchi 512x512 steps=26 ...
+[00:06:54]   ok 288.2s seed=1057918969 -> tools/_raw_sprites/char_hamaguchi.png
+[00:06:54] [7/9] char_seiichi 512x512 steps=26 ...
+[00:12:20]   ok 325.8s seed=1460349310 -> tools/_raw_sprites/char_seiichi.png
+[00:12:20] [8/9] char_kiryu 512x512 steps=26 ...
+[00:17:47]   ok 327.7s seed=35656147 -> tools/_raw_sprites/char_kiryu.png
+[00:17:47] [9/9] char_yuto 512x512 steps=26 ...
+[00:23:09]   ~~ 第 1 次：构图出画（顶 57 / 左 27 / 右 121），换种子重抽
+[00:28:34]   ~~ 第 2 次：构图出画（顶 96 / 左 0 / 右 0），换种子重抽
+[00:33:57]   ok 970.0s seed=1211628696 -> tools/_raw_sprites/char_yuto.png
+[00:33:57] 出图完成：成功 9 / 失败 0，总耗时 107.4 分钟
+[00:33:57] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[00:33:58] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[00:33:58] Local Dream 2.8.1
+[00:33:58] token char_shiori_casual             prompt= 72/77 negative= 75/77  OK
+[00:33:58] token 核算通过（全部 ≤ 77）
+[00:33:58] [1/1] char_shiori_casual 512x512 steps=26 ...
+[00:39:23]   ok 325.1s seed=497725996 -> tools/_raw_sprites/char_shiori_casual.png
+[00:39:23] 出图完成：成功 1 / 失败 0，总耗时 5.4 分钟
+[00:39:23] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[00:39:23] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[00:39:23] Local Dream 2.8.1
+[00:39:23] token char_shiori_uniform_sad        prompt= 76/77 negative= 75/77  OK
+[00:39:23] token 核算通过（全部 ≤ 77）
+[00:39:23] [1/1] char_shiori_uniform_sad 512x512 steps=26 ...
+[00:45:39]   ~~ 第 1 次：构图出画（顶 188 / 左 0 / 右 0），换种子重抽
+[00:51:20]   ~~ 第 2 次：构图出画（顶 63 / 左 0 / 右 0），换种子重抽
+[00:57:03]   ~~ 第 3 次：构图出画（顶 202 / 左 0 / 右 0），换种子重抽
+[01:02:12]   ~~ 第 4 次：构图出画（顶 81 / 左 0 / 右 0），换种子重抽
+[01:07:16]   ~~ 第 5 次：构图出画（顶 129 / 左 0 / 右 0），换种子重抽
+[01:12:30]   ~~ 第 6 次：构图出画（顶 158 / 左 0 / 右 0），换种子重抽
+[01:12:30]   XX char_shiori_uniform_sad 出图失败
+[01:12:30] 出图完成：成功 0 / 失败 1，总耗时 33.1 分钟
+[01:12:30]    FAILED char_shiori_uniform_sad
+[01:12:42] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[01:12:42] Local Dream 2.8.1
+[01:12:42] token char_shiori_uniform_sad        prompt= 71/77 negative= 75/77  OK
+[01:12:42] token 核算通过（全部 ≤ 77）
+[01:12:42] [1/1] char_shiori_uniform_sad 512x512 steps=26 ...
+[01:18:47]   ok 364.6s seed=1803882911 -> tools/_raw_sprites/char_shiori_uniform_sad.png
+[01:18:47] 出图完成：成功 1 / 失败 0，总耗时 6.1 分钟
+[01:18:47] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[01:27:53] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[01:27:53] Local Dream 2.8.1
+[01:27:53] token char_fumi                      prompt= 64/77 negative= 75/77  OK
+[01:27:53] token 核算通过（全部 ≤ 77）
+[01:27:53] [1/1] char_fumi 512x512 steps=26 ...
+[01:33:31]   ok 338.1s seed=2045029003 -> tools/_raw_sprites/char_fumi.png
+[01:33:31] 出图完成：成功 1 / 失败 0，总耗时 5.6 分钟
+[01:33:31] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[01:33:56] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[01:33:56] Local Dream 2.8.1
+[01:33:56] token char_daikan                    prompt= 65/77 negative= 75/77  OK
+[01:33:56] token 核算通过（全部 ≤ 77）
+[01:33:56] [1/1] char_daikan 512x512 steps=26 ...
+[01:40:44]   ok 407.6s seed=909422753 -> tools/_raw_sprites/char_daikan.png
+[01:40:44] 出图完成：成功 1 / 失败 0，总耗时 6.8 分钟
+[01:40:44] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[01:40:44] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[01:40:44] Local Dream 2.8.1
+[01:40:44] token char_hamaguchi                 prompt= 69/77 negative= 75/77  OK
+[01:40:44] token 核算通过（全部 ≤ 77）
+[01:40:44] [1/1] char_hamaguchi 512x512 steps=26 ...
+[01:46:34]   ok 349.4s seed=1155679516 -> tools/_raw_sprites/char_hamaguchi.png
+[01:46:34] 出图完成：成功 1 / 失败 0，总耗时 5.8 分钟
+[01:46:34] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[01:46:34] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[01:46:34] Local Dream 2.8.1
+[01:46:34] token char_kiryu                     prompt= 62/77 negative= 75/77  OK
+[01:46:34] token 核算通过（全部 ≤ 77）
+[01:46:34] [1/1] char_kiryu 512x512 steps=26 ...
+[01:52:15]   ok 341.1s seed=1513300461 -> tools/_raw_sprites/char_kiryu.png
+[01:52:15] 出图完成：成功 1 / 失败 0，总耗时 5.7 分钟
+[01:52:15] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[01:52:15] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[01:52:15] Local Dream 2.8.1
+[01:52:15] token char_hitomi_uniform            prompt= 60/77 negative= 75/77  OK
+[01:52:15] token 核算通过（全部 ≤ 77）
+[01:52:15] [1/1] char_hitomi_uniform 512x512 steps=26 ...
+[01:57:19]   ok 303.4s seed=1249357665 -> tools/_raw_sprites/char_hitomi_uniform.png
+[01:57:19] 出图完成：成功 1 / 失败 0，总耗时 5.1 分钟
+[01:57:19] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[01:57:19] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[01:57:19] Local Dream 2.8.1
+[01:57:19] token char_shiori_weak               prompt= 75/77 negative= 75/77  OK
+[01:57:19] token 核算通过（全部 ≤ 77）
+[01:57:19] [1/1] char_shiori_weak 512x512 steps=26 ...
+[02:02:09]   ok 290.0s seed=125686196 -> tools/_raw_sprites/char_shiori_weak.png
+[02:02:09] 出图完成：成功 1 / 失败 0，总耗时 4.8 分钟
+[02:02:09] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[02:02:09] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[02:02:09] Local Dream 2.8.1
+[02:02:09] token char_shiori_casual             prompt= 69/77 negative= 75/77  OK
+[02:02:09] token 核算通过（全部 ≤ 77）
+[02:02:09] [1/1] char_shiori_casual 512x512 steps=26 ...
+[02:09:03]   ~~ 第 1 次：构图出画（顶 49 / 左 0 / 右 0），换种子重抽
+[02:14:09]   ok 719.6s seed=1223839565 -> tools/_raw_sprites/char_shiori_casual.png
+[02:14:09] 出图完成：成功 1 / 失败 0，总耗时 12.0 分钟
+[02:14:09] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[02:14:09] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[02:14:09] Local Dream 2.8.1
+[02:14:09] token char_seiichi                   prompt= 64/77 negative= 75/77  OK
+[02:14:09] token 核算通过（全部 ≤ 77）
+[02:14:09] [1/1] char_seiichi 512x512 steps=26 ...
+[02:18:48]   ok 279.6s seed=1005061830 -> tools/_raw_sprites/char_seiichi.png
+[02:18:48] 出图完成：成功 1 / 失败 0，总耗时 4.7 分钟
+[02:18:48] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[02:18:49] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[02:18:49] Local Dream 2.8.1
+[02:18:49] token char_chizuru                   prompt= 67/77 negative= 75/77  OK
+[02:18:49] token 核算通过（全部 ≤ 77）
+[02:18:49] [1/1] char_chizuru 512x512 steps=26 ...
+[02:23:28]   ok 278.9s seed=2113099565 -> tools/_raw_sprites/char_chizuru.png
+[02:23:28] 出图完成：成功 1 / 失败 0，总耗时 4.6 分钟
+[02:23:28] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[02:23:34] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[02:23:34] Local Dream 2.8.1
+[02:23:34] token char_shiori_weak               prompt= 72/77 negative= 76/77  OK
+[02:23:34] token 核算通过（全部 ≤ 77）
+[02:23:34] [1/1] char_shiori_weak 512x512 steps=26 ...
+[02:28:15]   ~~ 第 1 次：构图出画（顶 109 / 左 0 / 右 0），换种子重抽
+[02:32:51]   ok 557.5s seed=166513913 -> tools/_raw_sprites/char_shiori_weak.png
+[02:32:51] 出图完成：成功 1 / 失败 0，总耗时 9.3 分钟
+[02:32:51] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[02:32:52] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[02:32:52] Local Dream 2.8.1
+[02:32:52] token char_kiryu                     prompt= 60/77 negative= 71/77  OK
+[02:32:52] token 核算通过（全部 ≤ 77）
+[02:32:52] [1/1] char_kiryu 512x512 steps=26 ...
+[02:37:31]   ok 279.4s seed=1026722260 -> tools/_raw_sprites/char_kiryu.png
+[02:37:31] 出图完成：成功 1 / 失败 0，总耗时 4.7 分钟
+[02:37:31] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[02:37:31] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[02:37:31] Local Dream 2.8.1
+[02:37:31] token char_hamaguchi                 prompt= 67/77 negative= 76/77  OK
+[02:37:31] token 核算通过（全部 ≤ 77）
+[02:37:31] [1/1] char_hamaguchi 512x512 steps=26 ...
+[02:42:10]   ok 279.1s seed=2014557620 -> tools/_raw_sprites/char_hamaguchi.png
+[02:42:10] 出图完成：成功 1 / 失败 0，总耗时 4.7 分钟
+[02:42:10] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[02:42:10] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[02:42:10] Local Dream 2.8.1
+[02:42:10] token char_daikan                    prompt= 66/77 negative= 71/77  OK
+[02:42:10] token 核算通过（全部 ≤ 77）
+[02:42:10] [1/1] char_daikan 512x512 steps=26 ...
+[02:46:49]   ok 279.1s seed=154275569 -> tools/_raw_sprites/char_daikan.png
+[02:46:49] 出图完成：成功 1 / 失败 0，总耗时 4.7 分钟
+[02:46:49] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[02:46:54] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[02:46:54] Local Dream 2.8.1
+[02:46:54] token char_shiori_casual             prompt= 75/77 negative= 75/77  OK
+[02:46:54] token 核算通过（全部 ≤ 77）
+[02:46:54] [1/1] char_shiori_casual 512x512 steps=26 ...
+[02:51:33]   ok 279.4s seed=2050730178 -> tools/_raw_sprites/char_shiori_casual.png
+[02:51:33] 出图完成：成功 1 / 失败 0，总耗时 4.7 分钟
+[02:51:33] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[02:59:08] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[02:59:08] Local Dream 2.8.1
+[02:59:08] token char_hitomi_uniform            prompt= 70/77 negative= 75/77  OK
+[02:59:08] token 核算通过（全部 ≤ 77）
+[02:59:08] [1/1] char_hitomi_uniform 512x512 steps=26 ...
+[03:03:45]   ok 277.5s seed=1050885642 -> tools/_raw_sprites/char_hitomi_uniform.png
+[03:03:45] 出图完成：成功 1 / 失败 0，总耗时 4.6 分钟
+[03:03:45] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[03:03:45] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[03:03:45] Local Dream 2.8.1
+[03:03:45] token char_chizuru                   prompt= 70/77 negative= 75/77  OK
+[03:03:45] token 核算通过（全部 ≤ 77）
+[03:03:45] [1/1] char_chizuru 512x512 steps=26 ...
+[03:08:23]   ok 277.9s seed=2021789910 -> tools/_raw_sprites/char_chizuru.png
+[03:08:23] 出图完成：成功 1 / 失败 0，总耗时 4.6 分钟
+[03:08:23] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py
+[03:08:23] 立绘重出：命中 1 项，待出图 1 项（模型 anythingv5cpu）
+[03:08:23] Local Dream 2.8.1
+[03:08:23] token char_shiori_uniform_sad        prompt= 74/77 negative= 75/77  OK
+[03:08:23] token 核算通过（全部 ≤ 77）
+[03:08:23] [1/1] char_shiori_uniform_sad 512x512 steps=26 ...
+[03:13:01]   ok 277.9s seed=2087847693 -> tools/_raw_sprites/char_shiori_uniform_sad.png
+[03:13:01] 出图完成：成功 1 / 失败 0，总耗时 4.6 分钟
+[03:13:01] 下一步：birefnet-cutout tools/_raw_sprites/*.png --outdir assets/char --json  然后 python3 tools/check_sprites.py

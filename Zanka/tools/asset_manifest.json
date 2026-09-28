@@ -1,7 +1,7 @@
 {
-  "_comment": "《残夏》美术资产清单。模型 anythingv5cpu（动漫特化）。背景/CG 用 512x320（贴近 16:10，兼顾质量与速度），角色立绘用 512x512（模型原生分辨率，抠图质量最好）。生成脚本 tools/gen_assets.py。",
+  "_comment": "《残夏》美术资产清单。模型 anythingv5cpu（动漫特化）。背景/CG 用 512x320，角色立绘用 512x512。★ 立绘流程已改：tools/regen_sprites.py 出原图（不带抠图）→ birefnet-cutout 语义抠图 → tools/check_sprites.py 体检。★ 提示词与负面提示词都必须 ≤77 token（CLIP 上限），超了尾部会被服务端静默丢弃——旧版立绘提示词 104 token、负面 193 token，红绳与构图标签全被丢掉了，这是立绘出错的主因。regen_sprites.py 现在会在出图前核算 token，溢出直接中止。背景/CG 仍走 tools/gen_assets.py。",
   "model": "anythingv5cpu",
-  "quality_prefix": "masterpiece, best quality, very aesthetic, absurdres, highly detailed, anime visual novel, ",
+  "quality_prefix": "masterpiece, best quality, absurdres, anime visual novel, ",
   "negative": "lowres, worst quality, low quality, normal quality, jpeg artifacts, blurry, bad anatomy, bad hands, extra fingers, missing fingers, extra limbs, fused fingers, poorly drawn face, poorly drawn hands, deformed, signature, watermark, username, text, logo, error, cropped, multiple views, sketch, monochrome, 3d, realistic photo",
   "assets": [
     {
@@ -153,143 +153,156 @@
       "kind": "char",
       "w": 512,
       "h": 512,
-      "steps": 14,
+      "steps": 26,
       "cutout": true,
-      "prompt": "(solid black background:1.6), (simple background:1.4), 1girl, solo, japanese high school girl, 17 years old, summer school uniform white short sleeve blouse and dark navy pleated skirt, medium black hair with uneven self-cut bangs, dark brown eyes, calm quiet expression, slightly tired eyes, thin red string bracelet on left wrist, cowboy shot, standing, facing viewer, head fully visible, cel shading, clean lineart",
-      "negative": "cropped, out of frame, zoomed in, tight framing, cut off, close-up, face close-up, headshot, 2girls, 2boys, multiple people, duplicate, twins, extra person, crowd, white background, grey background, gradient background, vignette, bokeh, scenery, detailed background, room, indoors, outdoors, window, door, wall, floor, furniture, tree, grass, sky, building, holding object, prop, weapon, ball, racket, umbrella, floating object, extra object, full body, sitting, lying, close-up, headshot, lowres, worst quality, low quality, jpeg artifacts, bad anatomy, bad hands, extra fingers, missing fingers, extra limbs, fused fingers, poorly drawn face, poorly drawn hands, deformed, signature, watermark, text, logo, multiple views, sketch, monochrome, 3d, realistic photo, nsfw, nude, cleavage",
-      "no_prefix": false
+      "prompt": "1girl, solo, petite japanese high school girl, faded white short sleeve blouse, navy pleated skirt, short black hair, uneven self-cut bangs, dark brown eyes, calm tired expression, red string bracelet left wrist, cowboy shot, head fully visible, flat grey background",
+      "negative": "cropped, out of frame, cut off, close-up, headshot, 2girls, multiple people, extra person, duplicate, bad anatomy, bad hands, extra fingers, fused fingers, missing fingers, blurry, lowres, worst quality, low quality, jpeg artifacts, detailed background, busy background, scenery, vignette, necktie, floating object",
+      "no_prefix": false,
+      "cfg": 7.5
     },
     {
       "id": "char_shiori_uniform_smile",
       "kind": "char",
       "w": 512,
       "h": 512,
-      "steps": 14,
+      "steps": 26,
       "cutout": true,
-      "prompt": "(solid black background:1.6), (simple background:1.4), 1girl, solo, japanese high school girl, 17 years old, summer school uniform white short sleeve blouse and dark navy pleated skirt, medium black hair with uneven self-cut bangs, dark brown eyes, gentle faint smile, soft eyes, thin red string bracelet on left wrist, cowboy shot, standing, facing viewer, head fully visible, cel shading, clean lineart",
-      "negative": "cropped, out of frame, zoomed in, tight framing, cut off, close-up, face close-up, headshot, 2girls, 2boys, multiple people, duplicate, twins, extra person, crowd, white background, grey background, gradient background, vignette, bokeh, scenery, detailed background, room, indoors, outdoors, window, door, wall, floor, furniture, tree, grass, sky, building, holding object, prop, weapon, ball, racket, umbrella, floating object, extra object, full body, sitting, lying, close-up, headshot, lowres, worst quality, low quality, jpeg artifacts, bad anatomy, bad hands, extra fingers, missing fingers, extra limbs, fused fingers, poorly drawn face, poorly drawn hands, deformed, signature, watermark, text, logo, multiple views, sketch, monochrome, 3d, realistic photo, nsfw, nude, cleavage",
-      "no_prefix": false
+      "prompt": "1girl, solo, petite japanese high school girl, faded white short sleeve blouse, navy pleated skirt, short black hair, uneven self-cut bangs, dark brown eyes, gentle faint smile, soft eyes, red string bracelet left wrist, cowboy shot, head fully visible, flat grey background",
+      "negative": "cropped, out of frame, cut off, close-up, headshot, 2girls, multiple people, extra person, duplicate, bad anatomy, bad hands, extra fingers, fused fingers, missing fingers, blurry, lowres, worst quality, low quality, jpeg artifacts, detailed background, busy background, scenery, vignette, necktie, floating object",
+      "no_prefix": false,
+      "cfg": 7.5
     },
     {
       "id": "char_shiori_uniform_sad",
       "kind": "char",
       "w": 512,
       "h": 512,
-      "steps": 14,
+      "steps": 26,
       "cutout": true,
-      "prompt": "(solid black background:1.6), (simple background:1.4), 1girl, solo, japanese high school girl, 17 years old, summer school uniform white short sleeve blouse and dark navy pleated skirt, medium black hair with uneven self-cut bangs, dark brown eyes, looking down, sad downcast expression, holding back tears, thin red string bracelet on left wrist, cowboy shot, standing, facing viewer, head fully visible, cel shading, clean lineart",
-      "negative": "cropped, out of frame, zoomed in, tight framing, cut off, close-up, face close-up, headshot, 2girls, 2boys, multiple people, duplicate, twins, extra person, crowd, white background, grey background, gradient background, vignette, bokeh, scenery, detailed background, room, indoors, outdoors, window, door, wall, floor, furniture, tree, grass, sky, building, holding object, prop, weapon, ball, racket, umbrella, floating object, extra object, full body, sitting, lying, close-up, headshot, lowres, worst quality, low quality, jpeg artifacts, bad anatomy, bad hands, extra fingers, missing fingers, extra limbs, fused fingers, poorly drawn face, poorly drawn hands, deformed, signature, watermark, text, logo, multiple views, sketch, monochrome, 3d, realistic photo, nsfw, nude, cleavage",
-      "no_prefix": false
+      "prompt": "1girl, solo, petite japanese high school girl, faded white short sleeve blouse, navy pleated skirt, short black hair, dark brown eyes, downcast eyes, sorrowful expression, facing viewer, red string bracelet left wrist, standing, cowboy shot, head fully visible, flat grey background",
+      "negative": "cropped, out of frame, cut off, close-up, headshot, 2girls, multiple people, extra person, duplicate, bad anatomy, bad hands, extra fingers, fused fingers, missing fingers, blurry, lowres, worst quality, low quality, jpeg artifacts, detailed background, busy background, scenery, vignette, necktie, floating object",
+      "no_prefix": false,
+      "cfg": 10.0
     },
     {
       "id": "char_shiori_casual",
       "kind": "char",
       "w": 512,
       "h": 512,
-      "steps": 14,
+      "steps": 26,
       "cutout": true,
-      "prompt": "(solid black background:1.6), (simple background:1.4), 1girl, solo, japanese girl, 17 years old, plain faded navy blue one piece dress, worn beige knit cardigan, medium black hair with uneven bangs, dark brown eyes, quiet calm expression, thin red string bracelet on left wrist, cowboy shot, standing, facing viewer, head fully visible, cel shading, clean lineart",
-      "negative": "cropped, out of frame, zoomed in, tight framing, cut off, close-up, face close-up, headshot, 2girls, 2boys, multiple people, duplicate, twins, extra person, crowd, white background, grey background, gradient background, vignette, bokeh, scenery, detailed background, room, indoors, outdoors, window, door, wall, floor, furniture, tree, grass, sky, building, holding object, prop, weapon, ball, racket, umbrella, floating object, extra object, full body, sitting, lying, close-up, headshot, lowres, worst quality, low quality, jpeg artifacts, bad anatomy, bad hands, extra fingers, missing fingers, extra limbs, fused fingers, poorly drawn face, poorly drawn hands, deformed, signature, watermark, text, logo, multiple views, sketch, monochrome, 3d, realistic photo, nsfw, nude, cleavage, white dress, white cardigan, lingerie, underwear, bra, red ribbon, tangled string, red dress, red clothes, bright colors, glamorous, jewelry, necklace, choker, hair clip, earrings, looking away, profile, side view",
-      "no_prefix": false
+      "prompt": "1girl, solo, petite japanese girl, (modest white cotton one piece dress:1.5), (long skirt below knee:1.3), short sleeves, buttoned front, slightly faded, short black hair, uneven bangs, dark brown eyes, quiet expression, red string bracelet left wrist, cowboy shot, head fully visible, flat grey background",
+      "negative": "cropped, out of frame, cut off, close-up, headshot, 2girls, multiple people, extra person, duplicate, bad anatomy, bad hands, extra fingers, fused fingers, missing fingers, blurry, lowres, worst quality, low quality, jpeg artifacts, detailed background, busy background, scenery, vignette, necktie, floating object",
+      "no_prefix": false,
+      "cfg": 10.0
     },
     {
       "id": "char_shiori_weak",
       "kind": "char",
       "w": 512,
       "h": 512,
-      "steps": 14,
+      "steps": 26,
       "cutout": true,
-      "prompt": "(solid black background:1.6), (simple background:1.4), 1girl, solo, japanese high school girl, 17 years old, summer school uniform white short sleeve blouse and dark navy pleated skirt, medium black hair, dark brown eyes, very pale sickly complexion, dark shadows under eyes, faint exhausted weak expression, thin body, cowboy shot, standing, facing viewer, head fully visible, cel shading, clean lineart",
-      "negative": "cropped, out of frame, zoomed in, tight framing, cut off, close-up, face close-up, headshot, 2girls, 2boys, multiple people, duplicate, twins, extra person, crowd, white background, grey background, gradient background, vignette, bokeh, scenery, detailed background, room, indoors, outdoors, window, door, wall, floor, furniture, tree, grass, sky, building, holding object, prop, weapon, ball, racket, umbrella, floating object, extra object, full body, sitting, lying, close-up, headshot, lowres, worst quality, low quality, jpeg artifacts, bad anatomy, bad hands, extra fingers, missing fingers, extra limbs, fused fingers, poorly drawn face, poorly drawn hands, deformed, signature, watermark, text, logo, multiple views, sketch, monochrome, 3d, realistic photo, nsfw, nude, cleavage",
-      "no_prefix": false
+      "prompt": "1girl, solo, petite japanese high school girl, (short black hair:1.4), dark circles under eyes, tired exhausted expression, faded white short sleeve blouse, navy pleated skirt, loose uniform, thin wrists, red string bracelet left wrist, cowboy shot, head fully visible, flat grey background",
+      "negative": "(white hair:1.8), (silver hair:1.7), (grey hair:1.5), (hoodie:1.6), (sweater:1.4), cropped, out of frame, cut off, close-up, headshot, 2girls, multiple people, extra person, duplicate, bad anatomy, bad hands, extra fingers, fused fingers, blurry, lowres, worst quality, low quality, jpeg artifacts, detailed background, busy background, scenery",
+      "no_prefix": false,
+      "cfg": 10.0
     },
     {
       "id": "char_hitomi_uniform",
       "kind": "char",
       "w": 512,
       "h": 512,
-      "steps": 14,
+      "steps": 26,
       "cutout": true,
-      "prompt": "(solid black background:1.6), (simple background:1.4), 1girl, solo, japanese high school girl, 18 years old, summer school uniform white blouse and navy skirt, short light brown hair with a small hair clip, bright hazel eyes, cheerful energetic grin, lively expression, cowboy shot, standing, facing viewer, head fully visible, cel shading, clean lineart",
-      "negative": "cropped, out of frame, zoomed in, tight framing, cut off, close-up, face close-up, headshot, 2girls, 2boys, multiple people, duplicate, twins, extra person, crowd, white background, grey background, gradient background, vignette, bokeh, scenery, detailed background, room, indoors, outdoors, window, door, wall, floor, furniture, tree, grass, sky, building, holding object, prop, weapon, ball, racket, umbrella, floating object, extra object, full body, sitting, lying, close-up, headshot, lowres, worst quality, low quality, jpeg artifacts, bad anatomy, bad hands, extra fingers, missing fingers, extra limbs, fused fingers, poorly drawn face, poorly drawn hands, deformed, signature, watermark, text, logo, multiple views, sketch, monochrome, 3d, realistic photo, nsfw, nude, cleavage, yellow aura, energy effect, glowing lines, ribbons, wind effect, particles",
-      "no_prefix": false
+      "prompt": "1girl, solo, japanese high school girl, short light brown hair, small hair clip, bright hazel eyes, cheerful energetic grin, white sailor blouse, navy pleated skirt, standing still, facing viewer, arms at sides, cowboy shot, head fully visible, flat grey background",
+      "negative": "cropped, out of frame, cut off, close-up, headshot, 2girls, multiple people, extra person, duplicate, bad anatomy, bad hands, extra fingers, fused fingers, missing fingers, blurry, lowres, worst quality, low quality, jpeg artifacts, detailed background, busy background, scenery, vignette, necktie, floating object",
+      "no_prefix": false,
+      "cfg": 10.0
     },
     {
       "id": "char_fumi",
       "kind": "char",
       "w": 512,
       "h": 512,
-      "steps": 14,
+      "steps": 26,
       "cutout": true,
-      "prompt": "(solid black background:1.6), (simple background:1.4), 1girl, solo, elderly japanese woman, 78 years old, short grey white hair in a bun, deep wrinkles, wearing a faded navy kimono and apron, gentle vacant distant eyes, slight absent smile, hunched shoulders, cowboy shot, standing, facing viewer, head fully visible, cel shading, clean lineart",
-      "negative": "cropped, out of frame, zoomed in, tight framing, cut off, close-up, face close-up, headshot, 2girls, 2boys, multiple people, duplicate, twins, extra person, crowd, white background, grey background, gradient background, vignette, bokeh, scenery, detailed background, room, indoors, outdoors, window, door, wall, floor, furniture, tree, grass, sky, building, holding object, prop, weapon, ball, racket, umbrella, floating object, extra object, full body, sitting, lying, close-up, headshot, lowres, worst quality, low quality, jpeg artifacts, bad anatomy, bad hands, extra fingers, missing fingers, extra limbs, fused fingers, poorly drawn face, poorly drawn hands, deformed, signature, watermark, text, logo, multiple views, sketch, monochrome, 3d, realistic photo, nsfw, nude, cleavage",
-      "no_prefix": false
+      "prompt": "(elderly japanese woman:1.5), (deep wrinkles:1.3), (grey white hair:1.2), 78 years old, 1girl, solo, hair bun, faded navy kimono, apron, vacant distant eyes, slightly hunched, thin, cowboy shot, head fully visible, flat grey background",
+      "negative": "cropped, out of frame, cut off, close-up, headshot, 2girls, multiple people, extra person, duplicate, bad anatomy, bad hands, extra fingers, fused fingers, missing fingers, blurry, lowres, worst quality, low quality, jpeg artifacts, detailed background, busy background, scenery, vignette, necktie, floating object",
+      "no_prefix": false,
+      "cfg": 7.5
     },
     {
       "id": "char_chizuru",
       "kind": "char",
       "w": 512,
       "h": 512,
-      "steps": 14,
+      "steps": 26,
       "cutout": true,
-      "prompt": "(solid black background:1.6), (simple background:1.4), 1girl, solo, mature female, japanese mother, 45 years old, thin and frail, shoulder length black hair with some grey, tired hollow eyes, pale skin, plain grey cardigan over a white blouse, weary resigned expression, cowboy shot, standing, facing viewer, head fully visible, cel shading, clean lineart",
-      "negative": "cropped, out of frame, zoomed in, tight framing, cut off, close-up, face close-up, headshot, 2girls, 2boys, multiple people, duplicate, twins, extra person, crowd, white background, grey background, gradient background, vignette, bokeh, scenery, detailed background, room, indoors, outdoors, window, door, wall, floor, furniture, tree, grass, sky, building, holding object, prop, weapon, ball, racket, umbrella, floating object, extra object, full body, sitting, lying, close-up, headshot, lowres, worst quality, low quality, jpeg artifacts, bad anatomy, bad hands, extra fingers, missing fingers, extra limbs, fused fingers, poorly drawn face, poorly drawn hands, deformed, signature, watermark, text, logo, multiple views, sketch, monochrome, 3d, realistic photo, nsfw, nude, cleavage",
-      "no_prefix": false
+      "prompt": "(middle aged japanese woman:1.4), 45 years old, 1girl, solo, thin frail, shoulder length black hair with grey, tired hollow eyes, pale skin, grey cardigan, white blouse, weary resigned expression, facing viewer, cowboy shot, head fully visible, flat grey background",
+      "negative": "cropped, out of frame, cut off, close-up, headshot, 2girls, multiple people, extra person, duplicate, bad anatomy, bad hands, extra fingers, fused fingers, missing fingers, blurry, lowres, worst quality, low quality, jpeg artifacts, detailed background, busy background, scenery, vignette, necktie, floating object",
+      "no_prefix": false,
+      "cfg": 10.0
     },
     {
       "id": "char_daikan",
       "kind": "char",
       "w": 512,
       "h": 512,
-      "steps": 14,
+      "steps": 26,
       "cutout": true,
-      "prompt": "(solid black background:1.6), (simple background:1.4), 1boy, solo, male focus, old man, elderly japanese doctor, 62 years old, short grey hair, glasses, white lab coat over a dark shirt, stethoscope around neck, tired honest eyes, serious expression, cowboy shot, standing, facing viewer, head fully visible, cel shading, clean lineart",
-      "negative": "cropped, out of frame, zoomed in, tight framing, cut off, close-up, face close-up, headshot, 2girls, 2boys, multiple people, duplicate, twins, extra person, crowd, white background, grey background, gradient background, vignette, bokeh, scenery, detailed background, room, indoors, outdoors, window, door, wall, floor, furniture, tree, grass, sky, building, holding object, prop, weapon, ball, racket, umbrella, floating object, extra object, full body, sitting, lying, close-up, headshot, lowres, worst quality, low quality, jpeg artifacts, bad anatomy, bad hands, extra fingers, missing fingers, extra limbs, fused fingers, poorly drawn face, poorly drawn hands, deformed, signature, watermark, text, logo, multiple views, sketch, monochrome, 3d, realistic photo, nsfw, nude, cleavage",
-      "no_prefix": false
+      "prompt": "(old japanese man:1.6), (aged face:1.4), (deep wrinkles:1.3), (grey hair:1.2), 62 years old, 1boy, solo, glasses, white lab coat, dark shirt, stethoscope around neck, tired honest eyes, cowboy shot, head fully visible, flat grey background",
+      "negative": "(young:1.5), (youthful:1.4), (handsome young man:1.4), cropped, out of frame, cut off, close-up, headshot, 2girls, multiple people, extra person, duplicate, bad anatomy, bad hands, extra fingers, fused fingers, blurry, lowres, worst quality, low quality, jpeg artifacts, detailed background, busy background, scenery",
+      "no_prefix": false,
+      "cfg": 10.0
     },
     {
       "id": "char_hamaguchi",
       "kind": "char",
       "w": 512,
       "h": 512,
-      "steps": 14,
+      "steps": 26,
       "cutout": true,
-      "prompt": "(solid black background:1.6), (simple background:1.4), 1boy, solo, old japanese fisherman, 71 years old, deeply tanned weathered wrinkled face, short white bristly hair, grey stubble, worn blue work jacket and towel on neck, angry stubborn glaring expression, thick eyebrows, cowboy shot, standing, facing viewer, head fully visible, cel shading, clean lineart",
-      "negative": "cropped, out of frame, zoomed in, tight framing, cut off, close-up, face close-up, headshot, 2girls, 2boys, multiple people, duplicate, twins, extra person, crowd, white background, grey background, gradient background, vignette, bokeh, scenery, detailed background, room, indoors, outdoors, window, door, wall, floor, furniture, tree, grass, sky, building, holding object, prop, weapon, ball, racket, umbrella, floating object, extra object, full body, sitting, lying, close-up, headshot, lowres, worst quality, low quality, jpeg artifacts, bad anatomy, bad hands, extra fingers, missing fingers, extra limbs, fused fingers, poorly drawn face, poorly drawn hands, deformed, signature, watermark, text, logo, multiple views, sketch, monochrome, 3d, realistic photo, nsfw, nude, cleavage",
-      "no_prefix": false
+      "prompt": "(old japanese man:1.5), (deep wrinkles:1.3), (white hair:1.2), 71 years old, 1boy, solo, tanned weathered face, (worn blue work jacket, buttoned, closed:1.5), towel on neck, stubborn glare, cowboy shot, head fully visible, flat grey background",
+      "negative": "(shirtless:1.9), (bare chest:1.8), (topless:1.7), (nude:1.6), (abs:1.5), (muscular:1.4), cropped, out of frame, cut off, close-up, headshot, 2girls, multiple people, extra person, duplicate, bad anatomy, bad hands, extra fingers, fused fingers, blurry, lowres, worst quality, low quality, jpeg artifacts, detailed background, busy background, scenery",
+      "no_prefix": false,
+      "cfg": 10.0
     },
     {
       "id": "char_seiichi",
       "kind": "char",
       "w": 512,
       "h": 512,
-      "steps": 14,
+      "steps": 26,
       "cutout": true,
-      "prompt": "(solid black background:1.6), (simple background:1.4), 1boy, solo, japanese fisherman, 49 years old, tanned weathered face, short black hair with grey at temples, stubble, worn grey work clothes, alcohol flushed cheeks, silent tired stern expression, broad shoulders, cowboy shot, standing, facing viewer, head fully visible, cel shading, clean lineart",
-      "negative": "cropped, out of frame, zoomed in, tight framing, cut off, close-up, face close-up, headshot, 2girls, 2boys, multiple people, duplicate, twins, extra person, crowd, white background, grey background, gradient background, vignette, bokeh, scenery, detailed background, room, indoors, outdoors, window, door, wall, floor, furniture, tree, grass, sky, building, holding object, prop, weapon, ball, racket, umbrella, floating object, extra object, full body, sitting, lying, close-up, headshot, lowres, worst quality, low quality, jpeg artifacts, bad anatomy, bad hands, extra fingers, missing fingers, extra limbs, fused fingers, poorly drawn face, poorly drawn hands, deformed, signature, watermark, text, logo, multiple views, sketch, monochrome, 3d, realistic photo, nsfw, nude, cleavage",
-      "no_prefix": false
+      "prompt": "1boy, solo, japanese fisherman, 49 years old, tanned weathered face, short black hair grey temples, stubble, worn grey work clothes, stern tired expression, broad shoulders, cowboy shot, head fully visible, flat grey background",
+      "negative": "cropped, out of frame, cut off, close-up, headshot, 2girls, multiple people, extra person, duplicate, bad anatomy, bad hands, extra fingers, fused fingers, missing fingers, blurry, lowres, worst quality, low quality, jpeg artifacts, detailed background, busy background, scenery, vignette, necktie, floating object",
+      "no_prefix": false,
+      "cfg": 7.5
     },
     {
       "id": "char_kiryu",
       "kind": "char",
       "w": 512,
       "h": 512,
-      "steps": 14,
+      "steps": 26,
       "cutout": true,
-      "prompt": "(solid black background:1.6), (simple background:1.4), 1boy, solo, japanese businessman, 48 years old, neat short black hair with grey, clean shaven, dark grey suit with no tie, white shirt, calm empty polite expression, slightly lonely eyes, cowboy shot, standing, facing viewer, head fully visible, cel shading, clean lineart",
-      "negative": "cropped, out of frame, zoomed in, tight framing, cut off, close-up, face close-up, headshot, 2girls, 2boys, multiple people, duplicate, twins, extra person, crowd, white background, grey background, gradient background, vignette, bokeh, scenery, detailed background, room, indoors, outdoors, window, door, wall, floor, furniture, tree, grass, sky, building, holding object, prop, weapon, ball, racket, umbrella, floating object, extra object, full body, sitting, lying, close-up, headshot, lowres, worst quality, low quality, jpeg artifacts, bad anatomy, bad hands, extra fingers, missing fingers, extra limbs, fused fingers, poorly drawn face, poorly drawn hands, deformed, signature, watermark, text, logo, multiple views, sketch, monochrome, 3d, realistic photo, nsfw, nude, cleavage",
-      "no_prefix": false
+      "prompt": "(middle aged japanese man:1.4), 48 years old, 1boy, solo, neat short black hair, clean shaven, (dark charcoal suit:1.4), (open collar shirt:1.5), calm polite expression, cowboy shot, head fully visible, flat grey background",
+      "negative": "(necktie:1.9), (tie:1.7), (formal tie:1.5), cropped, out of frame, cut off, close-up, headshot, 2girls, multiple people, extra person, duplicate, bad anatomy, bad hands, extra fingers, fused fingers, blurry, lowres, worst quality, low quality, jpeg artifacts, detailed background, busy background, scenery",
+      "no_prefix": false,
+      "cfg": 10.0
     },
     {
       "id": "char_yuto",
       "kind": "char",
       "w": 512,
       "h": 512,
-      "steps": 14,
+      "steps": 26,
       "cutout": true,
-      "prompt": "(solid black background:1.6), (simple background:1.4), 1boy, solo, japanese high school boy, 18 years old, summer school uniform white short sleeve shirt, short black slightly messy hair, dark eyes, sun tanned skin, quiet serious tired expression, looks older than his age, cowboy shot, standing, facing viewer, head fully visible, cel shading, clean lineart",
-      "negative": "cropped, out of frame, zoomed in, tight framing, cut off, close-up, face close-up, headshot, 2girls, 2boys, multiple people, duplicate, twins, extra person, crowd, white background, grey background, gradient background, vignette, bokeh, scenery, detailed background, room, indoors, outdoors, window, door, wall, floor, furniture, tree, grass, sky, building, holding object, prop, weapon, ball, racket, umbrella, floating object, extra object, full body, sitting, lying, close-up, headshot, lowres, worst quality, low quality, jpeg artifacts, bad anatomy, bad hands, extra fingers, missing fingers, extra limbs, fused fingers, poorly drawn face, poorly drawn hands, deformed, signature, watermark, text, logo, multiple views, sketch, monochrome, 3d, realistic photo, nsfw, nude, cleavage",
-      "no_prefix": false
+      "prompt": "1boy, solo, japanese high school boy, 18 years old, short black messy hair, dark eyes, sun tanned skin, rolled up white short sleeve shirt, small scar on right hand, serious tired expression, looks older, cowboy shot, head fully visible, flat grey background",
+      "negative": "cropped, out of frame, cut off, close-up, headshot, 2girls, multiple people, extra person, duplicate, bad anatomy, bad hands, extra fingers, fused fingers, missing fingers, blurry, lowres, worst quality, low quality, jpeg artifacts, detailed background, busy background, scenery, vignette, necktie, floating object",
+      "no_prefix": false,
+      "cfg": 7.5
     },
     {
       "id": "cg_umbrella_rain",

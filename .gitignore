@@ -15,3 +15,10 @@ __pycache__/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# 立绘重出流程的中间产物（原始出图，未抠图）
+Zanka/tools/_raw_sprites/
+Zanka/tools/_matte/
+Zanka/tools/_final/
+Zanka/tools/_old_sprites/
+Zanka/tools/_preview/

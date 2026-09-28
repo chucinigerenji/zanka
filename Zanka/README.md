@@ -62,11 +62,19 @@ Zanka/
 │   └── story/main.json      main.zs 的打包产物（运行时实际读这个）
 ├── assets/
 │   ├── bg/                  18 张背景（512×320）
-│   ├── char/                13 张立绘（512×512，自动抠图带 alpha）
+│   ├── char/                13 张立绘（语义抠图带 alpha，裁到内容包围盒）
 │   ├── cg/                  5 张事件 CG（512×320）
 │   ├── audio/               7 BGM + 6 环境音 + 7 音效（16bit WAV）
 │   └── ui/                  中文字体（Noto Sans/Serif CJK SC 子集，含 1217 字）
 └── tools/                   生成与校验脚本（Python，不参与游戏运行）
+    ├── regen_sprites.py     立绘出图（Local Dream，带 77token 护栏 + 构图自动重抽）
+    ├── qc_sprites.py        立绘量化质检（红绳/碎块/软边/构图）+ 对比总览图
+    ├── install_sprites.py   抠图收尾：清碎块 + 裁边归一化 -> assets/char/
+    ├── gen_assets.py        背景 / CG 出图（自带旧版洪水填充抠图）
+    ├── pack_story.py        剧本打包 main.zs -> main.json
+    ├── validate.py          静态校验（交付前必跑）
+    ├── check_sprites.py     立绘构图体检（单独跑，validate 不含）
+    └── ...                  gen_audio / make_font / export_script / rebuild_sprites 等
 ```
 
 ## 四、剧本语法（`.zs`）
@@ -117,7 +125,14 @@ python3 tools/gen_audio.py
 # 中文字体子集化（从系统 NotoSansCJK / NotoSerifCJK 抽取项目用到的字）
 python3 tools/make_font.py
 
-# ---- 立绘 alpha 重建（一条命令跑完整条流水线）----
+# ---- 立绘（现在走「语义抠图」路线，见下一节）----
+python3 tools/regen_sprites.py                 # 1. 出原图 -> tools/_raw_sprites/（带 77token 护栏）
+birefnet-cutout "$PWD"/tools/_raw_sprites/*.png --outdir "$PWD"/tools/_matte --json  # 2. BiRefNet 抠图
+python3 tools/install_sprites.py               # 3. 清碎块 + 裁边归一化 -> assets/char/
+python3 tools/qc_sprites.py                    # 4. 量化质检（红绳/碎块/软边/构图）
+python3 tools/check_sprites.py                 # 5. 构图体检（头顶有没有被切）
+
+# 旧的立绘 alpha 重建（洪水填充方案，只在不想用 BiRefNet 时才用）
 python3 tools/rebuild_sprites.py
 # 内部固定顺序：抠图 -> 切断细通道 -> 清边缘均匀色带 -> 轮廓收缩削灰边 -> 清碎块 + 裁边归一化
 # 每一步都会保留原始 RGB。
@@ -132,6 +147,32 @@ python3 tools/rebuild_sprites.py
 
 # 立绘构图体检：发现头顶/身体被画面边缘切掉的图
 python3 tools/check_sprites.py
+```
+
+### 立绘流水线（BiRefNet 语义抠图）
+
+立绘不再走 `gen_assets.py` 的洪水填充抠图了——那条路线会留下硬二值边（没有任何抗锯齿）
+和灰边。现在拆成四步，每步都可单独重跑：
+
+| 步骤 | 命令 | 干什么 |
+|---|---|---|
+| 1 出图 | `python3 tools/regen_sprites.py` | Local Dream 出原图（**不抠图**），落 `tools/_raw_sprites/` |
+| 2 抠图 | `birefnet-cutout <绝对路径>/*.png --outdir <绝对路径>/tools/_matte --json` | 本机离线 BiRefNet 语义抠图 |
+| 3 收尾 | `python3 tools/install_sprites.py` | 清孤立碎块 + 裁到内容包围盒，写回 `assets/char/` |
+| 4 质检 | `python3 tools/qc_sprites.py --compare <旧目录>` | 量化指标 + 可选对比总览图 |
+
+两个必须记住的坑：
+
+1. **`birefnet-cutout` 一定要传绝对路径。** 它内部会 `os.chdir(~/birefnet)`，
+   相对路径一律报 `FileNotFoundError`。
+2. **提示词必须 ≤77 token（CLIP 上限），超了是静默截断。** 服务端不报错，直接把尾部丢掉。
+   `regen_sprites.py` 出图前会用 `/tokenize` 核算，溢出即中止。
+
+   > 这个坑真的踩过：旧版立绘提示词 **104 token**、负面 **193 token**。
+   > 被丢掉的正好是 `thin red string bracelet on left wrist`（企划里栞「从不摘的红绳」）
+   > 和 `cowboy shot / head fully visible`（全部构图控制）——也就是**红绳从来没被画出来过**，
+   > 这才是当时反复「构图出画」重抽的真正原因。
+   > `qc_sprites.py` 的「红像素」一列就是用来盯这件事的：旧图 0，新图八百多。
 
 # 导出可读版剧本全文（Markdown，脱离 Godot 通读审稿）
 python3 tools/export_script.py
@@ -163,16 +204,23 @@ python3 tools/validate.py
 
 * 图片由本地 Stable Diffusion（Anything V5）在 512 分辨率生成后放大，柔化是既定风格；
   背景着色器带轻微 unsharp + 颗粒，让「软」看起来是有意为之。
-* 立绘走的是「**纯黑底 + 自适应抠图**」路线：
-  - 提示词里把 `(solid black background:1.6), (simple background:1.4)` 放在**最前面**，并保留
-	`masterpiece, best quality...` 质量前缀。前缀不能省——实测去掉它，SD1.5 会画重复人像和纯色块。
-  - 抠图取四边像素中位数当背景参考色（不假设是黑是白），按容差做边界洪水填充 + 1px 羽化。
-	参考色接近纯白时容差自动压到 15，避免背景白顺着白衬衫填进去。
-  - 为什么不用白底：角色穿白衬衫时，背景白和衣服白连通，宽松阈值会把衣服一起填掉（实测踩过）。
-	黑底从根上避开了这个歧义。
-* 已知瑕疵：少数立绘上会残留模型自己加的漂浮色块（如医生肩上、祖母手边的灰色块）。
-  这类色块与角色连通，孤岛清除清不掉——`tools/clean_sprites.py` 能处理的是**断开**的孤岛。
-  重新抽一次卡（`python3 gen_assets.py --only <id> --force`）通常能换掉。
+* 立绘走的是「**平灰底 + BiRefNet 语义抠图**」路线（BiRefNet 改版；之前是纯黑底 + 洪水填充）：
+  - 背景用 `flat grey background`。中灰对**黑发**和**白衬衫**两边都有对比；
+    旧版用纯黑底是洪水填充的前提，但「黑发贴黑底」本身就是最难的情况，语义抠图不需要这个前提。
+  - 抠图用本机离线的 BiRefNet（`birefnet-cutout`），边缘是真正的抗锯齿，
+    不再是洪水填充那样的硬二值边（`qc_sprites.py` 的「软边%」：旧 **0.0%** → 新约 **3%**）。
+  - 收尾 `install_sprites.py` 先清孤立碎块、再裁到内容包围盒，让 13 个角色在画框里大小一致
+    （SD 每次给的人物大小都不一样，不裁就会一大一小）。
+* **提示词有 77 token 的硬上限，CLIP 截断是静默的。** 这是本项目踩过最贵的一个坑：
+  旧版立绘提示词 104 token，被丢掉的尾部是
+  `thin red string bracelet on left wrist, cowboy shot, standing, facing viewer, head fully visible,
+  cel shading, clean lineart` —— 也就是**栞的红绳从来没有出现在立绘上**，且构图毫无约束
+  （这才是当时反复「构图出画」重抽的真正原因）；负面提示词同样超（193 token），
+  连 `lowres / worst quality / bad anatomy` 都被丢掉了。
+  现在 `regen_sprites.py` 出图前强制核算 token，溢出直接中止；`qc_sprites.py` 的红像素列做回归。
+* 少数立绘上可能残留模型自己画的漂浮色块。与主体**断开**的孤岛会被
+  `install_sprites.py` 里的 `clean()` 清掉；与主体**连通**的清不掉，
+  只能重抽一张（`python3 tools/regen_sprites.py --only <id> --force` 再抠一次）。
 * 立绘是**腰部以上的半身像**，按屏高 80% 摆放，底边压出屏幕外——对话框正好盖住下三分之一，
   所以画面里看不到腿部裁切。
 * 无语音。`scripts/ui/dialogue_box.gd` 的打字机速度可以按设置调节。
@@ -229,4 +277,3 @@ python3 tools/validate.py       # 必须 0 ERROR
 2. 右上「菜单 → 汐浦港 潮汐表」→ 13 行都在，9/19 那行是「朔望大潮 +202cm」（`tides.json` 进包了）；
 3. 走完序章 → 弹出「不会寄出的信」面板（`systems.json` 进包了）；
 4. 横屏、无导航栏、中文不是豆腐块。
-
