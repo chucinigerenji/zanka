@@ -30,23 +30,29 @@ func _ready() -> void:
 	add_child(_bg)
 	_bg.resized.connect(_on_bg_resized)
 
-	# 和纸方案：把标题图压成浅淡底纹，墨字才压得住（原来是冷蓝黑幕）
+	# 磨砂方案：整屏只轻提一点（右边保留标题画面），
+	# 左侧单独一块磨砂玻璃卡承载墨字——墨字压在暗画面上会看不清。
 	var grad := ColorRect.new()
 	grad.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	grad.color = Color(UI.C_PAPER.r, UI.C_PAPER.g, UI.C_PAPER.b, 0.62)
+	grad.color = Color(UI.C_PAPER.r, UI.C_PAPER.g, UI.C_PAPER.b, 0.16)
 	grad.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(grad)
 
-	# 占满整屏高度 + 垂直居中：手机分辨率各式各样，写死上下偏移会把按钮挤出屏幕
+	var card := Kit.panel(Color(UI.C_PAPER.r, UI.C_PAPER.g, UI.C_PAPER.b, 0.72),
+		UI.R_PANEL, Color(1, 1, 1, 0.45), 1, 30, 26)
+	card.set_anchors_preset(Control.PRESET_LEFT_WIDE)
+	card.offset_left = 50
+	card.offset_right = 646
+	card.offset_top = 38
+	card.offset_bottom = -38
+	card.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(card)
+
+	# 占满卡片高度 + 垂直居中：手机分辨率各式各样，写死上下偏移会把按钮挤出屏幕
 	var left := VBoxContainer.new()
 	left.add_theme_constant_override("separation", 10)
-	left.set_anchors_and_offsets_preset(Control.PRESET_LEFT_WIDE)
-	left.offset_left = 90
-	left.offset_right = 660
-	left.offset_top = 24
-	left.offset_bottom = -24
 	left.alignment = BoxContainer.ALIGNMENT_CENTER
-	add_child(left)
+	card.add_child(left)
 
 	var t1 := UI.title_label("残 夏", 80)
 	t1.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -77,9 +83,9 @@ func _ready() -> void:
 
 	_endings_label = Kit.label("", 18, UI.C_DIM)
 	_endings_label.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
-	_endings_label.offset_left = 96
+	_endings_label.offset_left = 82
 	_endings_label.offset_top = -66
-	_endings_label.offset_right = 700
+	_endings_label.offset_right = 618
 	_endings_label.offset_bottom = -38
 	add_child(_endings_label)
 

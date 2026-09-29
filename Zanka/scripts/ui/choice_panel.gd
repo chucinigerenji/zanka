@@ -24,7 +24,7 @@ func _ready() -> void:
 	UI.apply_paper(wrap)
 	center.add_child(wrap)
 
-	_root = Kit.vbox(4)
+	_root = Kit.vbox(6)
 	wrap.add_child(_root)
 
 func present(options: Array) -> void:
@@ -34,8 +34,8 @@ func present(options: Array) -> void:
 	_buttons.clear()
 	for i in range(options.size()):
 		var o: Dictionary = options[i]
-		var b := Kit.row_button(str(o.get("text", "…")), 24, 660)
-		b.custom_minimum_size = Vector2(660, 56)
+		var b := Kit.row_button(str(o.get("text", "…")), 24, 640)
+		b.custom_minimum_size = Vector2(640, 58)
 		b.pressed.connect(_on_pressed.bind(i))
 		_root.add_child(b)
 		_buttons.append(b)

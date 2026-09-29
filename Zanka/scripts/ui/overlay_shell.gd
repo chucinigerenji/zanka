@@ -36,16 +36,12 @@ func _ready() -> void:
 	_title = Kit.label("", 32, UI.C_TEXT)
 	_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	head.add_child(_title)
-	var x := Kit.button("✕", 24)
-	x.custom_minimum_size = Vector2(52, 44)
+	# 用「关闭」而不是「✕」：中文字体是子集化的，✕(U+2715) 不在子集里会渲染成豆腐块
+	var x := Kit.button("关闭", 22)
+	x.custom_minimum_size = Vector2(88, 44)
 	x.pressed.connect(close)
 	head.add_child(x)
 	v.add_child(head)
-
-	var line := ColorRect.new()
-	line.color = UI.C_LINE_SOFT
-	line.custom_minimum_size = Vector2(0, 1)
-	v.add_child(line)
 
 	body = Kit.vbox(12)
 	body.size_flags_vertical = Control.SIZE_EXPAND_FILL

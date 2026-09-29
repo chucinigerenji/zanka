@@ -124,7 +124,40 @@ PAPER = {
     "dbox_bottom": -28,
 }
 
-VARIANTS = {"current": CURRENT, "paper": PAPER}
+FROSTED = {
+    "key": "frosted",
+    "text": (0.145, 0.129, 0.118),          # 墨
+    "dim": (0.420, 0.390, 0.360),
+    "accent": (0.643, 0.208, 0.145),        # 朱
+    "paper": (0.985, 0.976, 0.957),
+    "box": (0.985, 0.976, 0.957, 0.820),
+    "box_soft": (0.965, 0.953, 0.930, 0.860),
+    "line": (1.0, 1.0, 1.0, 0.55),          # 玻璃亮边（高光），不再是深色线
+    "line_soft": (1.0, 1.0, 1.0, 0.28),
+    "hilite": (0.643, 0.208, 0.145),
+    "dbox_bg": (0.985, 0.976, 0.957, 0.800),
+    "dbox_edge": (0.643, 0.208, 0.145, 1.0),
+    "dbox_radius": 18,
+    "dbox_edge_w": 2,
+    "dbox_text": (0.145, 0.129, 0.118),
+    "hud_bg": (0.985, 0.976, 0.957, 0.620),
+    "plate_bg": (0.145, 0.129, 0.118, 0.820),
+    "plate_text": (0.985, 0.976, 0.957),
+    "btn_bg": (1, 1, 1, 0.0),
+    "btn_edge": (1, 1, 1, 0.0),
+    "btn_text": (0.145, 0.129, 0.118),
+    "btn_radius": 12,
+    "panel_bg": (0.985, 0.976, 0.957, 0.840),
+    "panel_text": (0.145, 0.129, 0.118),
+    "dim_overlay": (0.130, 0.115, 0.100, 0.500),   # 黑幕更淡，透出背景
+    "hairline": (0.145, 0.129, 0.118, 0.10),
+    "shadow": 24,
+    "btn_style": "pill",                    # 圆润软底，不再是一条条细线
+    "dbox_top": -208,
+    "dbox_bottom": -36,
+}
+
+VARIANTS = {"current": CURRENT, "paper": PAPER, "frosted": FROSTED}
 
 # 角色名牌配色（char_db.gd COLORS）
 NAME_COLORS = {
@@ -208,6 +241,17 @@ def button(img, box, label, t, fsize=None, active=False, center=True, style=None
             d.rectangle(box, fill=rgba((1.0, 0.99, 0.97, 0.10)))
             d.rectangle((box[0], box[1], box[0] + 4, box[3]), fill=rgba(t["accent"]))
             d.line((box[0], box[3] - 1, box[2], box[3] - 1), fill=rgba(t["accent"]), width=2)
+    elif style == "pill":
+        # 简洁方案：平时只有文字；选中/悬停时一块柔和圆底 + 圆头朱色短棒
+        txt = t["btn_text"]
+        if active:
+            ov = Image.new("RGBA", img.size, (0, 0, 0, 0))
+            ImageDraw.Draw(ov).rounded_rectangle(
+                (box[0], box[1] + 2, box[2], box[3] - 2), radius=11,
+                fill=rgba((1.0, 1.0, 1.0, 0.62)))
+            img.alpha_composite(ov)
+            d.rounded_rectangle((box[0] + 4, box[1] + 15, box[0] + 8, box[3] - 15),
+                                radius=2, fill=rgba(t["accent"]))
     else:
         # HUD 小按钮：按下态是朱底纸字（对应 theme 的 pressed stylebox）
         txt = t["btn_text"]
@@ -294,14 +338,14 @@ def choice(img, t, options=("「……你是打算把自己卖掉吗。」",
     """对应 scripts/ui/choice_panel.gd。"""
     f = font(SANS, 24)
     d = ImageDraw.Draw(img)
-    wid, hgt, gap = 660, 62, 4
+    wid, hgt, gap = (660, 62, 4) if t["key"] != "frosted" else (640, 58, 6)
     pad = 30 if t["key"] == "current" else 34
     ph = pad * 2 + len(options) * hgt + (len(options) - 1) * gap
     pw = wid + pad * 2
     x0 = (W - pw) / 2
     y0 = (H - ph) / 2 - 40
     panel(img, (x0, y0, x0 + pw, y0 + ph), t,
-          radius=14 if t["key"] == "current" else 4,
+          radius=(14 if t["key"] == "current" else (4 if t["key"] == "paper" else 18)),
           fill=t["box_soft"] if t["key"] == "current" else (0.976, 0.965, 0.941, 0.965),
           edge=t["line_soft"], w=1)
     y = y0 + pad
@@ -320,10 +364,16 @@ def title_screen(t):
         b = b.resize((int(W * 1.04), int(H * 1.06)), Image.LANCZOS)
         img.alpha_composite(b.crop((int((b.width - W) / 2), int((b.height - H) / 2),
                                     int((b.width - W) / 2) + W, int((b.height - H) / 2) + H)))
-    grad = Image.new("RGBA", (W, H), rgba((0.02, 0.03, 0.05, 0.55)))
-    img.alpha_composite(grad)
-    if t["key"] == "paper":      # 和纸方案：把标题图压成浅淡底纹
+    if t["key"] == "paper":      # 和纸方案：整屏洗成浅淡底纹，墨字才压得住
         img.alpha_composite(Image.new("RGBA", (W, H), (247, 243, 236, 165)))
+    elif t["key"] == "frosted":
+        # 磨砂方案：整屏只轻提一点，靠左侧一块磨砂卡承载墨字，右侧保留画面
+        img.alpha_composite(Image.new("RGBA", (W, H), (250, 246, 238, 40)))
+    else:                        # 现状：冷蓝黑幕 + 亮字
+        img.alpha_composite(Image.new("RGBA", (W, H), (0.02, 0.03, 0.05, 0.55)))
+    if t["key"] == "frosted":
+        panel(img, (50, 38, 50 + 596, H - 38), t, radius=22,
+              fill=(0.985, 0.976, 0.957, 0.720), edge=(1, 1, 1, 0.45), w=1)
     d = ImageDraw.Draw(img)
     y = 74
     d.text((90, y), "残 夏", font=font(SERIF, 80), fill=rgba(t["paper"] if t["key"] == "current" else t["text"]))
@@ -335,10 +385,10 @@ def title_screen(t):
     y += 52
     items = ["开始新的一周目", "继续游戏", "读取进度", "鉴赏与信件", "游戏设置", "退出"]
     for i, it in enumerate(items):
-        wide = 380 if t["key"] == "current" else 340
-        button(img, (90, y, 90 + wide, y + 44), it, t, fsize=22, center=False,
+        wide = 380 if t["key"] == "current" else (340 if t["key"] == "paper" else 360)
+        button(img, (86, y, 86 + wide, y + 44), it, t, fsize=22, center=False,
                active=(i == 0))
-        y += 44 + (6 if t["key"] == "paper" else 10)
+        y += 44 + (6 if t["key"] != "current" else 10)
     d = ImageDraw.Draw(img)
     d.text((96, H - 56), "已解锁结局 1 / 5　　第 1 周目", font=font(SANS, 18), fill=rgba(t["dim"]))
     return img
@@ -350,7 +400,7 @@ def overlay(img, t, title="菜单", items=("读取进度", "游戏设置", "鉴�
     img.alpha_composite(Image.new("RGBA", (W, H), rgba(t["dim_overlay"])))
     f = font(SANS, 32)
     d = ImageDraw.Draw(img)
-    pad = (30, 24) if t["key"] == "current" else (34, 26)
+    pad = (30, 24) if t["key"] == "current" else ((34, 26) if t["key"] == "paper" else (36, 28))
     bw, bh, bsep = 820, 58, 12
     pw = max(940, bw + pad[0] * 2)
     head = 46
@@ -362,11 +412,12 @@ def overlay(img, t, title="菜单", items=("读取进度", "游戏设置", "鉴�
           fill=t["panel_bg"], edge=t["line"], w=1)
     d.text((x0 + pad[0], y0 + pad[1] + 6), title, font=f,
            fill=rgba(t["panel_text"]))
-    button(img, (x0 + pw - pad[0] - 52, y0 + pad[1], x0 + pw - pad[0], y0 + pad[1] + 44),
-           "✕", t, fsize=24)
+    button(img, (x0 + pw - pad[0] - 88, y0 + pad[1], x0 + pw - pad[0], y0 + pad[1] + 44),
+           "关闭", t, fsize=22)
     y = y0 + pad[1] + head + 16
-    ImageDraw.Draw(img).line((x0 + pad[0], y, x0 + pw - pad[0], y),
-                             fill=rgba(t["hairline"]), width=1)
+    if t["key"] != "frosted":      # 简洁方案不画分隔线，靠间距分组
+        ImageDraw.Draw(img).line((x0 + pad[0], y, x0 + pw - pad[0], y),
+                                 fill=rgba(t["hairline"]), width=1)
     y += 17
     for k, it in enumerate(items):
         button(img, (x0 + pad[0], y, x0 + pad[0] + bw, y + bh), it, t, fsize=23,

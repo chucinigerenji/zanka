@@ -21,9 +21,11 @@ static func button(text: String, size: int = 23, min_w: float = 0.0) -> Button:
 		b.custom_minimum_size = Vector2(0, 44)
 	return b
 
-## 「目录式」按钮：无实底、去圆角，只留一条底部分隔线；
-## 悬停与键盘聚焦时浮出朱色左标记 + 朱色底线，按下时整条变朱底纸字。
-## 用于标题菜单、选项支、弹窗里的列表项——这些地方用实底方框会看着像输入框。
+## 「列表式」按钮（磨砂方案）：平时只有文字，不加边框、不加分隔线；
+## 悬停 / 键盘聚焦时浮出一块柔和圆角底，左缘一条朱色短棒；按下整块变朱底纸字。
+## 用于标题菜单、选项支、弹窗列表——这些地方用实底方框会看着像输入框。
+## 注意：朱色短棒是用 StyleBoxFlat 的 border_width_left 画的，
+## 它会跟着圆角一起被裁剪，所以端头看起来是圆的。
 static func row_button(text: String, size: int = 23, min_w: float = 0.0,
 		align_left: bool = true) -> Button:
 	var b := Button.new()
@@ -32,14 +34,15 @@ static func row_button(text: String, size: int = 23, min_w: float = 0.0,
 	b.focus_mode = Control.FOCUS_ALL
 	if align_left:
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-	b.add_theme_stylebox_override("normal",
-		UI.row(UI.C_LINE_SOFT, 1, Color(0, 0, 0, 0), 0, Color(0, 0, 0, 0)))
-	b.add_theme_stylebox_override("hover",
-		UI.row(UI.C_ACCENT, 2, Color(1, 1, 1, 0.10), 4, UI.C_ACCENT))
-	b.add_theme_stylebox_override("focus",
-		UI.row(UI.C_ACCENT, 2, Color(1, 1, 1, 0.10), 4, UI.C_ACCENT))
-	b.add_theme_stylebox_override("pressed",
-		UI.row(UI.C_ACCENT, 2, UI.C_ACCENT, 4, UI.C_ACCENT))
+	var idle := UI.flat(Color(0, 0, 0, 0), UI.R_BTN, Color(0, 0, 0, 0), 0, 22, 12)
+	var sel := UI.flat(Color(1, 1, 1, 0.62), UI.R_BTN, UI.C_ACCENT, 0, 22, 12)
+	sel.border_width_left = 4
+	var press := UI.flat(UI.C_ACCENT, UI.R_BTN, UI.C_ACCENT, 0, 22, 12)
+	press.border_width_left = 4
+	b.add_theme_stylebox_override("normal", idle)
+	b.add_theme_stylebox_override("hover", sel)
+	b.add_theme_stylebox_override("focus", sel)
+	b.add_theme_stylebox_override("pressed", press)
 	b.add_theme_color_override("font_hover_color", UI.C_TEXT)
 	b.add_theme_color_override("font_focus_color", UI.C_TEXT)
 	b.add_theme_color_override("font_pressed_color", UI.C_PAPER)
@@ -49,18 +52,18 @@ static func row_button(text: String, size: int = 23, min_w: float = 0.0,
 		b.custom_minimum_size = Vector2(0, 50)
 	return b
 
-## HUD 上的小按钮：纯文字，选中时朱色下划线。
+## HUD 上的小按钮：纯文字；按下（自动/跳过开启）时是一块朱色圆角底。
 static func text_button(text: String, size: int = 19, min_w: float = 0.0) -> Button:
 	var b := Button.new()
 	b.text = text
 	b.add_theme_font_size_override("font_size", size)
 	b.focus_mode = Control.FOCUS_NONE
-	b.toggle_mode = false
 	b.custom_minimum_size = Vector2(min_w, 38)
-	b.add_theme_stylebox_override("normal", UI.flat(Color(0, 0, 0, 0), 0, Color(0, 0, 0, 0), 0, 10, 4))
-	b.add_theme_stylebox_override("hover", UI.flat(UI.C_PAPER_D, 0, Color(0, 0, 0, 0), 0, 10, 4))
-	b.add_theme_stylebox_override("pressed", UI.flat(UI.C_ACCENT, 0, Color(0, 0, 0, 0), 0, 10, 4))
-	b.add_theme_stylebox_override("focus", UI.flat(Color(0, 0, 0, 0), 0, Color(0, 0, 0, 0), 0, 10, 4))
+	var none := UI.flat(Color(0, 0, 0, 0), 8, Color(0, 0, 0, 0), 0, 12, 4)
+	b.add_theme_stylebox_override("normal", none)
+	b.add_theme_stylebox_override("hover", UI.flat(Color(1, 1, 1, 0.55), 8, Color(0, 0, 0, 0), 0, 12, 4))
+	b.add_theme_stylebox_override("focus", none)
+	b.add_theme_stylebox_override("pressed", UI.flat(UI.C_ACCENT, 8, Color(0, 0, 0, 0), 0, 12, 4))
 	b.add_theme_color_override("font_hover_color", UI.C_TEXT)
 	b.add_theme_color_override("font_pressed_color", UI.C_PAPER)
 	return b

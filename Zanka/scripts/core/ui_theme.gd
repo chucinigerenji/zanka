@@ -1,14 +1,15 @@
 extends RefCounted
 ## 统一视觉风格：字体、配色、样式盒、主题构建。所有 UI 都从这里取样式，保证一致性。
 ##
-## 设计方向（v2「和纸」）：
-##   对齐企划 05 的美术基调——「低饱和、暖灰、洗褪色的夏天」
-##   「纸质质感、褪色商店街配色、手写体标题」。做法是把 UI 从「深色玻璃盒」
-##   换成 **和纸底 + 墨字 + 朱色点缀**：
-##     * 面板 = 暖白和纸，圆角很小（纸不会有大圆角），1px 淡墨描边
-##     * 文字 = 暖墨色（不是纯黑）
-##     * 强调 = 朱色，全界面只有这一处彩色
-##     * 按钮 = 无实底，只留一条底部分隔线；悬停/选中时出现朱色标记
+## 设计方向（v3「磨砂玻璃」）：
+##   在企划 05 的美术基调（「低饱和、暖灰、洗褪色」「纸质质感、褪色商店街配色」）
+##   之上，做成 **半透明磨砂玻璃 + 墨字 + 朱色点缀**：
+##     * 面板 = 暖白半透明（0.80~0.86），**圆角大**（18~22px），
+##       边缘是 1px **亮边**（白高光）而不是深色描边——这是"玻璃感"的来源
+##     * 文字 = 暖墨色（不是纯黑），压在磨砂底上依然清晰
+##     * 强调 = 朱色，全界面只有这一处彩色（顶边包边、当前项左标记）
+##     * 按钮 = 平时只有文字；悬停/选中时浮出一块柔和圆角底 + 朱色短棒
+##     * 面板内**不画任何分隔线**，靠间距分组（简洁）
 ##   配色与几何集中在这里与 ui_kit.gd，改这两处即可全局生效。
 
 const SANS_PATH := "res://assets/ui/ZankaSans.otf"
@@ -16,28 +17,30 @@ const SERIF_PATH := "res://assets/ui/ZankaSerif.otf"
 const PAPER_SHADER := "res://shaders/paper.gdshader"
 
 # ---- 文字 ----
-const C_TEXT := Color(0.153, 0.137, 0.125)        # 墨
-const C_DIM := Color(0.443, 0.412, 0.376)         # 淡墨
+const C_TEXT := Color(0.145, 0.129, 0.118)        # 墨
+const C_DIM := Color(0.420, 0.390, 0.360)         # 淡墨
 const C_ACCENT := Color(0.643, 0.208, 0.145)      # 朱
 const C_HILITE := Color(0.643, 0.208, 0.145)      # 朱（强调）
 
-# ---- 纸面 ----
-const C_PAPER := Color(0.969, 0.957, 0.929)       # 和纸白
-const C_PAPER_D := Color(0.906, 0.886, 0.847)     # 和纸暗一档（分区 / 悬停）
-const C_INK := Color(0.180, 0.161, 0.145)         # 浓墨（名牌底）
-const C_BOX := Color(0.976, 0.965, 0.941, 0.955)  # 弹窗面板底
-const C_BOX_SOFT := Color(0.941, 0.925, 0.890, 0.965)
-const C_DBOX := Color(0.976, 0.965, 0.941, 0.930) # 对话框底（透出一点背景）
-const C_HUD := Color(0.976, 0.965, 0.941, 0.780)  # HUD 小牌
+# ---- 磨砂底 ----
+const C_PAPER := Color(0.985, 0.976, 0.957)       # 纸白（用于文字 / 高光）
+const C_PAPER_D := Color(0.965, 0.953, 0.930)     # 暗一档（分区 / 列表项底）
+const C_INK := Color(0.145, 0.129, 0.118)         # 浓墨（名牌底）
+const C_BOX := Color(0.985, 0.976, 0.957, 0.840)  # 弹窗面板底（半透明）
+const C_BOX_SOFT := Color(0.965, 0.953, 0.930, 0.860)
+const C_DBOX := Color(0.985, 0.976, 0.957, 0.800) # 对话框底（透出背景）
+const C_HUD := Color(0.985, 0.976, 0.957, 0.620)  # HUD 小牌（更透）
 
-# ---- 描边与遮罩 ----
-const C_LINE := Color(0.298, 0.263, 0.227, 0.320)
-const C_LINE_SOFT := Color(0.298, 0.263, 0.227, 0.140)
-const C_DIM_BG := Color(0.098, 0.086, 0.075, 0.660)   # 弹窗黑幕（暖，不用冷蓝）
+# ---- 边缘与遮罩 ----
+# 玻璃感的关键：描边是**亮边（白高光）**，不是深色线
+const C_LINE := Color(1.0, 1.0, 1.0, 0.550)
+const C_LINE_SOFT := Color(1.0, 1.0, 1.0, 0.280)
+const C_DIM_BG := Color(0.130, 0.115, 0.100, 0.500)   # 黑幕更淡，透出背景
 
-# 纸张圆角：纸面不做大圆角
-const R_BOX := 3
-const R_PANEL := 4
+# 圆角：磨砂玻璃要圆润
+const R_BOX := 18
+const R_PANEL := 22
+const R_BTN := 12
 
 static var _sans: Font = null
 static var _serif: Font = null
@@ -112,12 +115,12 @@ static func make_theme() -> Theme:
 		t.default_font = f
 	t.default_font_size = 24
 
-	# ---- Button：无实底 + 淡墨描边；悬停出朱色边；按下朱底纸字 ----
-	t.set_stylebox("normal", "Button", flat(Color(1, 1, 1, 0.06), R_BOX, C_LINE_SOFT, 1, 18, 12))
-	t.set_stylebox("hover", "Button", flat(C_PAPER_D, R_BOX, C_ACCENT, 1, 18, 12))
-	t.set_stylebox("pressed", "Button", flat(C_ACCENT, R_BOX, C_ACCENT, 1, 18, 12))
-	t.set_stylebox("disabled", "Button", flat(Color(1, 1, 1, 0.03), R_BOX, C_LINE_SOFT, 1, 18, 12))
-	t.set_stylebox("focus", "Button", flat(Color(0, 0, 0, 0), R_BOX, C_ACCENT, 1, 18, 12))
+	# ---- Button：平时近乎透明；悬停浮出柔和圆底 + 亮边；按下朱底纸字 ----
+	t.set_stylebox("normal", "Button", flat(Color(1, 1, 1, 0.10), R_BTN, C_LINE_SOFT, 1, 18, 12))
+	t.set_stylebox("hover", "Button", flat(Color(1, 1, 1, 0.62), R_BTN, C_LINE, 1, 18, 12))
+	t.set_stylebox("pressed", "Button", flat(C_ACCENT, R_BTN, C_ACCENT, 1, 18, 12))
+	t.set_stylebox("disabled", "Button", flat(Color(1, 1, 1, 0.05), R_BTN, C_LINE_SOFT, 1, 18, 12))
+	t.set_stylebox("focus", "Button", flat(Color(1, 1, 1, 0.62), R_BTN, C_LINE, 1, 18, 12))
 	t.set_color("font_color", "Button", C_TEXT)
 	t.set_color("font_hover_color", "Button", C_TEXT)
 	t.set_color("font_pressed_color", "Button", C_PAPER)
@@ -142,20 +145,20 @@ static func make_theme() -> Theme:
 	t.set_stylebox("panel", "ScrollContainer", flat(Color(0, 0, 0, 0), 0))
 	var grabber := StyleBoxFlat.new()
 	grabber.bg_color = C_LINE
-	grabber.set_corner_radius_all(2)
+	grabber.set_corner_radius_all(3)
 	grabber.content_margin_left = 6
 	grabber.content_margin_right = 6
 	t.set_stylebox("grabber", "VScrollBar", grabber)
 	t.set_stylebox("grabber_highlight", "VScrollBar", grabber)
 	var track := StyleBoxFlat.new()
-	track.bg_color = Color(0.298, 0.263, 0.227, 0.075)
-	track.set_corner_radius_all(2)
+	track.bg_color = Color(0.145, 0.129, 0.118, 0.100)
+	track.set_corner_radius_all(3)
 	t.set_stylebox("scroll", "VScrollBar", track)
 
 	# ---- HSlider ----
-	t.set_stylebox("slider", "HSlider", flat(Color(0.298, 0.263, 0.227, 0.14), 2, C_LINE_SOFT, 1, 0, 6))
-	t.set_stylebox("grabber_area", "HSlider", flat(C_ACCENT, 2, Color(0, 0, 0, 0), 0, 0, 6))
-	t.set_stylebox("grabber_area_highlight", "HSlider", flat(C_ACCENT, 2, Color(0, 0, 0, 0), 0, 0, 6))
+	t.set_stylebox("slider", "HSlider", flat(Color(0.145, 0.129, 0.118, 0.12), 3, C_LINE_SOFT, 1, 0, 6))
+	t.set_stylebox("grabber_area", "HSlider", flat(C_ACCENT, 3, Color(0, 0, 0, 0), 0, 0, 6))
+	t.set_stylebox("grabber_area_highlight", "HSlider", flat(C_ACCENT, 3, Color(0, 0, 0, 0), 0, 0, 6))
 
 	# ---- CheckButton / OptionButton ----
 	t.set_color("font_color", "CheckButton", C_TEXT)
