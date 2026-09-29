@@ -370,7 +370,7 @@ def title_screen(t):
         # 磨砂方案：整屏只轻提一点，靠左侧一块磨砂卡承载墨字，右侧保留画面
         img.alpha_composite(Image.new("RGBA", (W, H), (250, 246, 238, 40)))
     else:                        # 现状：冷蓝黑幕 + 亮字
-        img.alpha_composite(Image.new("RGBA", (W, H), (0.02, 0.03, 0.05, 0.55)))
+        img.alpha_composite(Image.new("RGBA", (W, H), rgba((0.02, 0.03, 0.05, 0.55))))
     if t["key"] == "frosted":
         panel(img, (50, 38, 50 + 596, H - 38), t, radius=22,
               fill=(0.985, 0.976, 0.957, 0.720), edge=(1, 1, 1, 0.45), w=1)
