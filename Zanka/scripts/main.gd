@@ -77,7 +77,7 @@ func _check_story() -> void:
 		return
 	var raw := FileAccess.get_file_as_string(path)
 	if raw.is_empty():
-		_show_fatal("剧本无法读取或为空：%s" % path)
+		_show_fatal("剧本读不出内容：%s" % path)
 		return
 	var text := raw
 	if path.get_extension().to_lower() == "json":

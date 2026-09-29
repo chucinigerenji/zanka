@@ -355,6 +355,48 @@ def choice(img, t, options=("「……你是打算把自己卖掉吗。」",
         y += hgt + gap
 
 
+def chara_showcase(img, t, sprite="char_shiori_uniform_normal",
+                   name="三浦 栞", line="点我一下，我会再说一句。"):
+    """标题右侧的立绘轮播 + 聊天气泡（对应 scripts/ui/title_chara.gd）。"""
+    d = ImageDraw.Draw(img)
+    sh = H * 0.74
+    cx = W * 0.76
+    p = os.path.join(CHAR_DIR, sprite + ".png")
+    drawn = (cx - sh / 2, H - sh, cx + sh / 2, H)
+    if os.path.exists(p):
+        ch = Image.open(p).convert("RGBA")
+        k = min(sh / ch.width, sh / ch.height)
+        ch = ch.resize((int(ch.width * k), int(ch.height * k)), Image.LANCZOS)
+        px = int(cx - ch.width / 2)
+        py = int(H - sh + (sh - ch.height) / 2)
+        img.alpha_composite(ch, (px, py))
+        drawn = (px, py, px + ch.width, py + ch.height)
+
+    f, fn = font(SANS, 20), font(SANS, 16)
+    bw = 310
+    lines, cur = [], ""
+    for c in line:
+        if d.textlength(cur + c, font=f) > bw - 40:
+            lines.append(cur)
+            cur = c
+        else:
+            cur += c
+    lines.append(cur)
+    bh = 14 * 2 + 22 + 6 + len(lines) * 28
+    bx = max(8, int(drawn[0]) + 4)
+    by = max(8, int(drawn[1]) - bh - 8)
+    panel(img, (bx, by, bx + bw, by + bh), t, radius=16,
+          fill=(0.985, 0.976, 0.957, 0.880), edge=t["line"], w=1)
+    d = ImageDraw.Draw(img)
+    d.polygon([(bx + 26, by + bh - 2), (bx + 50, by + bh - 2), (bx + 31, by + bh + 17)],
+              fill=rgba((0.985, 0.976, 0.957, 0.880)))
+    d.text((bx + 20, by + 14), name, font=fn, fill=rgba(t["accent"]))
+    yy = by + 14 + 22 + 6
+    for ln in lines:
+        d.text((bx + 20, yy), ln, font=f, fill=rgba(t["text"]))
+        yy += 28
+
+
 def title_screen(t):
     """对应 scripts/ui/title_screen.gd。"""
     img = Image.new("RGBA", (W, H), rgba((0.043, 0.055, 0.078)))
@@ -389,6 +431,7 @@ def title_screen(t):
         button(img, (86, y, 86 + wide, y + 44), it, t, fsize=22, center=False,
                active=(i == 0))
         y += 44 + (6 if t["key"] != "current" else 10)
+    chara_showcase(img, t)
     d = ImageDraw.Draw(img)
     d.text((96, H - 56), "已解锁结局 1 / 5　　第 1 周目", font=font(SANS, 18), fill=rgba(t["dim"]))
     return img

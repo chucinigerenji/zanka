@@ -55,7 +55,7 @@ func load_script(path: String) -> bool:
 		return false
 	var text := _read_text(path)
 	if text.is_empty():
-		error_reported.emit("剧本为空或读取失败：%s" % path)
+		error_reported.emit("找不到剧本内容：%s" % path)
 		return false
 	return compile_text(text, path)
 

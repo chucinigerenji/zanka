@@ -6,6 +6,7 @@ signal request(name: String)
 const UI := preload("res://scripts/core/ui_theme.gd")
 const Kit := preload("res://scripts/core/ui_kit.gd")
 const SettingsPanel := preload("res://scripts/ui/settings_panel.gd")
+const TitleChara := preload("res://scripts/ui/title_chara.gd")
 const GalleryPanel := preload("res://scripts/ui/gallery_panel.gd")
 
 const TITLE_BG := "res://assets/bg/bg_title.png"
@@ -15,6 +16,7 @@ var _bg: TextureRect
 var settings
 var gallery
 var _endings_label: Label
+var _chara            # 右侧的立绘轮播（title_chara.gd）
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -37,6 +39,10 @@ func _ready() -> void:
 	grad.color = Color(UI.C_PAPER.r, UI.C_PAPER.g, UI.C_PAPER.b, 0.16)
 	grad.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(grad)
+
+	# 右侧立绘轮播：随机逐张播放全部立绘，人物左上角挂一个聊天气泡
+	_chara = TitleChara.new()
+	add_child(_chara)
 
 	var card := Kit.panel(Color(UI.C_PAPER.r, UI.C_PAPER.g, UI.C_PAPER.b, 0.72),
 		UI.R_PANEL, Color(1, 1, 1, 0.45), 1, 30, 26)

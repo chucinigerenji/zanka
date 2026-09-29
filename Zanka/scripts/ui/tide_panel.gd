@@ -77,9 +77,9 @@ func _rebuild() -> void:
 	var head := UI.C_DIM
 	_grid.add_child(_cell("日期", 19, head, 90))
 	_grid.add_child(_cell("潮汐", 19, head, 110))
-	_grid.add_child(_cell("満潮／干潮", 19, head, 180))
+	_grid.add_child(_cell("満潮/干潮", 19, head, 180))
 	_grid.add_child(_cell("潮位", 19, head, 90))
-	_grid.add_child(_cell("备考", 19, head, 250))
+	_grid.add_child(_cell("说明", 19, head, 250))
 
 	var rows: Array = _data.get("rows", [])
 	var today: String = GameState.date_text
@@ -90,7 +90,7 @@ func _rebuild() -> void:
 		var is_today: bool = (not today.is_empty()) and today.begins_with(date_s)
 		var col: Color = UI.C_ACCENT if is_today else UI.C_TEXT
 		var dim: Color = UI.C_ACCENT if is_today else UI.C_DIM
-		var mark: String = "▶ " if is_today else ""
+		var mark: String = "● " if is_today else ""
 		_grid.add_child(_cell(mark + date_s, 20, col, 90))
 		_grid.add_child(_cell(str(d.get("moon", "")), 20, col, 110))
 		_grid.add_child(_cell(str(d.get("time", "")), 20, col, 180))
