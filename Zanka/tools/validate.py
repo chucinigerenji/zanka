@@ -148,6 +148,8 @@ BUILTIN_MEMBERS = {
     set_meta get_meta has_meta remove_meta connect disconnect emit_signal call call_deferred set_deferred
     notification to_string get_class is_class has_method has_signal property_list_changed_notify
     print_line print_error
+    gui_input resized focus_entered focus_exited mouse_entered mouse_exited minimum_size_changed
+    item_rect_changed theme_changed visibility_changed draw
     """.split()),
     "Node2D": set("""
     position rotation rotation_degrees scale skew transform global_position global_rotation global_scale
@@ -172,6 +174,7 @@ BUILTIN_MEMBERS = {
     create_tween get_process_delta_time get_physics_process_delta_time get_ticks_msec linear_to_db db_to_linear
     is_in_group get_groups print_tree print_orphan_nodes print_tree_pretty replace_by
     _ready _process _physics_process _input _unhandled_input _unhandled_key_input _draw _notification _enter_tree _exit_tree
+    ready tree_entered tree_exiting tree_exited renamed child_entered_tree child_exiting_tree child_order_changed script_changed
     """.split()),
     "RefCounted": set("get_reference_count".split()),
     "Object": set("""

@@ -16,6 +16,7 @@ const BUBBLE_W := 310           ## 气泡宽度（高度随文字自动长）
 const THINK_SEC := 0.72         ## 「思考」时长：这段时间气泡里只跳点点
 const DOT_STEP := 0.17          ## 点点切换间隔
 const DOT := "…"           ## 思考中的点点（省略号，字体有字形）
+const TOUCH_THINK := 0.34      ## 点部位时的思考时长（比换文案短，戳着玩不拖）
 
 ## 轮播的全部立绘（栞的五个表情算五张，按需求「播放全部立绘」）
 const CAST := [
@@ -138,6 +139,74 @@ const LINES := {
 	],
 }
 
+## 可点部位：归一化到「立绘实际绘制矩形」内的区域（0~1）。
+## 顺序就是命中优先级；arm 放在最后当兜底，它有两个框（左右各一）。
+const PARTS := [
+	{"id": "face", "rects": [Rect2(0.33, 0.01, 0.34, 0.19)]},
+	{"id": "chest", "rects": [Rect2(0.30, 0.21, 0.40, 0.20)]},
+	{"id": "belly", "rects": [Rect2(0.30, 0.41, 0.40, 0.24)]},
+	{"id": "arm", "rects": [Rect2(0.00, 0.18, 0.28, 0.62), Rect2(0.72, 0.18, 0.28, 0.62)]},
+]
+
+## 点不同部位说的话（每部位 3 条，循环播放）。
+## 外层的 key 是角色 id（char_db 的 base_id），所以栞的五个表情共用一套。
+const PART_LINES := {
+	"shiori": {
+		"face": ["……我脸上有什么吗。", "头发是我自己修的。", "别看太久。"],
+		"chest": ["……你在看哪里。", "（她把书包抱紧了一点。）", "这里没什么好看的。"],
+		"belly": ["我午饭没吃。", "不吃的时候，它自己会响。", "……不要指这里。"],
+		"arm": ["手上这个，不摘的。", "（她把袖子往下拉了拉。）", "这边的袖子洗得发白。"],
+	},
+	"yuto": {
+		"face": ["我比别人黑。", "（他碰了一下脸。）", "没睡好而已。"],
+		"chest": ["校服袖口我总是卷着。", "（他把领子理了理。）", "没什么可看的。"],
+		"belly": ["中午吃的是饭团。", "不吃也就不觉得了。", "……别碰。"],
+		"arm": ["右手有道旧伤。", "跟爸出海的时候伤到的。", "（他把手翻过来给你看。）"],
+	},
+	"hitomi": {
+		"face": ["看什么看，我脸上有东西？", "我笑起来是不是很响。", "别看我。"],
+		"chest": ["我说，往哪儿看呢。", "……你这人真的。", "（她抬起手。）"],
+		"belly": ["半价便当，两个。", "想吃就吃，别客气。", "（她拍了拍身上。）"],
+		"arm": ["搬货搬出来的。", "我搬东西比你快。", "（她比了比手。）"],
+	},
+	"fumi": {
+		"face": ["……你是谁家的孩子？", "（她看着你。）", "我认得你的脸。"],
+		"chest": ["（她把手放在心口。）", "这里，有时候会痛。", "老了。"],
+		"belly": ["今天吃了两碗饭。", "你吃了吗？", "（她拍了拍你的手。）"],
+		"arm": ["手上有洗碗的味道。", "（她的手很暖。）", "扶我一下。"],
+	},
+	"chizuru": {
+		"face": ["……我脸上有病气吧。", "不用为我难过。", "（她别过脸。）"],
+		"chest": ["这里没什么好看的。", "（她拉了拉外衣。）", "你别问了。"],
+		"belly": ["透析的日子，吃不下。", "星期三、五、日。", "（她按住这里。）"],
+		"arm": ["（手上都是点。）看多了就好。", "（手上有一片印子。）", "别看了。"],
+	},
+	"daikan": {
+		"face": ["我这张脸，看了三十年病。", "（他抬眼看了看你。）", "老了，不中用。"],
+		"chest": ["听诊器在这儿挂了一辈子。", "白色的外衣洗得发白。", "没什么可看的。"],
+		"belly": ["中午吃的是便利店的面。", "一个人住，随便吃点。", "（他笑了一下。）"],
+		"arm": ["写字写得太多了。", "意见书，我写得很快。", "（他活动了一下手。）"],
+	},
+	"hamaguchi": {
+		"face": ["看什么看。", "（他看了你一眼。）", "我这张脸不好看。"],
+		"chest": ["（他把外衣拉上。）", "在海里五十年了。", "别看。"],
+		"belly": ["早上吃了两碗饭。", "干活的，吃得多。", "（他拍了拍腰带。）"],
+		"arm": ["提东西提的。", "（他握了握手。）", "比你脸还大。"],
+	},
+	"seiichi": {
+		"face": ["……看我干什么。", "（他没回头。）", "去写作业。"],
+		"chest": ["（他把烟按掉。）", "没什么好说的。", "别站那儿。"],
+		"belly": ["酒没了就去买。", "（他翻了翻口袋。）", "不吃。"],
+		"arm": ["船上的活，都是手干的。", "（他手上都是老皮。）", "让开。"],
+	},
+	"kiryu": {
+		"face": ["……我的脸上有什么吗。", "（他笑了一下。）", "不用这么看我。"],
+		"chest": ["西装是旧的。", "（他理了理领口。）", "我不打领带。"],
+		"belly": ["中午在车里吃的。", "一个人，随便。", "（他看了看表。）"],
+		"arm": ["（他收回手。）", "我不喜欢被人碰。", "对不起。"],
+	},
+}
+
 var _sprite: TextureRect
 var _bubble: PanelContainer
 var _name_label: Label
@@ -146,6 +215,9 @@ var _tail: Polygon2D
 var _tex_cache: Dictionary = {}
 var _missing: Dictionary = {}
 
+var _drawn: Rect2 = Rect2()        # 立绘实际画出来的矩形（算部位命中和气泡位置都用它）
+var _part_idx: Dictionary = {}     # 部位 -> 下一条要播第几条
+var _hit: Control                  # 覆盖立绘的点击层
 var _cur: String = ""
 var _line_idx: int = 0
 var _t: float = 0.0
@@ -162,6 +234,16 @@ func _ready() -> void:
 	_sprite.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_sprite.modulate.a = 0.0
 	add_child(_sprite)
+
+	# 立绘点击层：铺满整块，用来判断点到了哪个部位。
+	# ⚠ 必须加在气泡【之前】：Godot 的输入是从后往前派发的，
+	#   加在气泡后面会把气泡自己的点击吃掉，气泡就点不动了。
+	_hit = Control.new()
+	_hit.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_hit.mouse_filter = Control.MOUSE_FILTER_STOP
+	_hit.gui_input.connect(_on_sprite_input)
+	_hit.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	add_child(_hit)
 
 	# 气泡：半透明磨砂圆角 + 1px 亮边，点它换下一条
 	_bubble = PanelContainer.new()
@@ -217,6 +299,7 @@ func next_chara() -> void:
 	_cur = pick
 	var pool: Array = LINES.get(CharDB.base_id(_cur), [])
 	_line_idx = randi() % max(1, pool.size())
+	_part_idx.clear()          # 换人了，各部位的「说到第几条」也重来
 	await _speak(str(pool[_line_idx]) if not pool.is_empty() else "", true)
 	_t = 0.0
 
@@ -245,10 +328,56 @@ func _on_bubble_input(ev: InputEvent) -> void:
 		next_line()
 
 
+## 点在立绘上：判断戳到了哪个部位，说那句对应的话。
+func _on_sprite_input(ev: InputEvent) -> void:
+	var local := Vector2.ZERO
+	var tapped := false
+	if ev is InputEventMouseButton and ev.pressed \
+			and (ev as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT:
+		local = (ev as InputEventMouseButton).position
+		tapped = true
+	elif ev is InputEventScreenTouch and ev.pressed:
+		local = (ev as InputEventScreenTouch).position
+		tapped = true
+	if not tapped or _busy:
+		return
+	var part := _part_at(local)
+	if part.is_empty():
+		return                 # 点在立绘外面（比如左侧菜单那边），不管
+	_touch(part)
+
+
+## 把点击坐标换算成「立绘实际矩形内的归一化坐标」，再逐个部位框去比。
+## 用实际绘制矩形而不是控件矩形：KEEP_ASPECT_CENTERED 会在控件里留白边。
+func _part_at(local: Vector2) -> String:
+	if _drawn.size.x <= 0.0 or _drawn.size.y <= 0.0 or not _drawn.has_point(local):
+		return ""
+	var u := (local.x - _drawn.position.x) / _drawn.size.x
+	var v := (local.y - _drawn.position.y) / _drawn.size.y
+	var uv := Vector2(u, v)
+	for p in PARTS:
+		for r in p["rects"]:
+			if (r as Rect2).has_point(uv):
+				return str(p["id"])
+	return ""
+
+
+## 说一句「被戳到」的反应。同一个部位连着点会往后轮。
+func _touch(part: String) -> void:
+	var by_char: Dictionary = PART_LINES.get(CharDB.base_id(_cur), {})
+	var pool: Array = by_char.get(part, [])
+	if pool.is_empty():
+		return
+	_part_idx[part] = (int(_part_idx.get(part, -1)) + 1) % pool.size()
+	AudioManager.play_se("select")
+	await _speak(str(pool[int(_part_idx[part])]), false, TOUCH_THINK)
+	_t = 0.0
+
+
 ## 让角色「开口说话」的完整过程：
 ##   旧文字淡出 → 气泡里跳点点（像在斟酌怎么说）→ 新文字淡入 + 气泡轻弹一下。
 ## swap_chara 为真时顺带换立绘（旧立绘先淡出，新立绘在说完之后才淡入）。
-func _speak(line: String, swap_chara: bool) -> void:
+func _speak(line: String, swap_chara: bool, think: float = THINK_SEC) -> void:
 	_busy = true
 	if swap_chara:
 		var out := create_tween()
@@ -269,7 +398,7 @@ func _speak(line: String, swap_chara: bool) -> void:
 	_line_label.text = DOT
 	_line_label.modulate.a = 1.0
 	_layout()
-	while acc < THINK_SEC and is_visible_in_tree():
+	while acc < think and is_visible_in_tree():
 		await get_tree().create_timer(DOT_STEP).timeout
 		acc += DOT_STEP
 		dots = (dots % 3) + 1
@@ -328,6 +457,7 @@ func _layout() -> void:
 		dh = dw / ar
 	var drawn := Rect2(box.position.x + (box.size.x - dw) * 0.5,
 		box.position.y + (box.size.y - dh) * 0.5, dw, dh)
+	_drawn = drawn
 
 	# 气泡贴在立绘左上角；reset_size 让它按文字算出自身高度
 	_bubble.reset_size()

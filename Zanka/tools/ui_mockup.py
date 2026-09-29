@@ -25,7 +25,15 @@
 import argparse
 import os
 
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+try:
+    from PIL import Image, ImageDraw, ImageFont, ImageFilter
+except ImportError:      # pragma: no cover
+    raise SystemExit(
+        "这个工具需要 Pillow（PIL），本机当前没有。\n"
+        "（Python 3.14 没有预编译 wheel，源码编译也需要工具链，装不上。）\n"
+        "装上即可恢复：python3 -m pip install pillow\n"
+        "注意：它只用来出设计稿，**不影响游戏运行**；\n"
+        "查字体字形请改用零依赖的 tools/check_font_coverage.py。")
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 W, H = 1280, 720
