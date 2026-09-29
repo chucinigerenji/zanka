@@ -56,7 +56,7 @@ func _ready() -> void:
 	v.add_child(Kit.spacer(8))
 	v.add_child(Kit.label("其它", 24, UI.C_HILITE))
 	_add_check(v, "全屏显示", "fullscreen")
-	_add_check(v, "跳过时忽略未读文本", "skip_unread")
+	_add_check(v, "跳过时忽略未读文本", "skip_all")
 
 	var reset := Kit.button("恢复默认", 20)
 	reset.pressed.connect(_on_reset)
@@ -111,7 +111,7 @@ func _on_reset() -> void:
 	GameConfig.bgm_volume = 0.65
 	GameConfig.se_volume = 0.85
 	GameConfig.fullscreen = true
-	GameConfig.skip_unread = false
+	GameConfig.skip_all = true
 	GameConfig.save_settings()
 	for k in _sliders.keys():
 		(_sliders[k] as HSlider).value = float(GameConfig.get(k))

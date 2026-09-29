@@ -13,6 +13,9 @@ const SWITCH_SEC := 30.0        ## 换角色的间隔（秒）
 const SPRITE_H_RATIO := 0.74    ## 立绘高度占屏高
 const CENTER_X := 0.76          ## 立绘中心横坐标（标题右侧那片空位）
 const BUBBLE_W := 310           ## 气泡宽度（高度随文字自动长）
+const THINK_SEC := 0.72         ## 「思考」时长：这段时间气泡里只跳点点
+const DOT_STEP := 0.17          ## 点点切换间隔
+const DOT := "…"           ## 思考中的点点（省略号，字体有字形）
 
 ## 轮播的全部立绘（栞的五个表情算五张，按需求「播放全部立绘」）
 const CAST := [
@@ -185,75 +188,108 @@ func _ready() -> void:
 	add_child(_tail)
 
 	resized.connect(_layout)
-	_pick_next()
+	next_chara()
 	call_deferred("_layout")
 
 
 func _process(delta: float) -> void:
-	# 标题画面不可见时（进了游戏 / 被弹窗盖住）就停表，别在后台空转
-	if not is_visible_in_tree():
+	# 标题画面不可见时（进了游戏 / 被弹窗盖住）就停表，别在后台空转；
+	# 正在「思考」时也不打表，免得刚说完就被换掉。
+	if not is_visible_in_tree() or _busy:
 		return
 	_t += delta
 	if _t >= SWITCH_SEC:
 		_t = 0.0
-		_pick_next()
+		next_chara()
 
 
 # ---------------------------------------------------------------- 展示逻辑
 
-func _pick_next() -> void:
+func next_chara() -> void:
 	# 随机挑一个「跟当前不同」的立绘，避免连续两次同一张
+	if _busy:
+		return
 	var pick := _cur
 	for _i in range(8):
 		pick = CAST[randi() % CAST.size()]
 		if pick != _cur:
 			break
 	_cur = pick
-	var pool: Array = LINES.get(CharDB.base_id(pick), [])
+	var pool: Array = LINES.get(CharDB.base_id(_cur), [])
 	_line_idx = randi() % max(1, pool.size())
-	_show()
+	await _speak(str(pool[_line_idx]) if not pool.is_empty() else "", true)
 	_t = 0.0
 
 
-func _next_line() -> void:
+func next_line() -> void:
+	# 同一个角色换下一条
+	if _busy:
+		return
 	var pool: Array = LINES.get(CharDB.base_id(_cur), [])
 	if pool.is_empty():
 		return
 	_line_idx = (_line_idx + 1) % pool.size()
-	_set_line(str(pool[_line_idx]))
+	await _speak(str(pool[_line_idx]), false)
 	_t = 0.0          # 点了就重新计时，别刚看完就换人
 
 
 func _on_bubble_input(ev: InputEvent) -> void:
+	var tapped := false
 	if ev is InputEventMouseButton and ev.pressed \
 			and (ev as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT:
-		AudioManager.play_se("select")
-		_next_line()
+		tapped = true
 	elif ev is InputEventScreenTouch and ev.pressed:
+		tapped = true
+	if tapped and not _busy:
 		AudioManager.play_se("select")
-		_next_line()
+		next_line()
 
 
-func _show() -> void:
-	var tex := _get_tex(_cur)
-	if tex == null:
-		return
-	_sprite.texture = tex
-	_name_label.text = CharDB.display_name(CharDB.base_id(_cur))
-	var pool: Array = LINES.get(CharDB.base_id(_cur), [])
-	_set_line(str(pool[_line_idx]) if not pool.is_empty() else "")
+## 让角色「开口说话」的完整过程：
+##   旧文字淡出 → 气泡里跳点点（像在斟酌怎么说）→ 新文字淡入 + 气泡轻弹一下。
+## swap_chara 为真时顺带换立绘（旧立绘先淡出，新立绘在说完之后才淡入）。
+func _speak(line: String, swap_chara: bool) -> void:
+	_busy = true
+	if swap_chara:
+		var out := create_tween()
+		out.tween_property(_sprite, "modulate:a", 0.0, 0.30)
+		await out.finished
+		var tex := _get_tex(_cur)
+		if tex != null:
+			_sprite.texture = tex
+		_name_label.text = CharDB.display_name(CharDB.base_id(_cur))
+		_layout()
+	# 旧文字淡出
+	var fade := create_tween()
+	fade.tween_property(_line_label, "modulate:a", 0.0, 0.14)
+	await fade.finished
+	# 思考中：只跳点点
+	var acc := 0.0
+	var dots := 1
+	_line_label.text = DOT
+	_line_label.modulate.a = 1.0
 	_layout()
-	# 淡入
-	var tw := create_tween()
-	tw.set_parallel(true)
-	tw.tween_property(_sprite, "modulate:a", 1.0, 0.45)
-	tw.tween_property(_bubble, "modulate:a", 1.0, 0.45)
-	tw.tween_property(_tail, "modulate:a", 1.0, 0.45)
-
-
-func _set_line(t: String) -> void:
-	_line_label.text = t
-	call_deferred("_layout")
+	while acc < THINK_SEC and is_visible_in_tree():
+		await get_tree().create_timer(DOT_STEP).timeout
+		acc += DOT_STEP
+		dots = (dots % 3) + 1
+		_line_label.text = DOT.repeat(dots)
+		_layout()
+	# 说出新的一句
+	_line_label.text = line
+	_layout()
+	_line_label.modulate.a = 0.0
+	create_tween().tween_property(_line_label, "modulate:a", 1.0, 0.22)
+	# 气泡以中心为轴轻弹一下（改 pivot 免得位置跑偏）
+	_bubble.pivot_offset = _bubble.size * 0.5
+	_bubble.scale = Vector2(0.965, 0.94)
+	create_tween().tween_property(_bubble, "scale", Vector2.ONE, 0.26) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	if swap_chara:
+		create_tween().tween_property(_sprite, "modulate:a", 1.0, 0.45)
+	else:
+		_sprite.modulate.a = 1.0
+	_busy = false
 
 
 func _get_tex(sprite_id: String) -> Texture2D:
@@ -297,8 +333,9 @@ func _layout() -> void:
 	_bubble.reset_size()
 	var bw := _bubble.size.x
 	var bh := _bubble.size.y
+	# 锚在「底边贴住立绘头顶」：文字变多时气泡向上长，不会整块上下跳
 	var bx := clampf(drawn.position.x + 4.0, 8.0, maxf(8.0, size.x - bw - 8.0))
-	var by := maxf(8.0, drawn.position.y - bh - 8.0)
-	_bubble.position = Vector2(bx, by)
+	var bottom := maxf(bh + 8.0, drawn.position.y - 8.0)
+	_bubble.position = Vector2(bx, bottom - bh)
 	if _tail != null:
-		_tail.position = Vector2(bx + 26.0, by + bh - 2.0)
+		_tail.position = Vector2(bx + 26.0, bottom - 2.0)

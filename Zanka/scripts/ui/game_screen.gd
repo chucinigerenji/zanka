@@ -424,18 +424,22 @@ func _process(delta: float) -> void:
 		return
 	if not StoryEngine.is_waiting_input():
 		return
-	if dbox.is_typing():
-		return
 	if skip_mode:
-		# 「只跳过已读」是默认行为：撞到没读过的句子就自动停下来。
-		# 想连未读一起跳，在设置里打开「跳过时忽略未读文本」。
-		if not GameConfig.skip_unread and not _cur_already_seen:
+		# 跳过要**排在打字动画之前**处理：否则文字正在打字时点跳过会被直接 return 掉，
+		# 表现就是「点了没反应」。这里先把当前这句一次性显示完，再往下跳。
+		if dbox.is_typing():
+			dbox.skip_typing()
+		# 「只跳过已读」是可选项（默认关，即全部跳过）。
+		# 开着它时撞到未读会停下——这是有意行为，但默认必须是能跳的。
+		if not GameConfig.skip_all and not _cur_already_seen:
 			_set_skip(false)
 			return
 		_skip_t += delta
 		if _skip_t >= 0.045:
 			_skip_t = 0.0
 			StoryEngine.advance()
+		return
+	if dbox.is_typing():
 		return
 	if auto_mode:
 		_auto_t += delta

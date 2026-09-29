@@ -69,7 +69,7 @@ def sig(font, ch):
 def check(text, which="sans"):
     f = ImageFont.truetype(FONTS[which], SIZE)
     ref = sig(f, NOTDEF_REF)
-    chars = sorted({c for c in text if ord(c) > 0x2000})   # 只看 CJK / 全角符号
+    chars = sorted({c for c in text if ord(c) > 0x7F})   # 所有非 ASCII（含 · × ° 这类符号）
     bad = [c for c in chars if sig(f, c) == ref]
     return chars, bad
 
