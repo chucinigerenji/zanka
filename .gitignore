@@ -23,3 +23,6 @@ Zanka/tools/_final/
 Zanka/tools/_old_sprites/
 Zanka/tools/_preview/
 Zanka/tools/_ui/
+
+# 发布产物（走 GitHub Releases，不进仓库）
+release/
