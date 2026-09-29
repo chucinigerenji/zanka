@@ -14,8 +14,8 @@
 
 | 平台 | 文件 | 说明 |
 |---|---|---|
-| **Android** | `残夏-Android-arm64-v0.1.0.apk` | arm64-v8a，Android 6.0+，直接安装（需允许未知来源） |
-| **Windows** | `残夏-Windows-x86_64-v0.1.0.zip` | 解压后双击 exe 即玩，**不需要安装 Godot** |
+| **Android** | `Zanka-Android-arm64-v0.1.0.apk` | arm64-v8a，Android 6.0+，直接安装（需允许未知来源） |
+| **Windows** | `Zanka-Windows-x86_64-v0.1.0.zip` | 解压后双击 exe 即玩，**不需要安装 Godot** |
 
 > Windows 版解压后请**保持 `.exe` 与 `.pck` 在同一个文件夹**里（`.console.exe` 是看日志用的，可以不管）。
 
