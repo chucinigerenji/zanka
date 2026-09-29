@@ -75,7 +75,7 @@ func _load_letters() -> void:
 
 func _make_cg_cell(id: String, name: String) -> Control:
 	var unlocked: bool = GameState.cgs_seen.has(id)
-	var cell := Kit.panel(Color(0.063, 0.071, 0.094, 0.9), 10, UI.C_LINE_SOFT, 1, 8, 8)
+	var cell := Kit.panel(UI.C_PAPER_D, UI.R_PANEL, UI.C_LINE_SOFT, 1, 8, 8)
 	cell.custom_minimum_size = Vector2(276, 196)
 	var v := Kit.vbox(6)
 	cell.add_child(v)

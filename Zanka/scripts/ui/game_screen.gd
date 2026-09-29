@@ -138,9 +138,17 @@ func _build() -> void:
 	var cbv := Kit.vbox(14)
 	cbc.add_child(cbv)
 	_chapter_label = UI.title_label("", 58)
+	# 章节标题是浮在**游戏画面**上、不是浮在纸面上，所以这里必须保持浅色 + 深投影，
+	# 否则在夜景/雨景里会糊成一片（theme 里的默认墨色只适用于纸面板）。
+	_chapter_label.add_theme_color_override("font_color", UI.C_PAPER)
+	_chapter_label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.78))
+	_chapter_label.add_theme_constant_override("shadow_offset_x", 1)
+	_chapter_label.add_theme_constant_override("shadow_offset_y", 2)
 	cbv.add_child(_chapter_label)
-	_chapter_date = Kit.label("", 24, UI.C_DIM)
+	_chapter_date = Kit.label("", 24, Color(UI.C_PAPER.r, UI.C_PAPER.g, UI.C_PAPER.b, 0.82))
 	_chapter_date.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_chapter_date.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.7))
+	_chapter_date.add_theme_constant_override("shadow_offset_y", 1)
 	cbv.add_child(_chapter_date)
 
 	# ---- 弹窗

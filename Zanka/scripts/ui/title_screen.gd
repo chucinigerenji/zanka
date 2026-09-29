@@ -30,9 +30,10 @@ func _ready() -> void:
 	add_child(_bg)
 	_bg.resized.connect(_on_bg_resized)
 
+	# 和纸方案：把标题图压成浅淡底纹，墨字才压得住（原来是冷蓝黑幕）
 	var grad := ColorRect.new()
 	grad.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	grad.color = Color(0.02, 0.03, 0.05, 0.55)
+	grad.color = Color(UI.C_PAPER.r, UI.C_PAPER.g, UI.C_PAPER.b, 0.62)
 	grad.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(grad)
 
@@ -66,8 +67,9 @@ func _ready() -> void:
 		["quit", "退出"],
 	]
 	for it in items:
-		var b := Kit.button(str(it[1]), 22, 380)
-		b.custom_minimum_size = Vector2(380, 46)
+		# 目录式菜单行：无框、左对齐、底部分隔线，悬停出朱色标记
+		var b := Kit.row_button(str(it[1]), 22, 420)
+		b.custom_minimum_size = Vector2(420, 46)
 		b.pressed.connect(func() -> void:
 			AudioManager.play_se("select")
 			request.emit(str(it[0])))

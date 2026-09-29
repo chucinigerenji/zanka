@@ -19,10 +19,12 @@ func _ready() -> void:
 	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(center)
 
-	var wrap := Kit.panel(Color(0.031, 0.039, 0.055, 0.82), 14, UI.C_LINE_SOFT, 1, 30, 26)
+	# 和纸选项板：暖白纸面 + 扁圆角，选项用目录式行（悬停出朱色左标记）
+	var wrap := Kit.panel(UI.C_BOX_SOFT, UI.R_PANEL, UI.C_LINE, 1, 30, 24)
+	UI.apply_paper(wrap)
 	center.add_child(wrap)
 
-	_root = Kit.vbox(16)
+	_root = Kit.vbox(4)
 	wrap.add_child(_root)
 
 func present(options: Array) -> void:
@@ -32,8 +34,8 @@ func present(options: Array) -> void:
 	_buttons.clear()
 	for i in range(options.size()):
 		var o: Dictionary = options[i]
-		var b := Kit.button(str(o.get("text", "…")), 24, 680)
-		b.custom_minimum_size = Vector2(680, 62)
+		var b := Kit.row_button(str(o.get("text", "…")), 24, 660)
+		b.custom_minimum_size = Vector2(660, 56)
 		b.pressed.connect(_on_pressed.bind(i))
 		_root.add_child(b)
 		_buttons.append(b)

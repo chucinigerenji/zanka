@@ -17,22 +17,23 @@ func _ready() -> void:
 	visible = false
 	mouse_filter = Control.MOUSE_FILTER_STOP
 
-	add_child(Kit.dim(0.76))
+	add_child(Kit.dim(0.70))
 
 	var center := CenterContainer.new()
 	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(center)
 
-	_panel = Kit.panel(Color(0.043, 0.051, 0.071, 0.975), 16, UI.C_LINE, 1, 30, 24)
+	_panel = Kit.panel(UI.C_BOX, UI.R_PANEL, UI.C_LINE, 1, 30, 24)
 	_panel.custom_minimum_size = Vector2(940, 0)
+	UI.apply_paper(_panel)        # 和纸纸纹
 	center.add_child(_panel)
 
 	var v := Kit.vbox(16)
 	_panel.add_child(v)
 
 	var head := Kit.hbox(12)
-	_title = Kit.label("", 32, UI.C_PAPER)
+	_title = Kit.label("", 32, UI.C_TEXT)
 	_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	head.add_child(_title)
 	var x := Kit.button("✕", 24)

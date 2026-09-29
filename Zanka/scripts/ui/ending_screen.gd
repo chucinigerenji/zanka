@@ -27,9 +27,10 @@ func _ready() -> void:
 	_bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_bg)
 
+	# 结局做成「印在和纸上的信」：把背景洗成浅淡底纹，墨字压在上面
 	_dim = ColorRect.new()
 	_dim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_dim.color = Color(0.02, 0.024, 0.035, 0.78)
+	_dim.color = Color(UI.C_PAPER.r, UI.C_PAPER.g, UI.C_PAPER.b, 0.88)
 	_dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_dim)
 
@@ -134,11 +135,13 @@ func _add_letter_section() -> void:
 				lines.append(str(o.get("text", "")))
 	if lines.is_empty():
 		lines.append("（你什么都没有写。）")
-	var box := Kit.panel(Color(0.055, 0.063, 0.086, 0.86), 12, UI.C_LINE_SOFT, 1, 28, 22)
+	# 信纸：比底色略深一档的和纸 + 淡墨描边，像一张夹在里面的纸
+	var box := Kit.panel(UI.C_PAPER_D, UI.R_PANEL, UI.C_LINE_SOFT, 1, 28, 22)
+	UI.apply_paper(box)
 	var v := Kit.vbox(10)
 	box.add_child(v)
 	for l in lines:
-		var ll := Kit.label(l, 22, UI.C_PAPER)
+		var ll := Kit.label(l, 22, UI.C_TEXT)
 		ll.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		ll.custom_minimum_size = Vector2(960, 0)
 		v.add_child(ll)

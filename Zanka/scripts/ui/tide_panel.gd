@@ -74,7 +74,7 @@ func _rebuild() -> void:
 	for c in _grid.get_children():
 		_grid.remove_child(c)
 		c.queue_free()
-	var head := Color(0.62, 0.66, 0.72)
+	var head := UI.C_DIM
 	_grid.add_child(_cell("日期", 19, head, 90))
 	_grid.add_child(_cell("潮汐", 19, head, 110))
 	_grid.add_child(_cell("満潮／干潮", 19, head, 180))

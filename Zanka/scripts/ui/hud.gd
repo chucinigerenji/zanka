@@ -15,14 +15,14 @@ func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	# ---- 左上：章节 + 日历/潮汐
-	var left := Kit.panel(Color(0.031, 0.039, 0.055, 0.66), 10, UI.C_LINE_SOFT, 1, 18, 10)
+	# ---- 左上：章节 + 日历/潮汐（和纸小牌 + 墨字）
+	var left := Kit.panel(UI.C_HUD, UI.R_BOX, UI.C_LINE_SOFT, 1, 18, 10)
 	left.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	left.position = Vector2(28, 22)
 	add_child(left)
 	var lv := Kit.vbox(4)
 	left.add_child(lv)
-	_chapter = Kit.label("", 21, UI.C_PAPER)
+	_chapter = Kit.label("", 21, UI.C_TEXT)
 	lv.add_child(_chapter)
 	_cal = Kit.label("", 18, UI.C_DIM)
 	lv.add_child(_cal)
@@ -54,8 +54,8 @@ func _ready() -> void:
 	row.add_child(_mk("菜单", "menu"))
 
 func _mk(text: String, act: String, toggle: bool = false) -> Button:
-	var b := Kit.button(text, 19)
-	b.custom_minimum_size = Vector2(76, 42)
+	# HUD 小按钮：纯文字、无框，开启状态靠朱色下划线表现
+	var b := Kit.text_button(text, 19, 76)
 	b.toggle_mode = toggle
 	b.pressed.connect(func() -> void: action.emit(act))
 	return b

@@ -67,14 +67,14 @@ Zanka/
 │   ├── audio/               7 BGM + 6 环境音 + 7 音效（16bit WAV）
 │   └── ui/                  中文字体（Noto Sans/Serif CJK SC 子集，含 1217 字）
 └── tools/                   生成与校验脚本（Python，不参与游戏运行）
-    ├── regen_sprites.py     立绘出图（Local Dream，带 77token 护栏 + 构图自动重抽）
-    ├── qc_sprites.py        立绘量化质检（红绳/碎块/软边/构图）+ 对比总览图
-    ├── install_sprites.py   抠图收尾：清碎块 + 裁边归一化 -> assets/char/
-    ├── gen_assets.py        背景 / CG 出图（自带旧版洪水填充抠图）
-    ├── pack_story.py        剧本打包 main.zs -> main.json
-    ├── validate.py          静态校验（交付前必跑）
-    ├── check_sprites.py     立绘构图体检（单独跑，validate 不含）
-    └── ...                  gen_audio / make_font / export_script / rebuild_sprites 等
+	├── regen_sprites.py     立绘出图（Local Dream，带 77token 护栏 + 构图自动重抽）
+	├── qc_sprites.py        立绘量化质检（红绳/碎块/软边/构图）+ 对比总览图
+	├── install_sprites.py   抠图收尾：清碎块 + 裁边归一化 -> assets/char/
+	├── gen_assets.py        背景 / CG 出图（自带旧版洪水填充抠图）
+	├── pack_story.py        剧本打包 main.zs -> main.json
+	├── validate.py          静态校验（交付前必跑）
+	├── check_sprites.py     立绘构图体检（单独跑，validate 不含）
+	└── ...                  gen_audio / make_font / export_script / rebuild_sprites 等
 ```
 
 ## 四、剧本语法（`.zs`）
@@ -206,11 +206,11 @@ python3 tools/validate.py
   背景着色器带轻微 unsharp + 颗粒，让「软」看起来是有意为之。
 * 立绘走的是「**平灰底 + BiRefNet 语义抠图**」路线（BiRefNet 改版；之前是纯黑底 + 洪水填充）：
   - 背景用 `flat grey background`。中灰对**黑发**和**白衬衫**两边都有对比；
-    旧版用纯黑底是洪水填充的前提，但「黑发贴黑底」本身就是最难的情况，语义抠图不需要这个前提。
+	旧版用纯黑底是洪水填充的前提，但「黑发贴黑底」本身就是最难的情况，语义抠图不需要这个前提。
   - 抠图用本机离线的 BiRefNet（`birefnet-cutout`），边缘是真正的抗锯齿，
-    不再是洪水填充那样的硬二值边（`qc_sprites.py` 的「软边%」：旧 **0.0%** → 新约 **3%**）。
+	不再是洪水填充那样的硬二值边（`qc_sprites.py` 的「软边%」：旧 **0.0%** → 新约 **3%**）。
   - 收尾 `install_sprites.py` 先清孤立碎块、再裁到内容包围盒，让 13 个角色在画框里大小一致
-    （SD 每次给的人物大小都不一样，不裁就会一大一小）。
+	（SD 每次给的人物大小都不一样，不裁就会一大一小）。
 * **提示词有 77 token 的硬上限，CLIP 截断是静默的。** 这是本项目踩过最贵的一个坑：
   旧版立绘提示词 104 token，被丢掉的尾部是
   `thin red string bracelet on left wrist, cowboy shot, standing, facing viewer, head fully visible,
@@ -277,3 +277,54 @@ python3 tools/validate.py       # 必须 0 ERROR
 2. 右上「菜单 → 汐浦港 潮汐表」→ 13 行都在，9/19 那行是「朔望大潮 +202cm」（`tides.json` 进包了）；
 3. 走完序章 → 弹出「不会寄出的信」面板（`systems.json` 进包了）；
 4. 横屏、无导航栏、中文不是豆腐块。
+
+---
+
+## 九、UI 设计（和纸方案）
+
+UI **全部由 GDScript 运行时构建**（工程里只有一个 6 行的 `.tscn`），
+所以样式全部收敛在两个文件里，改这两处就全局生效：
+
+| 文件 | 管什么 |
+|---|---|
+| `scripts/core/ui_theme.gd` | 配色常量、圆角、Button/Panel/滚动条主题、和纸材质 |
+| `scripts/core/ui_kit.gd` | 三种按钮工厂与面板工厂 |
+
+### 设计方向
+
+对齐企划 05 写的美术基调——「低饱和、暖灰、洗褪色的夏天」「纸质质感、褪色商店街配色、
+手写体标题」。做法是把 UI 从「深色玻璃盒」换成 **和纸底 + 墨字 + 朱色点缀**：
+
+* **面板 = 暖白和纸**，圆角很小（`R_BOX=3` / `R_PANEL=4`）——纸不会有大圆角，
+  这一点是从「看着像网页/输入框」里救回质感的关键；
+* **文字 = 暖墨色**（`C_TEXT`），不是纯黑；
+* **强调 = 朱色**（`C_ACCENT`），全界面只有这一处彩色（顶边包边、悬停标记、当前项）；
+* **按钮分三种**，别再混用：
+  | 工厂 | 外观 | 用在哪 |
+  |---|---|---|
+  | `Kit.button()` | 淡描边小方块 | `✕`、`回到游戏` 这类孤立动作 |
+  | `Kit.row_button()` | 无框 + 底分隔线，悬停出朱色左标记 | 标题菜单、选项支、弹窗列表（**用方框会像输入框**） |
+  | `Kit.text_button()` | 纯文字，按下朱底纸字 | HUD 上的 回想/自动/跳过/存档/菜单 |
+
+### 和纸颗粒
+
+`shaders/paper.gdshader` 给面板加极轻的纸纹（细噪点 + 竖向纤维）。
+它**只扰动 RGB、完全不碰 alpha**，所以材质没挂上或编译失败都只是「少了纸纹」，
+不会让面板透明或遮住文字——这是刻意的低风险设计。挂在 `UI.apply_paper(control)`。
+
+### 改 UI 前先看设计稿
+
+`tools/ui_mockup.py` 用**项目真实的字体、背景图、立绘**，把上述设计令牌与几何
+一比一渲染成 PNG（同一套几何、只换设计变量），所以不用开 Godot 就能快速迭代：
+
+```bash
+python3 tools/ui_mockup.py                  # 当前设计
+python3 tools/ui_mockup.py --variant paper  # 和纸方案
+python3 tools/ui_mockup.py --variant all    # 两套都出（做前后对比）
+# 输出在 tools/_ui/，成品设计稿见 预览/UI设计稿.png
+```
+
+⚠ 它是**设计稿不是引擎截图**：字体度量与容器自动布局会有像素级出入，
+改完仍要在 Godot 里 F5 实跑确认（尤其换行与动态尺寸）。
+⚠ 改 UI 文案时注意：中文字体是**子集化**的，只有出现在项目文本文件里的字才有字形。
+若必须用新字，得重跑 `tools/make_font.py`（依赖 `fontTools`，本机未安装）。

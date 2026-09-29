@@ -26,16 +26,18 @@ func _ready() -> void:
 	set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
 	offset_left = 40
 	offset_right = -40
-	offset_top = -252
-	offset_bottom = -22
+	offset_top = -218
+	offset_bottom = -28
 
 	_box = Panel.new()
 	_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_box.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	var sb := UI.flat(Color(0.031, 0.039, 0.055, 0.900), 12, UI.C_LINE_SOFT, 1, 0, 0)
-	sb.border_width_top = 2
-	sb.border_color = Color(0.788, 0.541, 0.365, 0.45)
+	# 和纸对话条：暖白纸面 + 扁圆角，顶边一条朱色「包边」
+	var sb := UI.flat(UI.C_DBOX, UI.R_BOX, UI.C_LINE_SOFT, 1, 0, 0)
+	sb.border_width_top = 3
+	sb.border_color = UI.C_ACCENT
 	_box.add_theme_stylebox_override("panel", sb)
+	UI.apply_paper(_box)          # 纸纹（拿不到着色器就自动跳过）
 	add_child(_box)
 
 	var m := Kit.margin(36, 30, 36, 26)
@@ -57,7 +59,8 @@ func _ready() -> void:
 	_name_panel = PanelContainer.new()
 	_name_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_name_panel.position = Vector2(12, -46)
-	_name_style = UI.flat(Color(0.078, 0.086, 0.114, 0.960), 8, UI.C_LINE, 1, 22, 7)
+	# 名牌：浓墨底 + 直角，骑在对话条上沿；名字用角色配色（浅色，压在墨底上刚好）
+	_name_style = UI.flat(UI.C_INK, 0, UI.C_LINE, 1, 22, 7)
 	_name_panel.add_theme_stylebox_override("panel", _name_style)
 	add_child(_name_panel)
 

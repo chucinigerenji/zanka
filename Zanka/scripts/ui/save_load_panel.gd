@@ -51,7 +51,8 @@ func _rebuild() -> void:
 func _add_row(slot: int, name: String) -> void:
 	var info: Dictionary = SaveManager.slot_info(slot)
 	var has: bool = not info.is_empty()
-	var row := Kit.panel(Color(0.063, 0.071, 0.094, 0.86), 10, UI.C_LINE_SOFT, 1, 18, 12)
+	# 存档条目：和纸略深一档的底，像贴在纸页上的一行
+	var row := Kit.panel(UI.C_PAPER_D, UI.R_PANEL, UI.C_LINE_SOFT, 1, 18, 12)
 	_list.add_child(row)
 
 	var h := Kit.hbox(16)
@@ -68,11 +69,11 @@ func _add_row(slot: int, name: String) -> void:
 		var dt := str(info.get("date", ""))
 		if not ch.is_empty() or not dt.is_empty():
 			title += "　—　" + ch + "　" + dt
-	left.add_child(Kit.label(title, 21, UI.C_PAPER if has else UI.C_DIM))
+	left.add_child(Kit.label(title, 21, UI.C_TEXT if has else UI.C_DIM))
 	var sub := str(info.get("text", "")) if has else "（空）"
 	left.add_child(Kit.label(sub, 18, UI.C_DIM))
 	if has:
-		left.add_child(Kit.label(str(info.get("time", "")), 15, Color(0.5, 0.52, 0.58)))
+		left.add_child(Kit.label(str(info.get("time", "")), 15, UI.C_DIM))
 
 	var btns := Kit.hbox(8)
 	h.add_child(btns)

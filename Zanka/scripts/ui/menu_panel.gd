@@ -25,8 +25,9 @@ func _ready() -> void:
 		["title", "返回标题画面"],
 	]
 	for it in items:
-		var b := Kit.button(str(it[1]), 23, 820)
-		b.custom_minimum_size = Vector2(820, 58)
+		# 目录式菜单行（无框 + 底分隔线 + 悬停朱色标记）
+		var b := Kit.row_button(str(it[1]), 23, 820)
+		b.custom_minimum_size = Vector2(820, 54)
 		b.pressed.connect(func() -> void:
 			AudioManager.play_se("select")
 			_shell.close()
