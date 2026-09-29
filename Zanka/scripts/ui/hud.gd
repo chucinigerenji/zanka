@@ -61,7 +61,10 @@ func _mk(text: String, act: String, toggle: bool = false) -> Button:
 	return b
 
 func set_chapter(t: String) -> void:
-	_chapter.text = t if not t.is_empty() else "《残夏》"
+	var s := t if not t.is_empty() else "《残夏》"
+	if s != _chapter.text:
+		_chapter.text = s
+		_fade_in(_chapter, 0.40)
 	_chapter.visible = not t.is_empty()
 
 func set_calendar(date_text: String, tide_text: String, period_text: String) -> void:
@@ -72,8 +75,16 @@ func set_calendar(date_text: String, tide_text: String, period_text: String) -> 
 		parts.append(period_text)
 	if not tide_text.is_empty() and tide_text != "-":
 		parts.append("潮 " + tide_text)
-	_cal.text = "　".join(parts)
+	var s := "　".join(parts)
+	if s != _cal.text:
+		_cal.text = s
+		_fade_in(_cal, 0.30)      # 每次日期/潮汐刷新时淡一下，给一点「时间在走」的感觉
 	_cal.visible = not parts.is_empty()
+
+## 文本换新内容时淡入（很短，只是让变化被看见，不抢戏）
+func _fade_in(c: Control, t: float) -> void:
+	c.modulate.a = 0.25
+	create_tween().tween_property(c, "modulate:a", 1.0, t)
 
 func set_toggle(name: String, on: bool) -> void:
 	if name == "auto":

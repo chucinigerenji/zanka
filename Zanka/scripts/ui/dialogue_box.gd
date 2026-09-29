@@ -17,6 +17,7 @@ var _text: RichTextLabel
 var _indicator: Label
 
 var _total: int = 0
+var _last_speaker: String = ""      # 上一个说话人，用来判断名牌要不要弹
 var _shown: float = 0.0
 var _typing: bool = false
 var _indicator_tw: Tween
@@ -105,6 +106,13 @@ func show_line(speaker_name: String, name_color: Color, text: String) -> void:
 		_name_style.border_color = name_color
 		_name_panel.reset_size()
 		_name_panel.position = Vector2(12, -46)
+		# 换人时才弹：同一个人连着说就一直弹会很吵
+		if speaker_name != _last_speaker:
+			_last_speaker = speaker_name
+			_name_panel.pivot_offset = Vector2(0.0, _name_panel.size.y * 0.5)
+			_name_panel.scale = Vector2(1.10, 1.10)
+			create_tween().tween_property(_name_panel, "scale", Vector2.ONE, 0.16) \
+				.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 	if not _typing:
 		_finish()

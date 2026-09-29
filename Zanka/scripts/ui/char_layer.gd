@@ -4,10 +4,13 @@ extends Control
 const CharDB := preload("res://scripts/core/char_db.gd")
 
 const POS_X := {"l": 0.235, "c": 0.5, "r": 0.765, "left": 0.235, "center": 0.5, "right": 0.765}
+const RISE_PX := 14.0             # 出场时从下方浮上来的距离
+const RISE_SPEED := 82.0          # 归位速度（px/秒）——约 0.17 秒走完，别拖
 
 var _sprites: Dictionary = {}     # sprite_id -> TextureRect
 var _pos: Dictionary = {}         # sprite_id -> 站位键
 var _bob: Dictionary = {}         # sprite_id -> 呼吸相位
+var _rise: Dictionary = {}        # sprite_id -> 出场动画还差多少像素没归位
 var _speaking: String = ""
 var _cache: Dictionary = {}
 var _missing: Dictionary = {}
@@ -25,8 +28,14 @@ func _process(delta: float) -> void:
 		var ph: float = float(_bob.get(id, 0.0)) + delta * 1.5
 		_bob[id] = ph
 		var amp: float = 5.0 if id == _speaking else 2.2
+		# 出场时额外叠加一个「上浮」偏移，随时间归零。
+		# 必须并进呼吸位移一起算，否则会和这一行的 base_pos 打架。
+		var rise: float = float(_rise.get(id, 0.0))
+		if rise > 0.0:
+			rise = maxf(0.0, rise - delta * RISE_SPEED)
+			_rise[id] = rise
 		var base: Vector2 = tr.get_meta("base_pos", tr.position)
-		tr.position = base + Vector2(0.0, sin(ph) * amp)
+		tr.position = base + Vector2(0.0, sin(ph) * amp + rise)
 
 func _place(id: String) -> void:
 	var tr: TextureRect = _sprites.get(id)
@@ -82,6 +91,8 @@ func show_char(sprite_id: String, pos: String = "c", fade: float = 0.4) -> void:
 		_sprites[sprite_id] = tr
 		_bob[sprite_id] = randf() * TAU
 		tr.modulate.a = 0.0
+		if fade > 0.02:
+			_rise[sprite_id] = RISE_PX      # 只有真的在淡入时才播出场动画
 	tr.texture = tex
 	_pos[sprite_id] = pos
 	_place(sprite_id)
@@ -102,6 +113,7 @@ func hide_char(sprite_id: String, fade: float = 0.4) -> void:
 	_sprites.erase(sprite_id)
 	_pos.erase(sprite_id)
 	_bob.erase(sprite_id)
+	_rise.erase(sprite_id)
 	if fade <= 0.02:
 		tr.queue_free()
 		return
@@ -146,4 +158,5 @@ func clear() -> void:
 	_sprites.clear()
 	_pos.clear()
 	_bob.clear()
+	_rise.clear()
 	_speaking = ""
