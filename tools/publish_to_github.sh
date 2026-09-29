@@ -41,9 +41,9 @@ say "2/4 推送源码（分支 $(git branch --show-current)）"
 [ -n "${GH_NAME:-}" ]  && git config user.name  "$GH_NAME"
 [ -n "${GH_EMAIL:-}" ] && git config user.email "$GH_EMAIL"
 git remote remove origin 2>/dev/null || true
-# 注意：token 会写进 .git/config。用完记得改回不带 token 的地址，或在 GitHub 后台吊销 token。
-git remote add origin "https://${GH_OWNER}:${GH_TOKEN}@github.com/${GH_OWNER}/${REPO}.git"
-git push -u origin HEAD
+git remote add origin "https://github.com/${GH_OWNER}/${REPO}.git"
+# token 只用于这一次 push，**不写进 .git/config**（避免凭据留在磁盘上）
+git push "https://${GH_OWNER}:${GH_TOKEN}@github.com/${GH_OWNER}/${REPO}.git" "HEAD:main"
 
 say "3/4 创建 Release $TAG"
 code=$(curl -s -o /tmp/gh_rel.json -w '%{http_code}' -X POST "${AUTH[@]}" \
@@ -76,7 +76,14 @@ say "4/4 上传产物"
 UP="https://uploads.github.com/repos/${GH_OWNER}/${REPO}/releases/${REL_ID}/assets"
 shopt -s nullglob
 for f in release/*; do
+  # ⚠ GitHub Release **会吃掉资源名里的非 ASCII 前缀**（"残夏-x.apk" 会变成 "-x.apk"），
+  #   所以这里统一转成 ASCII 名：去掉非 ASCII 字符，再补一个 Zanka- 前缀。
   name=$(basename "$f")
+  name=$(python3 -c "
+import re, sys
+n = re.sub(r'[^\x20-\x7e]', '', sys.argv[1]).lstrip('-')
+print('Zanka-' + n if n else 'asset')
+" "$name")
   echo "  上传 $name（$(du -h "$f" | cut -f1)）…"
   curl -s -o /tmp/gh_up.json -w '    HTTP %{http_code}\n' -X POST \
     -H "Authorization: Bearer ${GH_TOKEN}" -H "Content-Type: application/octet-stream" \
