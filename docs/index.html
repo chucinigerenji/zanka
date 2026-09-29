@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>残夏 -The Last Tide- ｜ 下载</title>
+<meta name="description" content="汐浦町，最后一个夏天。一个关于懂事、照护与留下的人的悲剧恋爱冒险。提供 Android 与 Windows 版下载。">
+<meta name="theme-color" content="#16110e">
+<meta property="og:type" content="website">
+<meta property="og:title" content="残夏 -The Last Tide-">
+<meta property="og:description" content="汐浦町，最后一个夏天。一个关于懂事、照护与留下的人的悲剧恋爱冒险。">
+<meta property="og:image" content="https://chucinigerenji.github.io/zanka/img/hero.png">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<style>
+  @font-face{
+    font-family:"ZankaSerif";
+    src:url("fonts/ZankaSerif.otf") format("opentype");
+    font-display:swap;
+  }
+  :root{
+    --paper:#FBF9F4;
+    --paper-2:#F2EEE6;
+    --ink:#241f1c;
+    --dim:#6b635c;
+    --line:rgba(36,31,28,.14);
+    --accent:#A43525;
+    --accent-hi:#c1483a;
+    --dark:#16110e;
+    --r:16px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font:16px/1.75 -apple-system,BlinkMacSystemFont,"Noto Sans SC","Source Han Sans SC",
+         "PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    overflow-x:hidden;
+  }
+  a{color:var(--accent);text-decoration:none}
+  code{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:.92em;padding:.12em .42em;border-radius:5px;
+    background:rgba(36,31,28,.07);border:1px solid rgba(36,31,28,.08);
+  }
+  .sec.dark code,.cta code{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.14)}
+  a:hover{text-decoration:underline}
+  h1,h2,h3{line-height:1.35;margin:0}
+  .wrap{width:min(1080px,100% - 40px);margin:0 auto}
+
+  /* ---------------- 首屏 ---------------- */
+  .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+  .hero-bg{
+    position:absolute;inset:0;
+    background:url("img/hero.png") center 38%/cover no-repeat;
+  }
+  .hero-bg::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(12,9,8,.62) 0%,rgba(12,9,8,.42) 42%,rgba(12,9,8,.86) 100%);
+  }
+  .hero-card{
+    position:relative;z-index:2;width:min(1080px,100% - 40px);margin:0 auto;
+    padding:44px 40px 38px;
+    background:rgba(251,249,244,.10);
+    border:1px solid rgba(255,255,255,.22);
+    border-radius:22px;
+    backdrop-filter:blur(14px) saturate(120%);
+    -webkit-backdrop-filter:blur(14px) saturate(120%);
+    box-shadow:0 24px 60px rgba(0,0,0,.35);
+    color:#fff;
+  }
+  .kicker{
+    margin:0 0 10px;font-size:13px;letter-spacing:.16em;color:rgba(255,255,255,.72)
+  }
+  .hero h1{
+    font-family:"ZankaSerif","Songti SC","Noto Serif SC",serif;
+    font-size:clamp(46px,10vw,86px);letter-spacing:.06em;margin:0 0 2px;
+    text-shadow:0 2px 18px rgba(0,0,0,.45);
+  }
+  .en{
+    font-family:"ZankaSerif",Georgia,serif;
+    font-size:clamp(15px,3.4vw,22px);letter-spacing:.14em;color:#e8b4a8;margin:0 0 18px;
+  }
+  .tagline{font-size:clamp(16px,4vw,21px);margin:0 0 6px;color:#fff}
+  .lead{margin:0;color:rgba(255,255,255,.78);font-size:15px}
+
+  .downloads{display:flex;flex-wrap:wrap;gap:14px;margin:30px 0 16px}
+  .dl-btn{
+    flex:1 1 260px;display:flex;align-items:center;gap:14px;
+    padding:16px 22px;border-radius:14px;
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.30);
+    color:#fff;transition:transform .16s ease,background .16s ease,border-color .16s ease;
+  }
+  .dl-btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.18);text-decoration:none}
+  .dl-btn.primary{background:var(--accent);border-color:var(--accent-hi)}
+  .dl-btn.primary:hover{background:var(--accent-hi)}
+  .dl-btn svg{flex:0 0 30px;height:30px;fill:currentColor;opacity:.95}
+  .dl-main{display:block;font-size:18px;font-weight:700;letter-spacing:.02em}
+  .dl-sub{display:block;font-size:12.5px;opacity:.82;letter-spacing:.04em}
+  .ver{margin:0;font-size:13px;color:rgba(255,255,255,.62)}
+  .ver a{color:#e8b4a8}
+
+  /* ---------------- 区块 ---------------- */
+  .sec{padding:76px 0}
+  .sec h2{
+    font-family:"ZankaSerif","Songti SC","Noto Serif SC",serif;
+    font-size:clamp(25px,5.4vw,34px);margin:0 0 8px;letter-spacing:.02em;
+  }
+  .sec h2 .bar{display:block;width:44px;height:3px;background:var(--accent);margin:14px 0 26px;border-radius:2px}
+  .sec p{margin:0 0 18px;color:#3a332e}
+  .sec.alt{background:var(--paper-2)}
+  .sec.dark{background:var(--dark);color:#f3efe8}
+  .sec.dark h2,.sec.dark p{color:#f3efe8}
+  .sec.dark p{color:rgba(243,239,232,.72)}
+
+  .cards{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:8px}
+  .card{
+    padding:22px 22px 20px;border-radius:var(--r);
+    background:rgba(255,255,255,.72);border:1px solid var(--line);
+  }
+  .dark .card{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.13)}
+  .card h3{font-size:16.5px;margin:0 0 8px}
+  .card h3 span{color:var(--accent);margin-right:6px}
+  .card p{margin:0;font-size:14.5px;color:var(--dim)}
+  .dark .card p{color:rgba(243,239,232,.66)}
+
+  .shots{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .shot{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:#000}
+  .shot img{display:block;width:100%;height:auto}
+  .shot figcaption{
+    position:absolute;left:0;right:0;bottom:0;padding:22px 16px 12px;
+    font-size:13px;color:#fff;
+    background:linear-gradient(180deg,transparent,rgba(0,0,0,.72));
+  }
+
+  .cast{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+  .who{text-align:center;padding:18px 10px 16px;border-radius:var(--r);
+       background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11)}
+  .who img{display:block;width:100%;height:190px;object-fit:contain;object-position:bottom;
+           filter:drop-shadow(0 8px 16px rgba(0,0,0,.5))}
+  .who .n{font-family:"ZankaSerif","Songti SC",serif;font-size:17px;margin:12px 0 3px;letter-spacing:.04em}
+  .who .r{font-size:12.5px;color:rgba(243,239,232,.6);line-height:1.6}
+
+  .how{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .how .box{padding:24px;border-radius:var(--r);background:#fff;border:1px solid var(--line)}
+  .how h3{font-size:17px;margin:0 0 4px}
+  .how .os{font-size:12.5px;color:var(--dim);letter-spacing:.06em;margin:0 0 14px}
+  .how ol{margin:0;padding-left:1.25em;font-size:14.5px;color:#3a332e}
+  .how li{margin-bottom:7px}
+  .warn{
+    margin-top:14px;padding:11px 14px;border-radius:10px;font-size:13px;
+    background:rgba(164,53,37,.07);border-left:3px solid var(--accent);color:#5c2a22;
+  }
+
+  table.keys{width:100%;border-collapse:collapse;margin-top:26px;font-size:14.5px}
+  table.keys th,table.keys td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left}
+  table.keys th{font-weight:600;color:var(--dim);font-size:13px;letter-spacing:.06em}
+  table.keys td:first-child{white-space:nowrap;color:#3a332e}
+
+  .cta{text-align:center;background:var(--dark);color:#f3efe8}
+  .cta .downloads{justify-content:center;max-width:760px;margin-left:auto;margin-right:auto}
+  .cta h2{color:#fff}
+
+  footer{background:#0e0b09;color:rgba(243,239,232,.62);font-size:13.5px;padding:38px 0 46px}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:space-between;align-items:center}
+  footer a{color:rgba(243,239,232,.85)}
+  @media (max-width:560px){
+    .hero-card{padding:30px 22px 26px;border-radius:18px}
+    .sec{padding:56px 0}
+    .dl-btn{flex:1 1 100%}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-card">
+    <p class="kicker">GODOT 4.7 ｜ 中文视觉小说</p>
+    <h1>残夏</h1>
+    <p class="en">The Last Tide</p>
+    <p class="tagline">汐浦町，最后一个夏天。</p>
+    <p class="lead">一个关于懂事、照护与留下的人的悲剧恋爱冒险。</p>
+
+    <div class="downloads">
+      <a class="dl-btn primary"
+         href="https://github.com/chucinigerenji/zanka/releases/download/v0.1.0/Zanka-Android-arm64-v0.1.0.apk">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm5 17.2a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM8 4v13h8V4H8z"/></svg>
+        <span><span class="dl-main">下载手机版</span><span class="dl-sub">Android · APK · 44 MB</span></span>
+      </a>
+      <a class="dl-btn"
+         href="https://github.com/chucinigerenji/zanka/releases/download/v0.1.0/Zanka-Windows-x86_64-v0.1.0.zip">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.6l7.3-1v7.2H3V5.6zm8.3-1.1L21 3v8.8h-9.7V4.5zM3 12.9h7.3V20L3 19V12.9zm8.3 0H21V21l-9.7-1.4v-6.7z"/></svg>
+        <span><span class="dl-main">下载电脑版</span><span class="dl-sub">Windows · ZIP · 50 MB</span></span>
+      </a>
+    </div>
+    <p class="ver">版本 v0.1.0 ｜ <a href="https://github.com/chucinigerenji/zanka/releases">查看全部版本与更新说明</a></p>
+  </div>
+</header>
+
+<main>
+
+  <section class="sec" id="about">
+    <div class="wrap">
+      <h2>这个夏天在讲什么<span class="bar"></span></h2>
+      <p>2013 年，日本一个正在退潮的渔村小镇「汐浦町」。高三的冈田悠人遇见转学生三浦栞——
+         一个会把货架上掉下来的坏饭团买下来、永远说「没关系」的女孩。</p>
+      <p>他用一个夏天去靠近她。而她已经用这个夏天，把他往后的人生都安排好了。</p>
+      <p>本作全程<strong>没有一句台词解释她病得多重</strong>——你只会慢慢发现，
+         自己在镇上能选的时间，一格一格变少。</p>
+
+      <div class="cards">
+        <div class="card">
+          <h3><span>01</span>5 个结局</h3>
+          <p>1 个真结局、2 个普通结局、2 个坏结局。走向由你在第五章末说出的那句话决定。</p>
+        </div>
+        <div class="card">
+          <h3><span>02</span>潮汐即结构</h3>
+          <p>每一章都标着一个潮位。序章潮汐表里那行「涨潮提前 1 小时 20 分」，一直埋到终章。</p>
+        </div>
+        <div class="card">
+          <h3><span>03</span>会说话的立绘</h3>
+          <p>标题画面右侧的立绘可以点——脸、胸、肚子、手臂，不同角色说不同的话。</p>
+        </div>
+        <div class="card">
+          <h3><span>04</span>全中文剧本</h3>
+          <p>剧本 1686 行、约 2.7 万字，五个结局各自写全。无语音。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec alt" id="shots">
+    <div class="wrap">
+      <h2>画面<span class="bar"></span></h2>
+      <div class="shots">
+        <figure class="shot"><img src="img/cg_umbrella_rain.png" alt="雨中的防波堤" loading="lazy"><figcaption>第一次把伞递出去的那天</figcaption></figure>
+        <figure class="shot"><img src="img/cg_piano.png" alt="废旧小学的音乐教室" loading="lazy"><figcaption>废校音乐教室里走音的钢琴</figcaption></figure>
+        <figure class="shot"><img src="img/cg_festival_fireworks.png" alt="潮祭的烟火" loading="lazy"><figcaption>潮祭——一年里年轻人才回来的两天</figcaption></figure>
+        <figure class="shot"><img src="img/cg_envelopes.png" alt="玄关里的信封" loading="lazy"><figcaption>十四个信封，四十七万</figcaption></figure>
+        <figure class="shot"><img src="img/cg_moon_sea.png" alt="中秋名月的海" loading="lazy"><figcaption>九月十九号。中秋名月，朔望大潮。</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec dark" id="cast">
+    <div class="wrap">
+      <h2>登场人物<span class="bar"></span></h2>
+      <p>十三个人，每个人身上都有一件说不出口的事。</p>
+      <div class="cast">
+        <div class="who"><img src="img/char_shiori_uniform_normal.png" alt="三浦栞" loading="lazy"><div class="n">三浦 栞</div><div class="r">女主。成绩年级第一，<br>永远说「没关系」。</div></div>
+        <div class="who"><img src="img/char_yuto.png" alt="冈田悠人" loading="lazy"><div class="n">冈田 悠人</div><div class="r">主角。18 岁。<br>把「没事」当盾牌。</div></div>
+        <div class="who"><img src="img/char_hitomi_uniform.png" alt="佐野瞳" loading="lazy"><div class="n">佐野 瞳</div><div class="r">青梅竹马。<br>想走，却没走。</div></div>
+        <div class="who"><img src="img/char_fumi.png" alt="冈田富美" loading="lazy"><div class="n">冈田 富美</div><div class="r">78 岁。祖母。<br>认知症早期。</div></div>
+        <div class="who"><img src="img/char_chizuru.png" alt="三浦千鹤" loading="lazy"><div class="n">三浦 千鹤</div><div class="r">45 岁。栞的母亲。<br>每周三次透析。</div></div>
+        <div class="who"><img src="img/char_daikan.png" alt="大贯和夫" loading="lazy"><div class="n">大贯 和夫</div><div class="r">62 岁。町立诊所医生。<br>「这里只能看感冒。」</div></div>
+        <div class="who"><img src="img/char_hamaguchi.png" alt="浜口源治" loading="lazy"><div class="n">浜口 源治</div><div class="r">71 岁。渔具店老板。<br>恨了三浦家三十年。</div></div>
+        <div class="who"><img src="img/char_seiichi.png" alt="冈田诚一" loading="lazy"><div class="n">冈田 诚一</div><div class="r">49 岁。父亲。<br>近海渔民。</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="how">
+    <div class="wrap">
+      <h2>怎么装、怎么玩<span class="bar"></span></h2>
+      <div class="how">
+        <div class="box">
+          <h3>手机版</h3>
+          <p class="os">ANDROID 6.0+ ｜ ARM64</p>
+          <ol>
+            <li>点上面的「下载手机版」，得到一个 <code>.apk</code> 文件。</li>
+            <li>点它安装。系统会提示「未知来源」，允许一次即可。</li>
+            <li>装好后从桌面图标启动，<strong>请横屏玩</strong>。</li>
+          </ol>
+          <div class="warn">只支持 64 位 ARM 机型（近几年的手机基本都是）。如果是很老的 32 位机型，会装不上。</div>
+        </div>
+        <div class="box">
+          <h3>电脑版</h3>
+          <p class="os">WINDOWS 64 位</p>
+          <ol>
+            <li>下载 ZIP，<strong>完整解压</strong>到一个文件夹。</li>
+            <li>双击里面的 <code>残夏 -The Last Tide-.exe</code>。</li>
+            <li>不需要安装 Godot 或任何运行库。</li>
+          </ol>
+          <div class="warn">请保持 <code>.exe</code> 和 <code>.pck</code> 在同一个文件夹里——只拷 exe 出去会打不开。
+            ZIP 里还有一个 <code>.console.exe</code>，是看日志用的，可以不管。</div>
+        </div>
+      </div>
+
+      <table class="keys">
+        <thead><tr><th>操作</th><th>键鼠</th><th>触屏</th></tr></thead>
+        <tbody>
+          <tr><td>推进对话</td><td>点击 / <code>Space</code> / <code>Enter</code></td><td>点屏幕</td></tr>
+          <tr><td>打开回想</td><td><code>Ctrl</code>+<code>R</code>，或 HUD「回想」</td><td>HUD「回想」</td></tr>
+          <tr><td>快速跳过</td><td><code>Ctrl</code>，或 HUD「跳过」</td><td>HUD「跳过」</td></tr>
+          <tr><td>自动播放</td><td>HUD「自动」</td><td>HUD「自动」</td></tr>
+          <tr><td>打开菜单</td><td><code>Esc</code>，或 HUD「菜单」</td><td>HUD「菜单」</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="sec cta" id="download">
+    <div class="wrap">
+      <h2>现在就可以开始<span class="bar" style="margin-left:auto;margin-right:auto"></span></h2>
+      <p style="color:rgba(243,239,232,.75)">免费下载，无需注册。选你的平台：</p>
+      <div class="downloads">
+        <a class="dl-btn primary" href="https://github.com/chucinigerenji/zanka/releases/download/v0.1.0/Zanka-Android-arm64-v0.1.0.apk">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm5 17.2a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM8 4v13h8V4H8z"/></svg>
+          <span><span class="dl-main">手机版</span><span class="dl-sub">Android · APK · 44 MB</span></span>
+        </a>
+        <a class="dl-btn" href="https://github.com/chucinigerenji/zanka/releases/download/v0.1.0/Zanka-Windows-x86_64-v0.1.0.zip">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.6l7.3-1v7.2H3V5.6zm8.3-1.1L21 3v8.8h-9.7V4.5zM3 12.9h7.3V20L3 19V12.9zm8.3 0H21V21l-9.7-1.4v-6.7z"/></svg>
+          <span><span class="dl-main">电脑版</span><span class="dl-sub">Windows · ZIP · 50 MB</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>残夏 -The Last Tide- ｜ 保留所有权利</span>
+    <span>
+      <a href="https://github.com/chucinigerenji/zanka">GitHub 仓库</a> ·
+      <a href="https://github.com/chucinigerenji/zanka/blob/main/残夏_剧情概括.md">剧情概括</a> ·
+      <a href="https://github.com/chucinigerenji/zanka/blob/main/残夏_企划书/02-角色设定集.md">人物设定集</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
